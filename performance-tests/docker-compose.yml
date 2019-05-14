@@ -1,0 +1,66 @@
+version: "2"
+
+services:
+  web_server:
+    image: moj_et_gatling_web
+    build:
+      context: ..
+      dockerfile: Dockerfile.test
+    links:
+      - db
+    environment:
+      GEM_HOME: '/rubygems'
+      BUNDLE_PATH: '/rubygems'
+      DB_HOST: 'db'
+      DB_USERNAME: 'postgres'
+      RAILS_ENV: 'development'
+      GOOGLE_ANALYTICS_ID: moj_et_test
+      HTTP_OPEN_TIMEOUT_S: 100
+      HTTP_READ_TIMEOUT_S: 100
+      JADU_API: https://fgr-stub-service.herokuapp.com/1/
+      S3_UPLOAD_BUCKET:
+      AWS_ACCESS_KEY_ID:
+      AWS_SECRET_ACCESS_KEY:
+      ZENDESK_URL:
+      ZENDESK_USER:
+      ZENDESK_TOKEN:
+      ZENDESK_GROUP_ID:
+
+    volumes:
+      - rubygems_cache:/rubygems
+      - npm_cache:/app/node_modules
+    command: /bin/bash -c "bundle && npm install && rake db:create db:migrate assets:precompile cucumber"
+  db:
+    image: postgres:9.3.5
+  gatling:
+    image: moj_et_gatling
+    build:
+      context: .
+    links:
+      - web_server
+    volumes:
+      - ./src/test/resources:/opt/gatling/conf
+      - ./src/test/scala/simulations:/opt/gatling/user-files/simulations
+      - ./results:/opt/gatling/results
+      - ./data:/opt/gatling/data
+    command: "-s simulations.EmploymentTribunalsPerformance"
+    environment:
+      BASE_URL: "https://staging1.et.dsd.io"
+  gatling_local:
+    image: moj_et_gatling
+    build:
+      context: .
+    links:
+      - web_server
+    volumes:
+      - ./src/test/resources:/opt/gatling/conf
+      - ./src/test/scala/simulations:/opt/gatling/user-files/simulations
+      - ./results:/opt/gatling/results
+      - ./data:/opt/gatling/data
+    command: "-s simulations.EmploymentTribunalsPerformance"
+    environment:
+      BASE_URL: "http://web_server:3000"
+volumes:
+  rubygems_cache:
+  npm_cache:
+
