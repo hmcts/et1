@@ -7,15 +7,7 @@ header.main-header role="banner"
       = claim_header
 
 .main-section
-
   .main-content
-    = simple_form_for resource, url: request.fullpath, multipart: true do |f|
-      = hidden_field_tag :return_to_review, params[:return_to_review]
-
-      = f.error_notification
-      .form-fields lang= "#{I18n.locale}"
-        = render current_step, f: f
-      .form-actions
-        = f.button :submit
+    = render current_step
 
   = render partial: 'shared/aside'

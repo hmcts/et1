@@ -254,13 +254,8 @@ RSpec.describe Claim, type: [:claim, :model] do
       expect(claim.attachments).to all(be_kind_of CarrierWave::Uploader::Base)
     end
 
-    specify { expect(claim.attachments.size).to eq 3 }
+    specify { expect(claim.attachments.size).to eq 2 }
 
-    it "only returns attachments that exist" do
-      expect { claim.remove_claim_details_rtf! }.
-        to change { claim.attachments.size }.
-        from(3).to(2)
-    end
   end
 
   describe '#remove_pdf!' do
@@ -273,6 +268,7 @@ RSpec.describe Claim, type: [:claim, :model] do
     end
   end
 
+  # TODO: RST-1660 remove the below
   describe '#remove_claim_details_rtf!' do
     before { claim.claim_details_rtf = Tempfile.new('suchclaimdetails') }
 

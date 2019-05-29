@@ -2,45 +2,51 @@ h2.legend= t '.claim_details'
 
 p= t('.claim_details_html', path: guide_path)
 
-details open=(resource.claim_form_details_rtf? || !resource.errors[:claim_details_rtf].empty? ? true : nil)
-  summary role='button' aria={ \
-    expanded: "#{resource.claim_form_details_rtf?}",
-    controls: 'details-content-0'}
-    span.summary= t('.claim_details_upload')
 
-  .panel-indent#details-content-0
-    = f.input :claim_details_rtf do
-      = f.input_field :claim_details_rtf, as: :file do
-    - if resource.claim_form_details_rtf?
-      = f.input :remove_claim_details_rtf, as: :boolean,
-          inline_label: t('.remove_claim_details_rtf',
-            file: resource.attachment_filename),
-            label: false
-    = f.hidden_field :claim_details_rtf_cache
+= simple_form_for resource, url: request.fullpath, multipart: true do |f|
+  = hidden_field_tag :return_to_review, params[:return_to_review]
 
-= f.input :claim_details, label: false,
-  hint: t('.claim_details_hint_html', path: guide_path),
-  as: :text,
-  input_html: { rows: 15, maxlength: '2500' }
+  = f.error_notification
+  .form-fields lang= "#{I18n.locale}"
 
-fieldset
-  legend= t '.similar_claims'
-  = f.input :other_known_claimants,
-    as: :radio_buttons,
-    readonly: nil,
-    collection: responses_collection,
-    include_hidden: false,
-    item_wrapper_class: 'block-label',
-    wrapper_class: 'form-group-reveal reveal-publish-delegate',
-    input_html: { :class => 'reveal-publish-publisher ga-vpv'},
-    reveal: { true => 'sub1', false => 'sub1' }
+    details open=(resource.uploaded_file_key.present? || !resource.errors[:uploaded_file_key].empty? ? true : nil)
+      summary role='button' aria={ \
+        expanded: "#{resource.uploaded_file_key.present?}",
+        controls: 'details-content-0'}
+        span.summary= t('.claim_details_upload')
 
-  = f.input :other_known_claimant_names,
-    as: :text,
-    input_html: { rows: 5, maxlength: '350' },
-    item_wrapper_class: 'block-label',
-    wrapper_class: 'panel-indent toggle-content',
-    wrapper_html: { :id => :other_known_claimant_names_wrapper,
-                    :class => 'reveal-subscribe ',
-                    :'data-target' => 'sub1',
-                    :'data-show-array' => 'true' }
+      = dropzone_form_helper(form_id: 'upload-additional-file',
+          upload_key_id: 'claim_details_uploaded_file_key',
+          file_name_id: 'claim_details_uploaded_file_name',
+          i18n_location: 'components.upload_rtf_file')
+      = f.hidden_field :uploaded_file_key
+      = f.hidden_field :uploaded_file_name
+    = f.input :claim_details, label: false,
+      hint: t('.claim_details_hint_html', path: guide_path),
+      as: :text,
+      input_html: { rows: 15, maxlength: '2500' }
+
+    fieldset
+      legend= t '.similar_claims'
+      = f.input :other_known_claimants,
+        as: :radio_buttons,
+        readonly: nil,
+        collection: responses_collection,
+        include_hidden: false,
+        item_wrapper_class: 'block-label',
+        wrapper_class: 'form-group-reveal reveal-publish-delegate',
+        input_html: { :class => 'reveal-publish-publisher ga-vpv'},
+        reveal: { true => 'sub1', false => 'sub1' }
+
+      = f.input :other_known_claimant_names,
+        as: :text,
+        input_html: { rows: 5, maxlength: '350' },
+        item_wrapper_class: 'block-label',
+        wrapper_class: 'panel-indent toggle-content',
+        wrapper_html: { :id => :other_known_claimant_names_wrapper,
+                        :class => 'reveal-subscribe ',
+                        :'data-target' => 'sub1',
+                        :'data-show-array' => 'true' }
+
+  .form-actions
+    = f.button :submit

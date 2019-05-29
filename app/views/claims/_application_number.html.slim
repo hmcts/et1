@@ -1,16 +1,24 @@
-.clearfix
-  .callout.callout-reference
-    p = t '.application_number'
-    span.number= claim.reference
+= simple_form_for resource, url: request.fullpath, multipart: true do |f|
+  = hidden_field_tag :return_to_review, params[:return_to_review]
 
-.content-section
-  p = t('.intro_text')
+  = f.error_notification
+  .form-fields lang= "#{I18n.locale}"
+    .clearfix
+      .callout.callout-reference
+        p = t '.application_number'
+        span.number= claim.reference
 
-  fieldset
-    = f.input :email_address
-    = f.input :password, as: :string
+    .content-section
+      p = t('.intro_text')
 
-p.print
-  = link_to t('.print_link'), 'javascript:window.print();', {class: 'print-page'}
-  = '&nbsp;'.html_safe
-  = t('.print_copy')
+      fieldset
+        = f.input :email_address
+        = f.input :password, as: :string
+
+    p.print
+      = link_to t('.print_link'), 'javascript:window.print();', {class: 'print-page'}
+      = '&nbsp;'.html_safe
+      = t('.print_copy')
+
+  .form-actions
+    = f.button :submit

@@ -7,8 +7,8 @@ RSpec.describe ClaimDetailsForm, type: :form do
     context 'presence' do
       it { expect(claim_details_form).to validate_presence_of(:claim_details) }
 
-      context 'claim details attached as an RTF' do
-        before { claim_details_form.claim_details_rtf = Tempfile.new('suchclaimdetails') }
+      context 'claim details attached with file key' do
+        before { claim_details_form.uploaded_file_key = "direct_uploads/#{SecureRandom.uuid}" }
         it { expect(claim_details_form).not_to validate_presence_of(:claim_details) }
       end
     end

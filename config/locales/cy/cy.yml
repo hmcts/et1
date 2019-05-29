@@ -964,3 +964,9 @@ cy:
               invalid: "Rhowch god post DU dilys. Os ydych chi'n byw dramor, rhowch SW55 9QT"
   date:
     month_names: [~, Ionawr, Chwefror, Mawrth, Ebrill, Mai, Mehefin, Gorffennaf, Awst, Medi, Hydref, Tachwedd, Rhagfyr]
+  components:
+    upload_rtf_file:
+      header: "Gwybodaeth Ychwanegol "
+      drag_text: "Llusgwch ffeiliau rtf a'u rhoi yma "
+      or_text: "neu"
+      upload_button: "Cliciwch yma i lwytho ffeil rtf"

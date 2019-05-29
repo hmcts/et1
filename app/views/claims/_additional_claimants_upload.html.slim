@@ -1,50 +1,58 @@
-- unless resource.csv_errors.empty?
-    .validation-summary
-      - if resource.erroneous_line_number
-        #error-line
-          b = t ".error_line", line_number: resource.erroneous_line_number
-      #errors
-        - resource.csv_errors.each do |error|
-          p = error
+= simple_form_for resource, url: request.fullpath, multipart: true do |f|
+  = hidden_field_tag :return_to_review, params[:return_to_review]
 
-fieldset
-  legend= t '.subheader'
+  = f.error_notification
+  .form-fields lang= "#{I18n.locale}"
 
-  = f.input :has_additional_claimants,
-    hint: t('.has_additional_claimants_html', path: claim_additional_claimants_path),
-    as: :radio_buttons,
-    readonly: nil,
-    include_hidden: false,
-    item_wrapper_class: 'block-label',
-    wrapper_class: 'form-group-reveal reveal-publish-delegate',
-    input_html: { :class => 'reveal-publish-publisher'},
-    reveal: { true => 'sub1', false => 'sub1' }
+    - unless resource.csv_errors.empty?
+      .validation-summary
+        - if resource.erroneous_line_number
+          #error-line
+            b = t ".error_line", line_number: resource.erroneous_line_number
+        #errors
+          - resource.csv_errors.each do |error|
+            p = error
 
-  fieldset.multiples.reveal-subscribe data-target="sub1" data-show-array="true"
-    legend= t '.steps_header'
+    fieldset
+      legend= t '.subheader'
 
-    #step_one.clearfix
-      b = t ".step_one_header"
-      p = t(".download_template_html", path: asset_url(t('.download_template_asset')))
-      p = t ".dob_info"
+      = f.input :has_additional_claimants,
+        hint: t('.has_additional_claimants_html', path: claim_additional_claimants_path),
+        as: :radio_buttons,
+        readonly: nil,
+        include_hidden: false,
+        item_wrapper_class: 'block-label',
+        wrapper_class: 'form-group-reveal reveal-publish-delegate',
+        input_html: { :class => 'reveal-publish-publisher'},
+        reveal: { true => 'sub1', false => 'sub1' }
 
-    #step_two.clearfix
-      b = t ".step_two_header"
-      p = t ".save_csv_format"
-      p = t ".how_to_save"
-      p = t ".no_spaces"
+      fieldset.multiples.reveal-subscribe data-target="sub1" data-show-array="true"
+        legend= t '.steps_header'
 
-    #step_three.clearfix
-      b = t ".step_three_header"
+      #step_one.clearfix
+        b = t ".step_one_header"
+        p = t(".download_template_html", path: asset_url(t('.download_template_asset')))
+        p = t ".dob_info"
 
-      = f.input :additional_claimants_csv, error: false do
-        - if resource.has_additional_claimants_csv?
-            = f.input :remove_additional_claimants_csv, as: :boolean,
-              inline_label: t('.remove_additional_claimants_csv',
-                file: resource.attachment_filename),
-              label: false
+        #step_two.clearfix
+          b = t ".step_two_header"
+          p = t ".save_csv_format"
+          p = t ".how_to_save"
+          p = t ".no_spaces"
 
-        = f.input_field :additional_claimants_csv, as: :file
+        #step_three.clearfix
+          b = t ".step_three_header"
 
-      = f.hidden_field :additional_claimants_csv_cache
-      p.form-hint = t('.upload_limit')
+          = f.input :additional_claimants_csv, error: false do
+            - if resource.has_additional_claimants_csv?
+              = f.input :remove_additional_claimants_csv, as: :boolean,
+                inline_label: t('.remove_additional_claimants_csv',
+                  file: resource.attachment_filename),
+                label: false
+
+            = f.input_field :additional_claimants_csv, as: :file
+
+          = f.hidden_field :additional_claimants_csv_cache
+          p.form-hint = t('.upload_limit')
+  .form-actions
+    = f.button :submit

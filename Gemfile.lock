@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/hmcts/et_dropzone_uploader.git
+  revision: e8f73fa913b9d5208b054981dc087e5bbf1eae7a
+  tag: v2.2.0
+  specs:
+    et_dropzone_uploader (2.2.0)
+      dropzonejs-rails (~> 0.8)
+      rack-proxy (~> 0.6.5)
+      rails (~> 5.2.2)
+
+GIT
   remote: https://github.com/ministryofjustice/azure_env_secrets.git
   revision: b72195789c350839d8a7f492eb2938c5101d5400
   tag: v0.1.3
@@ -6,7 +16,6 @@ GIT
     azure_env_secrets (0.1.3)
 
 GEM
-  remote: https://rubygems.org/
   specs:
     actioncable (5.2.3)
       actionpack (= 5.2.3)
@@ -31,7 +40,7 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    activeadmin (1.3.1)
+    activeadmin (1.4.2)
       arbre (>= 1.1.1)
       coffee-rails
       formtastic (~> 3.1)
@@ -70,6 +79,15 @@ GEM
     arel (9.0.0)
     ast (2.4.0)
     awesome_print (1.8.0)
+    azure-core (0.1.15)
+      faraday (~> 0.9)
+      faraday_middleware (~> 0.10)
+      nokogiri (~> 1.6)
+    azure-storage (0.15.0.preview)
+      azure-core (~> 0.1)
+      faraday (~> 0.9)
+      faraday_middleware (~> 0.10)
+      nokogiri (~> 1.6, >= 1.6.8)
     backports (3.14.0)
     base32_pure (0.1.0)
     bcrypt (3.1.12)
@@ -110,9 +128,9 @@ GEM
     codeclimate-test-reporter (0.6.0)
       simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.2)
-    coffee-rails (4.2.2)
+    coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
-      railties (>= 4.0.0)
+      railties (>= 5.2.0)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -152,6 +170,8 @@ GEM
     dotenv-rails (2.7.2)
       dotenv (= 2.7.2)
       railties (>= 3.2, < 6.1)
+    dropzonejs-rails (0.8.4)
+      rails (> 3.1)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -170,6 +190,8 @@ GEM
       railties (>= 4.2.0)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.13.1)
+      faraday (>= 0.7.4, < 1.0)
     ffi (1.10.0)
     fog-aws (3.5.0)
       fog-core (~> 2.1)
@@ -310,6 +332,8 @@ GEM
     rack-livereload (0.3.17)
       rack
     rack-protection (2.0.5)
+      rack
+    rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -469,6 +493,10 @@ GEM
     unicorn (5.5.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
+    webdrivers (3.9.4)
+      nokogiri (~> 1.6)
+      rubyzip (~> 1.0)
+      selenium-webdriver (~> 3.0)
     webmock (3.5.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -493,6 +521,7 @@ DEPENDENCIES
   activeadmin (~> 1.3)
   activerecord-nulldb-adapter (~> 0.3)
   awesome_print (~> 1.8)
+  azure-storage (~> 0.15.0.preview)
   azure_env_secrets!
   base32_pure (~> 0.1)
   bcrypt (~> 3.1)
@@ -510,6 +539,7 @@ DEPENDENCIES
   database_cleaner (~> 1.7)
   dotenv-rails (~> 2.7)
   email_validator (~> 1.6)
+  et_dropzone_uploader!
   factory_bot_rails (~> 5.0)
   fog-aws (~> 3.0)
   govuk_frontend_toolkit (~> 4.0.0)
@@ -550,8 +580,9 @@ DEPENDENCIES
   uglifier (~> 4.1)
   uk_postcode (~> 2.1)
   unicorn (~> 5.5)
+  webdrivers (~> 3.7)
   webmock (~> 3.5)
   zendesk_api (~> 1.5.1x)
 
 BUNDLED WITH
-   1.17.3
+   2.0.1

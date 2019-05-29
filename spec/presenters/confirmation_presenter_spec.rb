@@ -62,13 +62,13 @@ RSpec.describe ConfirmationPresenter, type: :presenter do
     end
   end
 
-  it { expect(confirmation_presenter.attachments).to eq 'file.rtf<br />file.csv' }
+  it { expect(confirmation_presenter.attachments).to eq 'big.rtf<br />file.csv' }
 
   describe '#each_item' do
     it 'yields the submission information' do
       expect { |b| confirmation_presenter.each_item(&b) }.
         to yield_successive_args [:submission_information, "Submitted 01 January 2014 to tribunal office Birmingham, Centre City Tower, 5­7 Hill Street, Birmingham B5 4UU"],
-          [:attachments, "file.rtf<br />file.csv"]
+          [:attachments, "big.rtf<br />file.csv"]
     end
 
     context 'when no attachments were uploaded' do

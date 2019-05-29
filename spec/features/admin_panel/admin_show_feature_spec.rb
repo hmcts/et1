@@ -5,7 +5,7 @@ RSpec.feature 'Viewing a claims details in the admin interface', type: :feature 
   include_context 'block pdf generation'
 
   let!(:claim_with_attachments) do
-    create :claim, :submitted, :with_pdf,
+    create :claim, :submitted, :with_pdf, :with_claim_details_rtf,
       fee_group_reference: '511234567800',
       confirmation_email_recipients: ['such@lolz.com', 'wow@lol.biz']
   end

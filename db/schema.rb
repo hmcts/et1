@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_14_161051) do
+ActiveRecord::Schema.define(version: 2019_03_29_135800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,8 @@ ActiveRecord::Schema.define(version: 2019_02_14_161051) do
     t.string "pdf"
     t.string "confirmation_email_recipients", default: [], array: true
     t.boolean "is_protective_award", default: false
+    t.string "uploaded_file_key"
+    t.string "uploaded_file_name"
     t.index ["application_reference"], name: "index_claims_on_application_reference", unique: true
   end
 

@@ -37,7 +37,7 @@ describe "claim_reviews/show.html.slim" do
 
     context 'Attached documents' do
       subject { review_page.claim_details.attached_documents.answer.native.inner_html }
-      it { is_expected.to eq('file.rtf') }
+      it { is_expected.to eq('big.rtf') }
     end
   end
 end

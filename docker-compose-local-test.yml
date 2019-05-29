@@ -32,3 +32,17 @@ services:
       - BROWSER_STACK_KEY
       - TESTINGBOT_KEY
       - TESTINGBOT_SECRET
+  redis:
+    image: redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+  azurite:
+    image: mcr.microsoft.com/azurestorage-azurite:2.6.7
+    ports:
+      - ${AZURE_BLOB_PORT:-10000}:10000
+    volumes:
+      - azurite_data:/opt/azurite/folder
+    environment:
+      executable: blob
+volumes:
+  azurite_data:

@@ -1,86 +1,93 @@
-h2.legend = t '.claim_type'
+= simple_form_for resource, url: request.fullpath, multipart: true do |f|
+  = hidden_field_tag :return_to_review, params[:return_to_review]
 
-p= t '.claim_type_label'
+  = f.error_notification
+  .form-fields lang= "#{I18n.locale}"
+    h2.legend = t '.claim_type'
 
-fieldset
-  legend.medium= t '.unfair_dismissal'
-  details
-    summary role="button" aria={controls: 'details-content-0', expanded: 'true'}
-      span.summary= t '.summary'
-    .panel-indent#details-content-0
-      p= t '.unfair_dismissal_summary_detail'
-  = f.input :is_unfair_dismissal,
-    as: :gds_check_boxes,
-    wrapper_class: 'options',
-    required: true
+    p= t '.claim_type_label'
 
-fieldset
-  legend.medium= t '.protective_award'
-  details
-    summary role="button" aria={controls: 'details-content-1', expanded: 'true'}
-      span.summary= t '.summary'
-    .panel-indent#details-content-1
-      p= t '.protective_award_summary_detail'
-  = f.input :is_protective_award,
-    as: :gds_check_boxes,
-    wrapper_class: 'options',
-    required: true
+    fieldset
+      legend.medium= t '.unfair_dismissal'
+      details
+        summary role="button" aria={controls: 'details-content-0', expanded: 'true'}
+          span.summary= t '.summary'
+        .panel-indent#details-content-0
+          p= t '.unfair_dismissal_summary_detail'
+      = f.input :is_unfair_dismissal,
+        as: :gds_check_boxes,
+        wrapper_class: 'options',
+        required: true
 
-fieldset
-  legend.medium= t '.discrimination'
-  = f.input :discrimination_claims, label: false,
-    collection: Claim::DISCRIMINATION_COMPLAINTS,
-    include_hidden: false,
-    as: :check_boxes,
-    item_wrapper_class: 'block-label',
-    wrapper_class: 'label-column options'
+    fieldset
+      legend.medium= t '.protective_award'
+      details
+        summary role="button" aria={controls: 'details-content-1', expanded: 'true'}
+          span.summary= t '.summary'
+        .panel-indent#details-content-1
+          p= t '.protective_award_summary_detail'
+      = f.input :is_protective_award,
+        as: :gds_check_boxes,
+        wrapper_class: 'options',
+        required: true
 
-fieldset
-  legend.medium= t '.pay'
-  = f.input :pay_claims, label: false,
-    collection: Claim::PAY_COMPLAINTS, as: :check_boxes,
-    include_hidden: false,
-    item_wrapper_class: 'block-label',
-    wrapper_class: 'label-column options'
+    fieldset
+      legend.medium= t '.discrimination'
+      = f.input :discrimination_claims, label: false,
+        collection: Claim::DISCRIMINATION_COMPLAINTS,
+        include_hidden: false,
+        as: :check_boxes,
+        item_wrapper_class: 'block-label',
+        wrapper_class: 'label-column options'
 
-fieldset.reveal-publish-delegate
-  legend.medium= t '.other_type'
-  = f.input :is_other_type_of_claim,
-    as: :gds_check_boxes,
-    wrapper_class: 'options',
-    input_html: { :class => 'reveal-publish-publisher',
-                  :'data-target' => 'sub1' },
-    required: true
+    fieldset
+      legend.medium= t '.pay'
+      = f.input :pay_claims, label: false,
+        collection: Claim::PAY_COMPLAINTS, as: :check_boxes,
+        include_hidden: false,
+        item_wrapper_class: 'block-label',
+        wrapper_class: 'label-column options'
 
-  = f.input :other_claim_details, as: :text, label: false,
-    input_html: { rows: 2 },
-    wrapper_html: { :id => :other_claim_details_wrapper,
-                    :class => 'panel-indent toggle-content reveal-subscribe',
-                    :'data-target' => 'sub1',
-                    :'data-show-array' => 'true'}
+    fieldset.reveal-publish-delegate
+      legend.medium= t '.other_type'
+      = f.input :is_other_type_of_claim,
+        as: :gds_check_boxes,
+        wrapper_class: 'options',
+        input_html: { :class => 'reveal-publish-publisher',
+                      :'data-target' => 'sub1' },
+        required: true
 
-fieldset
-  legend= t '.whistleblowing'
-  = f.input :is_whistleblowing,
-    as: :radio_buttons,
-    readonly: nil,
-    include_hidden: false,
-    collection: responses_collection,
-    item_wrapper_class: 'block-label',
-    input_html: { class: 'reveal-publish-publisher ga-vpv'},
-    wrapper_class: 'form-group-reveal reveal-publish-delegate',
-    reveal: { true => 'sub2', false => 'sub2' },
-    required: true
+      = f.input :other_claim_details, as: :text, label: false,
+        input_html: { rows: 2 },
+        wrapper_html: { :id => :other_claim_details_wrapper,
+                        :class => 'panel-indent toggle-content reveal-subscribe',
+                        :'data-target' => 'sub1',
+                        :'data-show-array' => 'true'}
 
-  = f.input :send_claim_to_whistleblowing_entity,
-    as: :radio_buttons,
-    readonly: nil,
-    include_hidden: false,
-    item_wrapper_class: 'block-label',
-    wrapper_class: 'panel-indent toggle-content',
-    input_html: { class: 'ga-vpv'},
-    wrapper_html: { :id => :send_claim_to_whistleblowing_entity_wrapper,
-                    :class => 'reveal-subscribe',
-                    :'data-target' => 'sub2',
-                    :'data-show-array' => 'true' },
-    required: true
+    fieldset
+      legend= t '.whistleblowing'
+      = f.input :is_whistleblowing,
+        as: :radio_buttons,
+        readonly: nil,
+        include_hidden: false,
+        collection: responses_collection,
+        item_wrapper_class: 'block-label',
+        input_html: { class: 'reveal-publish-publisher ga-vpv'},
+        wrapper_class: 'form-group-reveal reveal-publish-delegate',
+        reveal: { true => 'sub2', false => 'sub2' },
+        required: true
+
+      = f.input :send_claim_to_whistleblowing_entity,
+        as: :radio_buttons,
+        readonly: nil,
+        include_hidden: false,
+        item_wrapper_class: 'block-label',
+        wrapper_class: 'panel-indent toggle-content',
+        input_html: { class: 'ga-vpv'},
+        wrapper_html: { :id => :send_claim_to_whistleblowing_entity_wrapper,
+                        :class => 'reveal-subscribe',
+                        :'data-target' => 'sub2',
+                        :'data-show-array' => 'true' },
+        required: true
+  .form-actions
+    = f.button :submit

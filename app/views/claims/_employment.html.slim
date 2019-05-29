@@ -1,165 +1,172 @@
-fieldset
-  legend= t '.situation_legend'
+= simple_form_for resource, url: request.fullpath, multipart: true do |f|
+  = hidden_field_tag :return_to_review, params[:return_to_review]
 
-  /! Radios: main yes / no
-  = f.input :was_employed,
-    as: :radio_buttons,
-    readonly: nil,
-    include_hidden: false,
-    collection: responses_collection,
-    item_wrapper_class: 'block-label',
-    wrapper_html: { :class => 'form-group-reveal reveal-publish-delegate' },
-    input_html: { :class => 'reveal-publish-publisher ga-vpv'},
-    reveal: { true => 'main', false => 'main' }
-
-  /! reveal_current_situation
-  #reveal_current_situation.reveal-subscribe.reveal-publish-delegate.toggle-content data-target="main" data-show-array="true"
+  = f.error_notification
+  .form-fields lang= "#{I18n.locale}"
     fieldset
-      legend.form-label = t '.current_situation'
-      /! Radios: 3 options
-      = f.input :current_situation, input_html: { class: 'reveal-publish-publisher'}, label: false,
-        collection: EmploymentForm::CURRENT_SITUATION,
+      legend= t '.situation_legend'
+
+      /! Radios: main yes / no
+      = f.input :was_employed,
         as: :radio_buttons,
         readonly: nil,
         include_hidden: false,
+        collection: responses_collection,
         item_wrapper_class: 'block-label',
-        wrapper_html: { :class => 'form-group-reveal' },
-        reveal: { 'still_employed'        => 'sub1',
-                  'notice_period'         => 'sub1',
-                  'employment_terminated' => 'sub1' }
+        wrapper_html: { :class => 'form-group-reveal reveal-publish-delegate' },
+        input_html: { :class => 'reveal-publish-publisher ga-vpv'},
+        reveal: { true => 'main', false => 'main' }
 
-    #employment_ppb_wrapper.reveal-subscribe.toggle-content data-target="sub1" data-show-array="still_employed notice_period employment_terminated"
-      /! Employment details
-      fieldset#employment_details
-        legend= t '.employment_details_legend'
-
-        = f.input :job_title
-
+      /! reveal_current_situation
+      #reveal_current_situation.reveal-subscribe.reveal-publish-delegate.toggle-content data-target="main" data-show-array="true"
         fieldset
-          legend.form-label = t '.start_date'
-          = f.input :start_date, label: false
-
-        fieldset.reveal-subscribe data-target="sub1" data-show-array="notice_period"
-          legend.form-label = t '.notice_period_end_date'
-          = f.input :notice_period_end_date, label: false,
-            wrapper_html: { :id => 'employment_notice_period_end_date' }
-
-        fieldset.reveal-subscribe data-target="sub1" data-show-array="employment_terminated"
-          legend.form-label = t '.end_date'
-          = f.input :end_date, label: false,
-            wrapper_html: { :id => 'employment_end_date' }
-
-        /! Did you work - or get paid for - a period of notice? (optional)
-        /! reveal on option 3
-        fieldset
-          legend.form-label = t '.worked_notice_period_or_paid_in_lieu'
-          = f.input :worked_notice_period_or_paid_in_lieu, label:false,
-            wrapper_html: { :id => 'worked_notice_period_or_paid_in_lieu',
-                          :class => 'reveal-subscribe reveal-publish-delegate toggle-content',
-                          :'data-target' => 'sub1',
-                          :'data-show-array' => 'employment_terminated' } do
-
-          = f.input_field :worked_notice_period_or_paid_in_lieu,
+          legend.form-label = t '.current_situation'
+          /! Radios: 3 options
+          = f.input :current_situation, input_html: { class: 'reveal-publish-publisher'}, label: false,
+            collection: EmploymentForm::CURRENT_SITUATION,
             as: :radio_buttons,
             readonly: nil,
-            collection: responses_collection,
             include_hidden: false,
-            :class => 'reveal-publish-publisher',
-            reveal: { true => 'sub2', false => 'sub2' },
-            item_wrapper_class: 'block-label '
+            item_wrapper_class: 'block-label',
+            wrapper_html: { :class => 'form-group-reveal' },
+            reveal: { 'still_employed'        => 'sub1',
+                      'notice_period'         => 'sub1',
+                      'employment_terminated' => 'sub1' }
+
+        #employment_ppb_wrapper.reveal-subscribe.toggle-content data-target="sub1" data-show-array="still_employed notice_period employment_terminated"
+          /! Employment details
+          fieldset#employment_details
+            legend= t '.employment_details_legend'
+
+            = f.input :job_title
+
+            fieldset
+              legend.form-label = t '.start_date'
+              = f.input :start_date, label: false
+
+            fieldset.reveal-subscribe data-target="sub1" data-show-array="notice_period"
+              legend.form-label = t '.notice_period_end_date'
+              = f.input :notice_period_end_date, label: false,
+                wrapper_html: { :id => 'employment_notice_period_end_date' }
+
+            fieldset.reveal-subscribe data-target="sub1" data-show-array="employment_terminated"
+              legend.form-label = t '.end_date'
+              = f.input :end_date, label: false,
+                wrapper_html: { :id => 'employment_end_date' }
+
+            /! Did you work - or get paid for - a period of notice? (optional)
+            /! reveal on option 3
+            fieldset
+              legend.form-label = t '.worked_notice_period_or_paid_in_lieu'
+              = f.input :worked_notice_period_or_paid_in_lieu, label:false,
+                wrapper_html: { :id => 'worked_notice_period_or_paid_in_lieu',
+                              :class => 'reveal-subscribe reveal-publish-delegate toggle-content',
+                              :'data-target' => 'sub1',
+                              :'data-show-array' => 'employment_terminated' } do
+
+              = f.input_field :worked_notice_period_or_paid_in_lieu,
+                as: :radio_buttons,
+                readonly: nil,
+                collection: responses_collection,
+                include_hidden: false,
+                :class => 'reveal-publish-publisher',
+                reveal: { true => 'sub2', false => 'sub2' },
+                item_wrapper_class: 'block-label '
+
+              /! reveal on option yes of the above
+              = f.input :notice_pay_period_count,
+                wrapper_html: { :id => 'reveal_notice_pay_period',
+                                :class => 'reveal-subscribe panel-indent toggle-content',
+                                :'data-target' => 'sub2',
+                                :'data-show-array' => 'true' } do
+                .inline-fields.slim-fieldset
+                  = f.input_field :notice_pay_period_count, {type: 'text', class: 'string'}
+                  = f.input :notice_pay_period_type, label: false,
+                    collection: EmploymentForm::NOTICE_PAY_PERIODS, as: :radio_buttons,
+                    readonly: nil,
+                    include_hidden: false,
+                    item_wrapper_class: 'slim-label'
+
+            = f.input :average_hours_worked_per_week, input_html: { class: 'short-input' }
+
+          /! Pay, pension and benefits
+          fieldset#pay_pension_benefits
+            legend= t '.pay_legend'
+
+            = f.input :gross_pay,
+              input_html: { :class => 'prefix-pound' } do
+              .prefixed-field.inline-fields
+                .currency_field
+                  span.currency_pound £
+                  = f.input_field :gross_pay, as: :string
+
+                = f.input :gross_pay_period_type,
+                  label: false,
+                  collection: EmploymentForm::PAY_PERIODS,
+                  as: :radio_buttons,
+                  readonly: nil,
+                  include_hidden: false,
+                  item_wrapper_class: 'slim-label'
+
+            = f.input :net_pay,
+              input_html: { :class => 'prefix-pound' } do
+              .prefixed-field.inline-fields
+                .currency_field
+                  span.currency_pound £
+                  = f.input_field :net_pay, as: :string
+                = f.input :net_pay_period_type,
+                  label: false,
+                  collection: EmploymentForm::PAY_PERIODS,
+                  as: :radio_buttons,
+                  readonly: nil,
+                  include_hidden: false,
+                  item_wrapper_class: 'slim-label'
+
+            = f.input :enrolled_in_pension_scheme,
+              as: :radio_buttons,
+              readonly: nil,
+              include_hidden: false,
+              collection: [[t('.true_v2'), true], [t('.false_v2'), false]],
+              item_wrapper_class: 'block-label'
+
+            = f.input :benefit_details,
+              as: :text,
+              input_html: { rows: 5 }
+
+        /! New job fieldset
+        /! reveal on option 3
+        fieldset#end_date_wrapper.reveal-subscribe.toggle-content data-target="sub1" data-show-array="employment_terminated"
+          legend= t '.new_job_legend'
+
+          = f.input :found_new_job,
+            as: :radio_buttons,
+            readonly: nil,
+            include_hidden: false,
+            item_wrapper_class: 'block-label',
+            input_html: { :class => 'reveal-publish-publisher'},
+            wrapper_html: { :class => 'form-group-reveal' },
+            reveal: { true => 'sub3', false => 'sub3' }
 
           /! reveal on option yes of the above
-          = f.input :notice_pay_period_count,
-            wrapper_html: { :id => 'reveal_notice_pay_period',
-                            :class => 'reveal-subscribe panel-indent toggle-content',
-                            :'data-target' => 'sub2',
-                            :'data-show-array' => 'true' } do
-            .inline-fields.slim-fieldset
-              = f.input_field :notice_pay_period_count, {type: 'text', class: 'string'}
-              = f.input :notice_pay_period_type, label: false,
-                collection: EmploymentForm::NOTICE_PAY_PERIODS, as: :radio_buttons,
+          #reveal_new_job.panel-indent.reveal-subscribe.toggle-content data-target="sub3" data-show-array="true"
+            fieldset
+              legend.form-label = t '.new_job_start_date'
+              = f.input :new_job_start_date, label: false
+
+            = f.input :new_job_gross_pay,
+              input_html: { :class => 'prefix-pound' } do
+
+            .prefixed-field.inline-fields
+              .currency_field
+                span.currency_pound £
+                = f.input_field :new_job_gross_pay, as: :string
+
+              = f.input :new_job_gross_pay_frequency,
+                label: false,
+                collection: EmploymentForm::PAY_PERIODS,
+                as: :radio_buttons,
                 readonly: nil,
                 include_hidden: false,
                 item_wrapper_class: 'slim-label'
-
-        = f.input :average_hours_worked_per_week, input_html: { class: 'short-input' }
-
-      /! Pay, pension and benefits
-      fieldset#pay_pension_benefits
-        legend= t '.pay_legend'
-
-        = f.input :gross_pay,
-          input_html: { :class => 'prefix-pound' } do
-          .prefixed-field.inline-fields
-            .currency_field
-              span.currency_pound £
-              = f.input_field :gross_pay, as: :string
-
-            = f.input :gross_pay_period_type,
-              label: false,
-              collection: EmploymentForm::PAY_PERIODS,
-              as: :radio_buttons,
-              readonly: nil,
-              include_hidden: false,
-              item_wrapper_class: 'slim-label'
-
-        = f.input :net_pay,
-          input_html: { :class => 'prefix-pound' } do
-          .prefixed-field.inline-fields
-            .currency_field
-              span.currency_pound £
-              = f.input_field :net_pay, as: :string
-            = f.input :net_pay_period_type,
-              label: false,
-              collection: EmploymentForm::PAY_PERIODS,
-              as: :radio_buttons,
-              readonly: nil,
-              include_hidden: false,
-              item_wrapper_class: 'slim-label'
-
-        = f.input :enrolled_in_pension_scheme,
-          as: :radio_buttons,
-          readonly: nil,
-          include_hidden: false,
-          collection: [[t('.true_v2'), true], [t('.false_v2'), false]],
-          item_wrapper_class: 'block-label'
-
-        = f.input :benefit_details,
-          as: :text,
-          input_html: { rows: 5 }
-
-    /! New job fieldset
-    /! reveal on option 3
-    fieldset#end_date_wrapper.reveal-subscribe.toggle-content data-target="sub1" data-show-array="employment_terminated"
-      legend= t '.new_job_legend'
-
-      = f.input :found_new_job,
-        as: :radio_buttons,
-        readonly: nil,
-        include_hidden: false,
-        item_wrapper_class: 'block-label',
-        input_html: { :class => 'reveal-publish-publisher'},
-        wrapper_html: { :class => 'form-group-reveal' },
-        reveal: { true => 'sub3', false => 'sub3' }
-
-      /! reveal on option yes of the above
-      #reveal_new_job.panel-indent.reveal-subscribe.toggle-content data-target="sub3" data-show-array="true"
-        fieldset
-          legend.form-label = t '.new_job_start_date'
-          = f.input :new_job_start_date, label: false
-
-        = f.input :new_job_gross_pay,
-          input_html: { :class => 'prefix-pound' } do
-
-        .prefixed-field.inline-fields
-          .currency_field
-            span.currency_pound £
-            = f.input_field :new_job_gross_pay, as: :string
-
-          = f.input :new_job_gross_pay_frequency,
-            label: false,
-            collection: EmploymentForm::PAY_PERIODS,
-            as: :radio_buttons,
-            readonly: nil,
-            include_hidden: false,
-            item_wrapper_class: 'slim-label'
+  .form-actions
+    = f.button :submit

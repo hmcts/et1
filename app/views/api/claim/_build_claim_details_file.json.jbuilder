@@ -1,9 +1,8 @@
 json.uuid SecureRandom.uuid
 json.command 'BuildClaimDetailsFile'
 json.data do
-  json.filename CarrierwaveFilename.for(file, underscore: true)
+  json.filename claim.uploaded_file_name
   json.checksum nil
-  json.data_url file.url
-  json.data_from_key nil
+  json.data_url nil
+  json.data_from_key claim.uploaded_file_key
 end
-

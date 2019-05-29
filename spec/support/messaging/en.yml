@@ -27,6 +27,7 @@ en:
         attached_documents: 'Attached documents'
         claim_details: 'Claim details'
         other_known_claimants: 'Other known claimants'
+      remove_upload: "Remove file"
     claim_outcome:
       title: 'Claim outcome'
       questions:

@@ -223,7 +223,7 @@ RSpec.describe EtApi, type: :service do
       it { is_expected.to contain_valid_api_command('BuildPrimaryRespondent').version('2').for_db_data(example_claim.primary_respondent) }
       it { is_expected.to contain_valid_api_command('BuildPrimaryRepresentative').version('2').for_db_data(example_claim.representative) }
       it { is_expected.to contain_valid_api_command('BuildPdfFile').version('2').for_db_data(example_claim.pdf) }
-      it { is_expected.to contain_valid_api_command('BuildClaimDetailsFile').version('2').for_db_data(example_claim.claim_details_rtf) }
+      it { is_expected.to contain_valid_api_command('BuildClaimDetailsFile').version('2').for_db_data(example_claim) }
       it { is_expected.not_to contain_api_command('BuildSecondaryClaimants') }
       it { is_expected.not_to contain_api_command('BuildClaimantsRespondents') }
       it { is_expected.not_to contain_api_command('BuildSecondaryRepresentatives') }

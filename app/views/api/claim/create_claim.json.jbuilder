@@ -32,9 +32,9 @@ json.data do
       json.partial! 'api/claim/build_claimants_file', file: claim.additional_claimants_csv
     end
   end
-  if claim.claim_details_rtf.present?
+  if claim.uploaded_file_key.present?
     json.child! do
-      json.partial! 'api/claim/build_claim_details_file', file: claim.claim_details_rtf
+      json.partial! 'api/claim/build_claim_details_file', claim: claim
     end
   end
   json.child! do

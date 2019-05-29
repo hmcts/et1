@@ -7,13 +7,13 @@ module Et1
           include RSpec::Matchers
           include RSpec::Mocks::ArgumentMatchers
 
-          def has_valid_json_for_model?(file, errors: [], indent: 1)
+          def has_valid_json_for_model?(claim, errors: [], indent: 1)
             expect(json).to include command: 'BuildClaimDetailsFile',
                                     uuid: instance_of(String)
             expect(json[:data]).to include checksum: nil,
-                                           data_from_key: nil,
-                                           data_url: file.url,
-                                           filename: file.filename
+                                           data_from_key: claim.uploaded_file_key,
+                                           data_url: nil,
+                                           filename: claim.uploaded_file_name
           rescue RSpec::Expectations::ExpectationNotMetError => err
             errors << "Missing or invalid BuildClaimDetailsFile command json"
             errors.concat(err.message.lines.map { |l| "#{'  ' * indent}#{l.gsub(/\n\z/, '')}" })

@@ -1,8 +1,10 @@
 require 'rails_helper'
 
-feature 'Attaching a document' do
+feature 'Attaching a document', js: true do
   include FormMethods
   include Messages
+  include ET1::Test::Pages
+  include ET1::Test::Setup
 
   let(:claim) { Claim.create password: 'lollolol' }
   let(:file_path) { Rails.root + 'spec/support/files/' }
@@ -18,41 +20,56 @@ feature 'Attaching a document' do
     let(:alternative_rtf_file_path) { file_path + './alt_file.rtf' }
 
     context 'Uploading a valid RTF file' do
+
+      let(:claim_from_db) { Claim.find(claim.id) }
+
       before do
-        visit '/apply/claim-details'
-        attach_file "claim_details_claim_details_rtf", rtf_file_path
+        stub_build_blob_to_azure
+        claim_details_page.load
+        claim_details_page.rtf_file_upload.expand
+        claim_details_page.rtf_file_upload.attach_additional_information_file(rtf_file_path)
         fill_in_claim_details
       end
 
-      scenario 'Attaching the file' do
-        expect(claim.reload.claim_details_rtf_file.read).to eq File.read(rtf_file_path)
+      it 'saves the file name' do
+        expect(claim_from_db.uploaded_file_name).to eq 'file.rtf'
       end
 
       scenario 'Deleting the file' do
-        visit '/apply/claim-details'
-        check "claim_details_remove_claim_details_rtf"
-        click_button 'Save and continue'
+        claim_details_page.load
+        claim_details_page.rtf_file_upload.remove_rtf
+        claim_details_page.next
 
-        expect(claim.reload.claim_details_rtf.present?).to be false
+        expect(claim_from_db.uploaded_file_name.present?).to be false
       end
 
-      scenario 'Replacing the file' do
-        visit '/apply/claim-details'
-        attach_file "claim_details_claim_details_rtf", alternative_rtf_file_path
-        click_button 'Save and continue'
+      it 'replaces an existing file with a new upload' do
+        claim_details_page.load
+        claim_details_page.rtf_file_upload.expand
+        claim_details_page.rtf_file_upload.attach_additional_information_file(alternative_rtf_file_path)
+        claim_details_page.next
 
-        expect(claim.reload.claim_details_rtf_file.read).to eq File.read(alternative_rtf_file_path)
+        expect(claim_from_db.uploaded_file_name).to eq 'alt_file.rtf'
       end
     end
 
-    scenario 'Uploading a non text file' do
-      visit '/apply/claim-details'
-      attach_file "claim_details_claim_details_rtf", invalid_file_path
+    scenario 'Uploading a non text file without submitting' do
+      claim_details_page.load
+      claim_details_page.rtf_file_upload.expander.click
+      claim_details_page.rtf_file_upload.attach_additional_information_file(invalid_file_path)
+
+      pending("An expectation that searches for an error element on the page")
+      fail
+    end
+
+    scenario 'Uploading a non text file and attempting to submit' do
+      claim_details_page.load
+      claim_details_page.rtf_file_upload.expander.click
+      claim_details_page.rtf_file_upload.attach_additional_information_file(invalid_file_path)
       click_button 'Save and continue'
 
-      expect(page).to have_text('is not an RTF')
-      expect(claim.claim_details_rtf).not_to be_present
-      expect(page.find("details")).to be_visible
+      expect(claim.uploaded_file_key).not_to be_present
+      expect(claim.uploaded_file_name).not_to be_present
     end
   end
 

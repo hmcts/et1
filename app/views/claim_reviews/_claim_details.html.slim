@@ -5,8 +5,8 @@
   - if claim.other_known_claimant_names.present?
     = sanitize simple_format(claim.other_known_claimant_names), tags: ['br']
 = render 'answer', section_name: 'claim_details', question: 'attached_document' do
-  - if claim.claim_details_rtf.present?
-    = CarrierwaveFilename.for claim.claim_details_rtf
+  - if claim.uploaded_file_name.present?
+    = sanitize simple_format(claim.uploaded_file_name), tags: ['br']
 
 
 

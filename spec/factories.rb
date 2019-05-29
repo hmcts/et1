@@ -11,9 +11,8 @@ FactoryBot.define do
     is_unfair_dismissal { true }
     is_protective_award { false }
 
-    claim_details_rtf do
-      Rack::Test::UploadedFile.new 'spec/support/files/file.rtf'
-    end
+    uploaded_file_key { 'direct_uploads/4275d293-fa3b-4d3b-9ffa-0c0ce0629eb0' }
+    uploaded_file_name { 'big.rtf' }
 
     additional_claimants_csv do
       Rack::Test::UploadedFile.new 'spec/support/files/file.csv'
@@ -69,7 +68,8 @@ FactoryBot.define do
     end
 
     trait :without_rtf do
-      claim_details_rtf { nil }
+      uploaded_file_name { nil }
+      uploaded_file_key { nil }
     end
 
 
@@ -130,7 +130,8 @@ FactoryBot.define do
     end
 
     trait :no_attachments do
-      claim_details_rtf { nil }
+      uploaded_file_name { nil }
+      uploaded_file_key { nil }
       additional_claimants_csv { nil }
       additional_claimants_csv_record_count { 0 }
     end
@@ -139,14 +140,16 @@ FactoryBot.define do
       additional_claimants_csv do
         Rack::Test::UploadedFile.new 'spec/support/files/file-l_o_l.biz._v1_.csv'
       end
-
-      claim_details_rtf do
-        Rack::Test::UploadedFile.new 'spec/support/files/file-l_o_l.biz._v1_.rtf'
-      end
     end
 
     trait :respondent_with_acas_number do
       association :primary_respondent, factory: [:respondent, :with_acas_number]
+    end
+
+    trait :with_claim_details_rtf do
+      claim_details_rtf do
+        Rack::Test::UploadedFile.new 'spec/support/files/file.rtf'
+      end
     end
   end
 

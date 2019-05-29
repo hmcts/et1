@@ -32,9 +32,11 @@ class ConfirmationPresenter < Presenter
   end
 
   def attachment_filenames
-    @attachment_filenames ||= \
-      [claim_details_rtf, additional_claimants_csv].
-      map { |attachment| CarrierwaveFilename.for attachment }.compact
+    @attachment_filenames ||= [uploaded_file_name, additional_claimants_csv_filename].compact
+  end
+
+  def additional_claimants_csv_filename
+    CarrierwaveFilename.for additional_claimants_csv if additional_claimants_csv.present?
   end
 
   def submission_with_office_message

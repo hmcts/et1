@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+#source 'https://rubygems.org'
 
 # Use CoffeeScript for .js.coffee assets and views
 # gem 'coffee-rails', '~> 4.0.0'
@@ -30,6 +30,9 @@ gem 'unicorn', '~> 5.5'
 
 # Use null db adapter for the form objects
 gem 'activerecord-nulldb-adapter', '~> 0.3'
+
+# Enables communication with API for direct upload
+gem 'et_dropzone_uploader', git: 'https://github.com/hmcts/et_dropzone_uploader.git', tag: 'v2.2.0'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '~> 0.4.0',          group: :doc
@@ -66,11 +69,16 @@ group :test do
   gem 'selenium-webdriver', '~> 3.142'
   gem 'rails-controller-testing', '~> 1.0'
   gem 'climate_control', '~> 0.2'
+  gem 'webdrivers', '~> 3.7'
+  gem 'azure-storage', '~> 0.15.0.preview'
+end
+
+group :production, :local do
+  # Use Uglifier as compressor for JavaScript assets
+  gem 'uglifier', '~> 4.1'
 end
 
 group :production do
-  # Use Uglifier as compressor for JavaScript assets
-  gem 'uglifier', '~> 4.1'
   # Only use bootsnap in prod to prevent debugging issues
   gem 'bootsnap', '~> 1.4'
 end

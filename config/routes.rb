@@ -67,7 +67,6 @@ Rails.application.routes.draw do
     root to: redirect('/apply')
     get '/:locale/apply/admin', to: redirect('/apply/admin')
     get '/:locale/apply/sidekiq', to: redirect('/apply/sidekiq')
-
   end
 
   scope :apply do
@@ -75,4 +74,5 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  mount EtDropzoneUploader::Engine, at: '/api/v2/build_blob'
 end
