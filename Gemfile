@@ -11,7 +11,6 @@ gem 'jquery-rails', '~> 4.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '6.0.1'
-gem 'rails', '6.0.1'
 gem 'responders', '~> 3.0'
 
 # Azure deployment so we need this
@@ -62,7 +61,7 @@ end
 group :test do
   gem 'webmock', '~> 3.5'
   gem 'database_cleaner', '~> 1.7'
-  gem 'cucumber-rails', '~> 1.8', require: false
+  gem 'cucumber-rails', '~> 2.0', require: false
   gem 'poltergeist', '~> 1.18'
   gem 'capybara-screenshot', '~> 1.0'
   gem 'site_prism', '~> 3.0'
