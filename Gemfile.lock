@@ -253,7 +253,7 @@ GEM
       responders (>= 2, < 4)
     invisible_captcha (1.1.0)
       rails (>= 4.2)
-    iodine (0.7.43)
+    iodine (0.7.44)
     ipaddress (0.8.3)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
