@@ -196,7 +196,7 @@ GEM
       ruby2_keywords
     faraday-net_http (1.0.1)
     ffi (1.14.2)
-    fog-aws (3.8.0)
+    fog-aws (3.10.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
       fog-xml (~> 0.1)
@@ -289,7 +289,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2020.1104)
+    mime-types-data (3.2021.0225)
     mimemagic (0.3.10)
       nokogiri (~> 1)
       rake
@@ -303,7 +303,7 @@ GEM
     multipart-post (2.1.1)
     nenv (0.3.0)
     nio4r (2.5.5)
-    nokogiri (1.11.1)
+    nokogiri (1.11.2)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     non-stupid-digest-assets (1.0.9)
@@ -532,7 +532,7 @@ DEPENDENCIES
   email_validator (~> 1.6)
   et_azure_insights (= 0.2.14)!
   factory_bot_rails (~> 6.1)
-  fog-aws (~> 3.0)
+  fog-aws (~> 3.10)
   govuk_frontend_toolkit (~> 4.0.0)
   guard-livereload (~> 2.5)
   invisible_captcha (~> 1.1)
