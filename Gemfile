@@ -64,7 +64,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'webmock', '~> 3.11'
+  gem 'webmock', '~> 3.13'
   gem 'database_cleaner', '~> 2.0'
   gem 'poltergeist', '~> 1.18'
   gem 'capybara-screenshot', '~> 1.0'
