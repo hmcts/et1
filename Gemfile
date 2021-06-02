@@ -91,7 +91,7 @@ gem 'bitmask_attributes', '~> 1.0'
 
 
 gem 'browserify-rails', '~> 4.3'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.2'
 gem 'fog-aws', '~> 3.0'
 gem 'govuk_frontend_toolkit', '~> 4.0.0'
 gem 'moj_template', '0.23.0'
