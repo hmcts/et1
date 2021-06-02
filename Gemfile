@@ -106,7 +106,7 @@ gem 'uk_postcode', '~> 2.1'
 gem 'susy', '~> 2.2'
 gem 'email_validator', '~> 1.6'
 gem 'typhoeus', '~> 1.4'
-gem 'invisible_captcha', '~> 1.1'
+gem 'invisible_captcha', '~> 2.0'
 
 # This gem ensures rails 4 also builds a non-digest version of the assets
 # so that static pages can refer to them.
