@@ -59,7 +59,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'spring', '~> 2.1'
   gem 'parallel_tests', '~> 3.4'
-  gem 'webdrivers', '~> 4.4'
+  gem 'webdrivers', '~> 4.6'
   gem 'webrick', '~> 1.4', '>= 1.4.2'
 end
 
