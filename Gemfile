@@ -10,7 +10,7 @@ gem 'jbuilder', '~> 2.10'
 gem 'jquery-rails', '~> 4.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '6.1.2.1'
+gem 'rails', '6.1.4'
 gem 'responders', '~> 3.0'
 
 # Azure deployment so we need this
