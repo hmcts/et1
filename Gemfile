@@ -54,7 +54,7 @@ group :development, :test do
   gem 'rack-livereload', '~> 0.3'
   gem 'rspec-its', '~> 1.2', require: 'rspec/its'
   gem 'rspec-rails', '~> 4.0'
-  gem 'rubocop', '~> 1.8', :require => false
+  gem 'rubocop', '~> 1.18', :require => false
   gem 'rubocop-rspec', '~> 2.1', :require => false
   gem 'shoulda-matchers', '~> 3.1'
   gem 'spring', '~> 2.1'
