@@ -1,7 +1,2 @@
-= f.input :claim_type,
-  as: :radio_buttons,
-  readonly: nil,
-  collection: Diversities::ClaimTypeForm::CLAIM_TYPES,
-  include_hidden: false,
-  item_wrapper_class: 'govuk-radios__item',
-  label: false, input_html: {class: 'govuk-radios__input'}
+= f.collection_radio_buttons :claim_type, Diversities::ClaimTypeForm::CLAIM_TYPES.map { |claim_type| [claim_type, t(".diversities_claim_type.claim_type.options.#{claim_type}")]}, :first, :last, label: false
+

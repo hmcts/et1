@@ -1,12 +1,4 @@
-fieldset
-  legend= t '.claim_outcome'
-
-  = f.input :desired_outcomes,
-    collection: Claim::DESIRED_OUTCOMES,
-    as: :check_boxes,
-    include_hidden: false,
-    item_wrapper_class: 'block-label'
-
-  = f.input :other_outcome,
-    as: :text,
-    input_html: { rows: 10 }
+= f.fieldset label: { text: t('.claim_outcome') } do
+  hr class="govuk-section-break.govuk-section-break--visible govuk-!-margin-bottom-3"
+  = f.collection_check_boxes :desired_outcomes, optional: true
+  = f.text_area :other_outcome, optional: true

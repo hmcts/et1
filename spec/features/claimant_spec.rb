@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Claimant page' do
+feature 'Claimant page', js: true do
   include FormMethods
 
   let(:claim) { Claim.create user: User.new(password: 'lollolol') }
@@ -17,6 +17,8 @@ feature 'Claimant page' do
     }
   end
 
+  let(:ui_claimant) { build(:ui_claimant, :default) }
+
   let(:secondary_attributes) do
     attributes.update 'First name' => 'Pegasus'
   end
@@ -28,65 +30,56 @@ feature 'Claimant page' do
 
   describe 'adding claimant that is 16 or more years older' do
     before do
-      visit claim_claimant_url
+      claimants_details_page.fill_in_all(claimant: ui_claimant)
+    end
 
-      select 'Mrs', from: 'Title'
+    context 'under 16 years old' do
+      let(:ui_claimant) { build(:ui_claimant, :default, :under_age) }
 
-      attributes.each do |field, value|
-        fill_in field, with: value
+      it "displays DOB validation above dob field" do
+        claimants_details_page.save_and_continue
+        expect(page).to have_text("Provide information in the highlighted fields")
+
+        claimants_details_page.about_the_claimant_group.date_of_birth_question.assert_error_message('Claimant must be 16 years of age or over')
       end
     end
 
-    it "displays DOB validation above dob field" do
-      year = (Time.current - 15.years).year.to_s
-      fill_in 'Day', with: '1'
-      fill_in 'Month', with: '1'
-      fill_in 'Year', with: year
+    context 'over 16 years old' do
+      it "displays no validation if older then 16" do
+        claimants_details_page.save_and_continue
 
-      click_button "Save and continue"
-      expect(page).to have_text("Provide information in the highlighted fields")
-
-      within(:xpath, './/fieldset/div[contains(@class,"claimant_date_of_birth")]') do
-        expect(page).to have_text("Claimant must be 16 years of age or over")
+        expect(page).not_to have_text("Provide information in the highlighted fields")
       end
     end
 
-    it "displays no validation if older then 16" do
-      date_ago = (Time.current - 16.years - 12.hours)
-      fill_in 'Day', with: date_ago.day.to_s
-      fill_in 'Month', with: date_ago.month.to_s
-      fill_in 'Year', with: date_ago.year.to_s
+    context 'no dob present' do
+      let(:ui_claimant) { build(:ui_claimant, :default, :no_date_of_birth) }
 
-      click_button "Save and continue"
-      expect(page).to have_text("Provide information in the highlighted fields")
-
-      within(:xpath, './/fieldset/div[contains(@class,"claimant_date_of_birth")]') do
-        expect(page).not_to have_text("Claimant must be 16 years of age or over")
+      it "displays validation if no DOB is present" do
+        claimants_details_page.save_and_continue
+        expect(page).to have_text("Provide information in the highlighted fields")
+        claimants_details_page.about_the_claimant_group.date_of_birth_question.assert_error_message('Claimant must be 16 years of age or over')
       end
     end
 
-    it "displays validation if no DOB is present" do
-      click_button "Save and continue"
-      expect(page).to have_text("Provide information in the highlighted fields")
-      expect(page).to have_text("Claimant must be 16 years of age or over")
-    end
+    context 'dob is 2 digit year' do
+      let(:ui_claimant) { build(:ui_claimant, :default, :date_of_birth_two_digit) }
 
-    it "displays validation of DOB is 2 digits" do
-      fill_in 'Day', with: '1'
-      fill_in 'Month', with: '1'
-      fill_in 'Year', with: '12'
-
-      click_button "Save and continue"
-      expect(page).to have_text("Provide information in the highlighted fields")
-
-      within(:xpath, './/fieldset/div[contains(@class,"claimant_date_of_birth")]') do
-        expect(page).to have_text("Enter the claimant’s date of birth in the correct format (DD/MM/YYYY)")
+      it "displays validation of DOB is 2 digits" do
+        claimants_details_page.save_and_continue
+        expect(page).to have_text("Provide information in the highlighted fields")
+        claimants_details_page.about_the_claimant_group.date_of_birth_question.assert_error_message('Enter the claimant’s date of birth in the correct format (DD/MM/YYYY)')
       end
     end
 
-    it "displays validation if no allow video attendance is present" do
-      click_button "Save and continue"
-      expect(page).to have_text("Please say whether you would be able to attend a hearing by video")
+    context 'with no video question present' do
+      let(:ui_claimant) { build(:ui_claimant, :default, :no_allow_video_attendance) }
+
+      it "displays validation if no allow video attendance is present" do
+        click_button "Save and continue"
+        expect(page).to have_text("Please say whether you would be able to attend a hearing by video")
+      end
     end
+
   end
 end

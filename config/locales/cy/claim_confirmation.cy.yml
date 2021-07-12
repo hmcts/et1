@@ -4,9 +4,9 @@ cy:
       header: Hawliad wedi'i gyflwyno
       callout_detail: Eich cyfeirnod cyflwyno
       feedback_html: |
-        <a href="%{href}" rel="external">Mae eich adborth</a> yn ein helpu i wella'r gwasanaeth hwn.
+        <a class="govuk-link" href="%{href}" rel="external">Mae eich adborth</a> yn ein helpu i wella'r gwasanaeth hwn.
       diversity_html: |
-        Helpwch ni i gadw cofnodion cywir . Llenwch ein <a href="%{href}" rel="external">holiadur monitro amrywiaeth</a>.
+        Helpwch ni i gadw cofnodion cywir . Llenwch ein <a class="govuk-link" href="%{href}" rel="external">holiadur monitro amrywiaeth</a>.
       what_happens_next:
         header: Beth sy'n digwydd nesaf
         covid_19: |
@@ -36,7 +36,7 @@ cy:
         office_address_wales: "swyddfa tribiwnlys Cymru, Tribiwnlys Cyflogaeth, 3ydd Llawr, Llys Ynadon Caerdydd a’r Fro, Plas Fitzalan, Caerdydd, CF24 0RA"
 
       print_link_html: |
-        <a href="javascript:window.print(0);">Argraffwch y dudalen hon</a> ar gyfer eich
+        <a class="govuk-link" href="javascript:window.print(0);">Argraffwch y dudalen hon</a> ar gyfer eich
         cofnodion
 
       pel_info: |

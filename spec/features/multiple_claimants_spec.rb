@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'Multiple claimants', js: true do
   include FormMethods
+  include ET1::Test::PageObjectHelpers
 
   let(:claim) { Claim.create user: User.new(password: 'lollolol') }
 
@@ -21,6 +22,7 @@ feature 'Multiple claimants', js: true do
       'Postcode'  => 'AT1 4PQ'
     }
   end
+  let(:claimant_factory) { build(:ui_secondary_claimant, :default) }
 
   let(:secondary_attributes) do
     attributes.update 'First name' => 'Pegasus'
@@ -33,46 +35,26 @@ feature 'Multiple claimants', js: true do
 
   describe 'adding claimants' do
     before do
-      visit claim_additional_claimants_path
-
-      choose 'Yes'
-      select 'Mrs', from: 'Title'
-
-      attributes.each do |field, value|
-        fill_in field, with: value
-      end
+      group_claims_page.load
+      group_claims_page.fill_in_all(secondary_claimants: [claimant_factory])
     end
 
     scenario "filling in a claimant and clicking 'Add more claimants' does not lose the entered details" do
+      second_claimant = build(:ui_secondary_claimant, :default)
       expect(page).not_to have_selector '#resource_1'
 
-      click_button "Add more claimants"
+      group_claims_page.append_secondary_claimants([second_claimant])
 
-      expect(page).to have_selector '#resource_1'
-
-      within '#resource_0' do
-        expect(page).to have_select('Title', selected: 'Mrs')
-
-        attributes.each do |field, value|
-          expect(page).to have_field(field, with: value)
-        end
-      end
+      expect(group_claims_page.secondary_claimants).to contain_exactly(claimant_factory, second_claimant)
     end
 
-    scenario 'adding more than one additional claimant', js: false do
-      click_button "Add more claimants"
-
-      within '#resource_1' do
-        select 'Mr', from: 'Title'
-
-        secondary_attributes.each do |field, value|
-          fill_in field, with: value
-        end
-      end
-
-      click_button 'Save and continue'
+    scenario 'adding more than one additional claimant' do
+      extra_claimant = build(:ui_secondary_claimant, :default)
+      group_claims_page
+        .append_secondary_claimants([extra_claimant])
+        .save_and_continue
       expect(page).not_to have_content("Group claims")
-      expect(claim.secondary_claimants.pluck(:first_name)).to match_array ['Persephone', 'Pegasus']
+      expect(claim.secondary_claimants.pluck(:last_name)).to contain_exactly(claimant_factory.last_name, extra_claimant.last_name)
     end
 
     scenario 'a user can still save & complete later' do
@@ -98,7 +80,7 @@ feature 'Multiple claimants', js: true do
       end
     end
 
-    context "additional claimants age has to be 16 or over", js: false do
+    context "additional claimants age has to be 16 or over", js: true do
       scenario "display age related error message" do
         expect(page).not_to have_selector '#resource_1'
 
@@ -175,14 +157,12 @@ feature 'Multiple claimants', js: true do
     end
 
     scenario 'deleting arbitrary claimants' do
-      visit claim_additional_claimants_path
+      group_claims_page.load
+      group_claims_page.remove_claimant(index: 1)
 
-      within '#resource_1' do
-        click_on 'Remove this claimant'
-      end
       expect(page).not_to have_css('#resource_1')
 
-      click_button 'Save and continue'
+      group_claims_page.save_and_continue
       expect(page).not_to have_content("Group claims")
       expect(claim.secondary_claimants.size).to eq 1
     end
@@ -190,11 +170,9 @@ feature 'Multiple claimants', js: true do
 
   describe 'indicating there are no additional claimants' do
     scenario 'when no additional claimants have been previously added' do
-      visit claim_additional_claimants_path
-
-      choose "No"
-
-      click_button 'Save and continue'
+      group_claims_page.load
+      group_claims_page.no_secondary_claimants
+      group_claims_page.save_and_continue
 
       expect(claim.secondary_claimants).to be_empty
       expect(page.current_path).not_to eq claim_additional_claimants_path
@@ -203,11 +181,9 @@ feature 'Multiple claimants', js: true do
     scenario 'when additional claimants have been previously added' do
       add_some_additional_claimants
 
-      visit claim_additional_claimants_path
-
-      choose "No"
-
-      click_button 'Save and continue'
+      group_claims_page.load
+      group_claims_page.no_secondary_claimants
+      group_claims_page.save_and_continue
 
       expect(claim.secondary_claimants).to be_empty
       expect(page.current_path).not_to eq claim_additional_claimants_path
@@ -215,30 +191,10 @@ feature 'Multiple claimants', js: true do
   end
 
   def add_some_additional_claimants
-    visit claim_additional_claimants_path
-    choose 'Yes'
-
-    select 'Mrs', from: 'Title'
-
-    attributes.each do |field, value|
-      fill_in field, with: value
-    end
-
-    click_button 'Add more claimants'
-
-    within '#resource_1' do
-      select 'Mr', from: 'Title'
-
-      secondary_attributes.each do |field, value|
-        fill_in field, with: value
-      end
-    end
-    # The sleep below should not be required - but for some reason the save and continue button
-    # sometimes works and sometimes doesnt so this is an experiment
-    # @TODO Remove sleep below
-    sleep 1
-
-    click_button 'Save and continue'
+    second_claimant = build(:ui_secondary_claimant, :default)
+    group_claims_page.load
+    group_claims_page.fill_in_all(secondary_claimants: [claimant_factory, second_claimant])
+    group_claims_page.save_and_continue
     expect(page).not_to have_content('Group claims')
   end
 end

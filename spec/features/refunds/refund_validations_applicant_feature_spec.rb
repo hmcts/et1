@@ -36,7 +36,7 @@ RSpec.feature 'Refund Validations - Applicant page', js: true do
       ]
     and_i_fill_in_my_refund_claimant_details_with \
       [
-        { field: 'date_of_birth', value: '32/13/3020' }
+        { field: 'date_of_birth', value: 'aa/12/3020' }
       ]
     and_i_save_the_refund_applicant_details
     then_the_user_should_be_informed_that_there_are_errors_on_the_refund_applicant_page

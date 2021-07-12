@@ -1,69 +1,24 @@
-fieldset
-  legend= t '.legend_personal_details'
-  p= t '.personal_details_description'
+= f.fieldset label: t('.legend_personal_details') do
+  hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-3"
+  p.govuk-body = t '.personal_details_description'
   = render partial: 'personal_details', locals: { f: f }
+  = f.collection_radio_buttons :gender, optional: true, inline: true, include_hidden: false
+  = f.collection_radio_buttons :has_special_needs, optional: true, inline: true, include_hidden: true
+  = f.revealed_content :has_special_needs, values: [:true]
+    = f.text_area :special_needs, optional: true
 
-  = f.input :gender, collection: ClaimantForm::GENDERS, as: :radio_buttons,
-    readonly: nil,
-    item_wrapper_class: 'block-label',
-    include_hidden: false
-
-  fieldset
-    legend.form-label = "#{t('simple_form.labels.claimant.has_special_needs')} #{t('simple_form.optional.text')}"
-    = f.input :has_special_needs,
-      as: :radio_buttons,
-      readonly: nil,
-      include_hidden: false,
-      label: false,
-      item_wrapper_class: 'block-label',
-      wrapper_class: 'form-group-reveal reveal-publish-delegate',
-      input_html: { :class => 'reveal-publish-publisher ga-vpv'},
-      reveal: { true => 'main', false => 'main' }
-
-    = f.input :special_needs, as: :text,
-      wrapper_class: 'panel-indent toggle-content',
-      wrapper_html: { id: :special_needs_wrapper,
-                      :class => 'reveal-subscribe',
-                      :'data-target' => 'main',
-                      :'data-show-array' => 'true' }
-
-fieldset
-  legend= t '.legend_contact_details'
-
+= f.fieldset label: t('.legend_contact_details') do
+  hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-3"
   = render partial: 'address', locals: { f: f }
+  = f.collection_radio_buttons :address_country
+  = f.phone_field :address_telephone_number, optional: true
+  = f.phone_field :mobile_number, optional: true
+  = f.collection_radio_buttons :contact_preference, inline: true
+  = f.revealed_content :contact_preference, values: [:email]
+    = f.email_field :email_address
+  = f.collection_radio_buttons :allow_video_attendance, inline: true
 
-  = f.input :address_country, collection: ClaimantForm::COUNTRIES, include_blank: false
-  = f.input :address_telephone_number, as: :tel, input_html: { class: 'medium-input' }
-  = f.input :mobile_number, as: :tel, input_html: { class: 'medium-input' }
-
-  fieldset
-    legend.form-label = t('simple_form.labels.claimant.contact_preference')
-    = f.input :contact_preference,
-      label: false,
-      collection: ClaimantForm::CONTACT_PREFERENCES,
-      as: :radio_buttons,
-      readonly: nil,
-      include_hidden: false,
-      item_wrapper_class: 'block-label',
-      wrapper_class: 'form-group-reveal reveal-publish-delegate',
-      input_html: { :class => 'reveal-publish-publisher'},
-      reveal: { "email" => 'email_address', "post" => 'email_address'}
-
-    = f.input :email_address,
-      required: true,
-      wrapper_class: 'panel-indent toggle-content',
-      wrapper_html: { id: :email_address,
-                      :class => 'reveal-subscribe',
-                      :'data-target' => 'email_address',
-                      :'data-show-array' => 'email' }
-
-  fieldset
-    legend.form-label = t('simple_form.labels.claimant.allow_video_attendance')
-    = f.input :allow_video_attendance,
-      label: false,
-      as: :radio_buttons,
-      collection: t('simple_form.options.claimant.allow_video_attendance').to_a.map(&:reverse),
-      readonly: nil,
-      include_hidden: false,
-      item_wrapper_class: 'block-label'
+- content_for(:javascripts)
+  javascript:
+    Et.pages.claims.ClaimantPage()
 

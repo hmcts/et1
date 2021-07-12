@@ -1,0 +1,59 @@
+en:
+  refunds:
+    bank_details:
+      your_bank_details: "Your Bank Details"
+      your_building_society_details: "Your Building Society Details"
+      header: "Repayment Details"
+      account_help: "This is the account, which must be held in your name, where any valid refund payments will be made."
+      payment_account_type:
+        label: Account type
+        options:
+          bank: Bank
+          building_society: Building Society
+      payment_bank_account_number:
+        label: Bank account number
+        hint: Please enter your 8 digit bank account number. This should be a current account held in your name, not a savings account
+      payment_bank_sort_code:
+        label: Bank sort code
+        hint: Please enter the sort code as a six digit number, eg. 112233, please do not include any spaces or dashes
+      payment_building_society_account_number:
+        label: Building Society account number
+        hint: Please enter your 8 digit building society account number. This should be a current account held in your name, not a savings account
+      payment_building_society_sort_code:
+        label: Building Society sort code
+        hint: Please enter the sort code as a six digit number, eg. 112233, please do not include any spaces or dashes
+      payment_bank_account_name:
+        label: Bank account holder name
+      payment_bank_name:
+        label: Bank name
+      payment_building_society_account_name:
+        label: Building Society account holder name
+      payment_building_society_name:
+        label: Building Society name
+  activemodel:
+    errors:
+      models:
+        refunds/bank_details:
+          attributes:
+            payment_account_type:
+              blank: Please select one of the options
+            payment_bank_account_name:
+              blank: Enter Account holder name
+            payment_bank_name:
+              blank: Enter Bank name
+            payment_bank_account_number:
+              blank: Enter Bank account
+              invalid: Must be 8 numbers
+            payment_bank_sort_code:
+              blank: Enter Sort Code
+              invalid: Must be 6 numbers
+            payment_building_society_account_name:
+              blank: Enter the name on the building society account
+            payment_building_society_name:
+              blank: Enter the name of the building society
+            payment_building_society_account_number:
+              blank: Enter the account number that the refund is to be paid into
+              invalid: Must be 8 numbers
+            payment_building_society_sort_code:
+              blank: Enter the sort code of the account that the refund is to be paid into
+              invalid: Must be 6 numbers

@@ -1,9 +1,9 @@
-tr
-  th = t "claim_reviews.item.additional_claimants_upload.group_claim"
-  td = yes_no claim.additional_claimants_csv.present?
-tr
-  th = t "claim_reviews.item.additional_claimants_upload.file_name"
-  td = CarrierwaveFilename.for claim.additional_claimants_csv
-tr
-  th = t "claim_reviews.item.additional_claimants_upload.number_claimants"
-  td = claim.additional_claimants_csv_record_count
+div.govuk-summary-list__row
+  dt.govuk-summary-list__key = t "claim_reviews.item.additional_claimants_upload.group_claim"
+  dt.govuk-summary-list__value = yes_no claim.additional_claimants_csv.present?
+div.govuk-summary-list__row
+  dt.govuk-summary-list__key = t "claim_reviews.item.additional_claimants_upload.file_name"
+  dt.govuk-summary-list__value = CarrierwaveFilename.for claim.additional_claimants_csv
+div.govuk-summary-list__row
+  dt.govuk-summary-list__key = t "claim_reviews.item.additional_claimants_upload.number_claimants"
+  dt.govuk-summary-list__value = claim.additional_claimants_csv_record_count

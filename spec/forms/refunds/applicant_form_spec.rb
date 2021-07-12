@@ -114,25 +114,41 @@ module Refunds
         end
 
         it 'validate date - allowing a good value' do
-          applicant_form.applicant_date_of_birth = { day: '1', month: '3', year: '1980' }
+          value = { 'applicant_date_of_birth(3i)' => '15',
+                    'applicant_date_of_birth(2i)' => '11',
+                    'applicant_date_of_birth(1i)' => '1985' }
+          applicant_form.assign_attributes(value)
+
+          applicant_form.applicant_date_of_birth = { 3 => '1', 2 => '3', 1 => '1980' }
           applicant_form.valid?
           expect(applicant_form.errors).not_to include :applicant_date_of_birth
         end
 
         it 'validate date - disallowing an 2 digit year' do
-          applicant_form.applicant_date_of_birth = { day: '1', month: '1', year: '80' }
+          value = { 'applicant_date_of_birth(3i)' => '1',
+                    'applicant_date_of_birth(2i)' => '1',
+                    'applicant_date_of_birth(1i)' => '80' }
+          applicant_form.assign_attributes(value)
           applicant_form.valid?
           expect(applicant_form.errors).to include :applicant_date_of_birth
         end
 
         it 'validate date - disallowing an invalid date' do
-          applicant_form.applicant_date_of_birth = { day: '32', month: '15', year: '1980' }
+          value = { 'applicant_date_of_birth(3i)' => '32',
+                    'applicant_date_of_birth(2i)' => '15',
+                    'applicant_date_of_birth(1i)' => '1980' }
+          applicant_form.assign_attributes(value)
+
           applicant_form.valid?
           expect(applicant_form.errors).to include :applicant_date_of_birth
         end
 
         it 'validates date - disallowing a blank value' do
-          applicant_form.applicant_date_of_birth = { day: '', month: '', year: '' }
+          value = { 'applicant_date_of_birth(3i)' => '',
+                    'applicant_date_of_birth(2i)' => '',
+                    'applicant_date_of_birth(1i)' => '' }
+          applicant_form.assign_attributes(value)
+
           applicant_form.valid?
           expect(applicant_form.errors).to include :applicant_date_of_birth
         end
@@ -191,39 +207,30 @@ module Refunds
       # @TODO See if the functionality provided by the 'dates' class method can be done better
       #
       it 'converts to the correct date if a hash with string keys is given' do
-        value = { 'day' => '15', 'month' => '11', "year" => '1985' }
+        value = { 3 => '15', 2 => '11', 1 => '1985' }
         applicant_form.applicant_date_of_birth = value
         expect(applicant_form.applicant_date_of_birth).to eql Date.parse('15/11/1985')
       end
 
       it 'converts to the correct date if an ActionController:Parameters is given with string keys' do
-        value = ActionController::Parameters.new('day' => '15', 'month' => '11', "year" => '1985')
-        applicant_form.applicant_date_of_birth = value
+        value = ActionController::Parameters.new 'applicant_date_of_birth(3i)' => '15',
+                                                 'applicant_date_of_birth(2i)' => '11',
+                                                 'applicant_date_of_birth(1i)' => '1985'
+        applicant_form.assign_attributes(value.permit(:applicant_date_of_birth))
         expect(applicant_form.applicant_date_of_birth).to eql Date.parse('15/11/1985')
       end
 
-      it 'stores nil if the values of the hash are all not present' do
-        value = { 'day' => '', 'month' => '', "year" => '' }
-        applicant_form.applicant_date_of_birth = value
-        expect(applicant_form.applicant_date_of_birth).to be_nil
-      end
-
-      it 'stores nil if the values of the ActionController::Parameters are all not present' do
-        value = ActionController::Parameters.new('day' => '', 'month' => '', "year" => '')
-        applicant_form.applicant_date_of_birth = value
-        expect(applicant_form.applicant_date_of_birth).to be_nil
-      end
 
       it 'stores the provided hash if the date is invalid' do
-        value = { 'day' => '32', 'month' => '15', "year" => '1985' }
+        value = { 3 => '32', 2 => '15', 1 => '1985' }
         applicant_form.applicant_date_of_birth = value
         expect(applicant_form.applicant_date_of_birth_before_type_cast).to be value
       end
 
       it 'stores the provided ActionController::Parameters as a hash if the date is invalid' do
-        value = ActionController::Parameters.new('day' => '32', 'month' => '15', "year" => '1985').freeze
+        value = ActionController::Parameters.new(3 => '32', 2 => '15', 1 => '1985').freeze
         applicant_form.applicant_date_of_birth = value
-        expect(applicant_form.applicant_date_of_birth).to eql('day' => '32', 'month' => '15', "year" => '1985')
+        expect(applicant_form.applicant_date_of_birth).to eql(3 => '32', 2 => '15', 1 => '1985')
       end
     end
 

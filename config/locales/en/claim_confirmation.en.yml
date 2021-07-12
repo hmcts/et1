@@ -4,9 +4,9 @@ en:
       header: Claim submitted
       callout_detail: Your submission reference
       feedback_html: |
-        <a href="%{href}" rel="external">Your feedback</a> helps us improve this service.
+        <a class="govuk-link" href="%{href}" rel="external">Your feedback</a> helps us improve this service.
       diversity_html: |
-        Help us keep track. Complete our <a href="%{href}" rel="external">diversity monitoring questionnaire</a>.
+        Help us keep track. Complete our <a class="govuk-link" href="%{href}" rel="external">diversity monitoring questionnaire</a>.
 
       what_happens_next:
         header: What happens next
@@ -40,7 +40,7 @@ en:
         submission: Submitted %{date}
 
       print_link_html: |
-        <a href="javascript:window.print(0);">Print this page</a> for your
+        <a class="govuk-link" href="javascript:window.print(0);">Print this page</a> for your
         records
 
       pel_info: |

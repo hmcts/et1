@@ -1,0 +1,67 @@
+en:
+  refunds:
+    review:
+      accept_declaration:
+        label: Tick to confirm
+      header: "Review your application"
+      sections:
+        applicant: "Claimant Details"
+        applicant_contact_details: "Contact Details"
+        original_case_details: "Original Case Details"
+        original_case_fees: "Original Case Fees"
+        bank_details: "Your Bank Details"
+        building_society_details: "Your Building Society Details"
+      full_name: "Full Name"
+      date_of_birth: "Date Of Birth"
+      applicant_email_address: "Email Address"
+      claimant_email_address: "Claimant email address"
+      edit: "Edit"
+      claimant_name: "Claimant name"
+      claimant_address_post_code: "Claimant address post code"
+      representative_name: "Representative name"
+      representative_address_post_code: "Representative address post code"
+      respondent_name: "Respondent name"
+      respondent_address_post_code: "Respondent address post code"
+      et_case_number: "Employment tribunal case number"
+      eat_case_number: "Employment appeal tribunal case number"
+      et_tribunal_office: "Employment tribunal office"
+      additional_information: "Additional information"
+      et_issue_fee: "ET issue"
+      fee: "Fee"
+      payment_method: "Payment Method"
+      et_hearing_fee: "ET hearing"
+      eat_issue_fee: "EAT issue"
+      eat_hearing_fee: "EAT hearing"
+      et_reconsideration_fee: "ET reconsideration"
+      fee_type: "Fee Type"
+      payment_bank_account_name: "Account holder name"
+      payment_bank_name: "Bank name"
+      payment_bank_account_number: "Account number"
+      payment_bank_sort_code: "Sort code"
+      payment_building_society_account_name: "Account holder name"
+      payment_building_society_name: "Building society name"
+      payment_building_society_account_number: "Account number"
+      payment_building_society_sort_code: "Sort code"
+      declaration: "Declaration"
+      declaration_detail_html: |
+        I am making an application on behalf of myself.
+        I made the payments set out in this application; and
+        I have not received a payment from the respondent to reimburse me those fees in accordance with an Order of the Tribunal.
+        If I am found to have been deliberately untruthful or dishonest, criminal proceedings for fraud can be brought against me.
+        I understand that if I have given false information or I do not provide further evidence if requested, my application may be rejected.
+      declaration_i_confirm: "I confirm that :"
+      claimant_address_building: "Claimant address building number or name"
+      claimant_address_street: "Claimant address street"
+      claimant_address_locality: "Claimant address town/city"
+      claimant_address_county: "Claimant address county"
+      et_country_of_claim: "Employment tribunal country of claim"
+      respondent_address_building: "Respondent address building number or name"
+      respondent_address_street: "Respondent address street"
+      respondent_address_locality: "Respondent address town/city"
+      respondent_address_county: "Respondent address county"
+      representative_address_building: "Representative address building number or name"
+      representative_address_street: "Representative address street"
+      representative_address_locality: "Representative address town/city"
+      representative_address_county: "Representative address county"
+      no_fees: "You have not entered any fees"
+      total_fees: "Total fees paid"

@@ -41,9 +41,8 @@ RSpec.describe EmploymentForm, type: :form do
       it { expect(employment_form).to validate_numericality_of(attribute).allow_nil }
     end
 
-    { new_job_gross_pay_frequency: :new_job_gross_pay, notice_pay_period_type: :notice_pay_period_count,
-      gross_pay_period_type: :gross_pay, net_pay_period_type: :net_pay }.
-      each do |type, pay|
+    { new_job_gross_pay_frequency: :new_job_gross_pay, notice_pay_period_type: :notice_pay_period_count}
+      .each do |type, pay|
         describe type.to_s do
           context "when #{pay} is true" do
             before { employment_form.send "#{pay}=", "100" }
@@ -76,8 +75,9 @@ RSpec.describe EmploymentForm, type: :form do
     context 'end date before start date' do
 
       it 'rejects when end_date is before start_date' do
-        employment_form.send(:"#{:start_date}=", {day: '1', month: '1', year: '2015'})
-        employment_form.send(:"#{:end_date}=", {day: '1', month: '1', year: '2014'})
+        employment_form.start_date = '1/1/2015'
+        employment_form.end_date = '1/1/2014'
+
         employment_form.valid?
         expect(employment_form.errors.details[:end_date]).to include(error: :end_date_before_start_date)
       end

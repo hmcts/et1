@@ -15,7 +15,7 @@ class ClaimsController < ApplicationController
   end
 
   def update
-    resource.assign_attributes params[current_step]
+    resource.assign_attributes params[current_step].permit!
 
     if resource.save
       redirect_to next_page

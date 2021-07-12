@@ -3,6 +3,7 @@ default: &default
   encoding: unicode
   pool: 5
   port: <%= ENV.fetch('DB_PORT', '5432') %>
+  password: <%= ENV['DB_PASSWORD']  || 'etpass' %>
 
 development:
   <<: *default
@@ -18,7 +19,7 @@ local:
 
 test: &test
   <<: *default
-  database: atet_test<%= ENV['TEST_ENV_NUMBER'] %>
+  database: <%= ENV.fetch('DB_TEST_NAME', 'atet_test') %><%= ENV['TEST_ENV_NUMBER'] %>
   host: <%= ENV.fetch('DB_HOST', 'localhost') %>
   user: <%= ENV.fetch('DB_USERNAME', 'postgres') %>
 

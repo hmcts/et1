@@ -11,84 +11,67 @@ feature 'Quick edit' do
   end
 
   scenario "editing 'Claimant’s details'" do
-    within(".claimant") do
-      click_link 'Edit'
-    end
-    expect(page.current_path).to eq "/en/apply/claimant"
-    click_button 'Save and continue'
-    expect(page.current_path).to eq "/en/apply/review"
+    review_page.edit_section('Claimant’s details')
+    expect(claimants_details_page).to be_displayed
+    claimants_details_page.save_and_continue
+    expect(review_page).to be_displayed
   end
 
   scenario "editing 'Group claim'" do
-    within(".additional-claimants") do
-      click_link 'Edit'
-    end
-    expect(page.current_path).to eq "/en/apply/additional-claimants"
-    click_button 'Save and continue'
-    expect(page.current_path).to eq "/en/apply/review"
+    review_page.edit_section('Group claim')
+    expect(group_claims_page).to be_displayed
+    group_claims_page.save_and_continue
+    expect(review_page).to be_displayed
   end
 
   scenario "editing 'Representative’s details'" do
-    within(".representative") do
-      click_link 'Edit'
-    end
-    expect(page.current_path).to eq "/en/apply/representative"
-    click_button 'Save and continue'
-    expect(page.current_path).to eq "/en/apply/review"
+    review_page.edit_section('Representative’s details')
+    expect(representatives_details_page).to be_displayed
+    representatives_details_page.save_and_continue
+    expect(review_page).to be_displayed
   end
 
   scenario "editing 'Respondent’s details'" do
-    within(".respondent") do
-      click_link 'Edit'
-    end
-    expect(page.current_path).to eq "/en/apply/respondent"
-    click_button 'Save and continue'
-    expect(page.current_path).to eq "/en/apply/review"
+    review_page.edit_section('Respondent’s details')
+    expect(respondents_details_page).to be_displayed
+    respondents_details_page.save_and_continue
+    expect(review_page).to be_displayed
   end
 
   scenario "editing 'Employment details'" do
-    within(".employment") do
-      click_link 'Edit'
-    end
-    expect(page.current_path).to eq "/en/apply/employment"
-    click_button 'Save and continue'
-    expect(page.current_path).to eq "/en/apply/review"
+    review_page.edit_section('Employment details')
+    expect(employment_details_page).to be_displayed
+    employment_details_page.save_and_continue
+    expect(review_page).to be_displayed
   end
 
   scenario "editing 'Claim type'" do
-    within(".claim-type") do
-      click_link 'Edit'
-    end
-    expect(page.current_path).to eq "/en/apply/claim-type"
-    click_button 'Save and continue'
-    expect(page.current_path).to eq "/en/apply/review"
+    review_page.edit_section('Claim type')
+    expect(about_the_claim_page).to be_displayed
+    about_the_claim_page.save_and_continue
+    expect(review_page).to be_displayed
   end
 
   scenario "editing 'Claim details'" do
-    within(".claim-details") do
-      click_link 'Edit'
-    end
-    expect(page.current_path).to eq "/en/apply/claim-details"
-    click_button 'Save and continue'
+    review_page.edit_section('Claim details')
+    expect(claim_details_page).to be_displayed
+    claim_details_page.save_and_continue
     expect(page.current_path).to eq "/en/apply/review"
   end
 
-  scenario "editing 'Claim outcome'" do
-    within(".claim-outcome") do
-      click_link 'Edit'
-    end
-    expect(page.current_path).to eq "/en/apply/claim-outcome"
-    click_button 'Save and continue'
-    expect(page.current_path).to eq "/en/apply/review"
+  scenario "editing 'Claim outcome'", js: true do
+    review_page.edit_section('Claim outcome')
+    expect(claim_outcome_page).to be_displayed
+    claim_outcome_page.save_and_continue
+    expect(review_page).to be_displayed
   end
 
-  scenario "editing 'Additional information'" do
-    within(".additional-information") do
-      click_link 'Edit'
-    end
-    expect(page.current_path).to eq "/en/apply/additional-information"
-    click_button 'Save and continue'
-    expect(page.current_path).to eq "/en/apply/review"
+  scenario "editing 'Additional information'", js: true do
+    review_page.edit_section('Additional information')
+    expect(more_about_the_claim_page).to be_displayed
+    more_about_the_claim_page.save_and_continue
+    expect(review_page).to be_displayed
+
   end
 
 

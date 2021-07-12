@@ -1,0 +1,77 @@
+en:
+  refunds:
+    applicant:
+      header: Claimant details
+      legend_personal_details: About you
+      legend_contact_details: Your contact details
+      sorry_name_changed:
+        header: "Sorry, you cannot continue"
+      applicant_personal_information_usage_html: |
+        For fraud prevention
+        To validate your entitlement to claim a fee refund
+        For audit
+      applicant_personal_information_usage_header: "Using your personal information:"
+      applicant_personal_information_usage_sub_header: "Personal information which you supply to us may be used in a number of ways, for example:"
+      name_changed_cannot_continue_html: 'If your name has changed since you submitted your original Employment Tribunal claim you will need to complete a paper form which can be downloaded <a target="_blank" href="https://hmctsformfinder.justice.gov.uk/HMCTS/GetForm.do?original_id=2033">here</a>. You will be asked to provide evidence of your name change.'
+      applicant_personal_information_usage_footer: "HMCTS will verify some of the information you have provided as part of this application using a credit reference agency. This check will appear in your credit history, it will not be visible to lenders and it will not affect your credit rating."
+      has_name_changed:
+        label: "Has your name changed since you made your employment tribunal claim ?"
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      applicant_title:
+        label: Title
+        options:
+          '': Please select
+          mr: Mr
+          mrs: Mrs
+          miss: Miss
+          ms: Ms
+      applicant_first_name:
+        label: First name
+      applicant_last_name:
+        label: Last name
+      applicant_date_of_birth:
+        label: Date of birth
+        hint: For example, 23 04 1981
+
+      applicant_address_building:
+        label: Building number or name
+      applicant_address_street:
+        label: Street
+      applicant_address_locality:
+        label: Town/city
+      applicant_address_county:
+        label: County
+      applicant_address_post_code:
+        label: UK Postcode
+      applicant_address_telephone_number:
+        label: Phone or mobile number
+      applicant_email_address:
+        label: Email address
+  activemodel:
+    errors:
+      models:
+        refunds/applicant:
+          attributes:
+            applicant_date_of_birth:
+              blank: Enter your date of birth
+            applicant_last_name:
+              blank: Enter your last name
+            applicant_first_name:
+              blank: Enter your first name
+            applicant_title:
+              blank: Select a title from the list
+            applicant_address_building:
+              blank: Enter the building number or name from your address
+            applicant_address_street:
+              blank: Enter the street from your address
+            applicant_address_locality:
+              blank: Enter the town or city from the claimant’s address
+            applicant_address_post_code:
+              blank: Enter your post code
+            applicant_address_telephone_number:
+              blank: Enter your preferred number
+            has_name_changed:
+              nil_or_empty: Please select Yes or No
+

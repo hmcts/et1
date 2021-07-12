@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_02_120824) do
+ActiveRecord::Schema.define(version: 2021_03_23_093709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(version: 2021_02_02_120824) do
     t.string "pdf"
     t.string "confirmation_email_recipients", default: [], array: true
     t.string "pdf_url"
+    t.boolean "has_multiple_claimants"
+    t.boolean "has_multiple_respondents"
     t.index ["application_reference"], name: "index_claims_on_application_reference", unique: true
   end
 
@@ -124,9 +126,8 @@ ActiveRecord::Schema.define(version: 2021_02_02_120824) do
     t.integer "new_job_gross_pay"
     t.float "average_hours_worked_per_week"
     t.string "current_situation"
-    t.string "gross_pay_period_type"
+    t.string "pay_period_type"
     t.string "job_title"
-    t.string "net_pay_period_type"
     t.string "new_job_gross_pay_frequency"
     t.string "notice_pay_period_type"
     t.text "benefit_details"
@@ -260,6 +261,7 @@ ActiveRecord::Schema.define(version: 2021_02_02_120824) do
     t.datetime "updated_at"
     t.boolean "worked_at_same_address", default: true
     t.boolean "primary_respondent", default: false
+    t.boolean "no_acas_number"
   end
 
   create_table "sessions", id: :serial, force: :cascade do |t|

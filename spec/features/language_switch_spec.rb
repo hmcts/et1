@@ -28,9 +28,8 @@ RSpec.feature 'Switching language', type: :feature do
     expect(current_path).to eql('/cy/apply/application-number')
     click_button('Cadw a pharhau')
 
-    expect(page).to have_text('Mae gwallau ar y dudalen')
+    expect(page).to have_text("Rhowch wybodaeth yn y blychau testun sydd wedi'u hamlygu.")
     expect(page).to have_text("Dylech greu gair cofiadwy er mwyn i chi allu dychwelyd i'ch hawliad")
     expect(page).to have_text('Cadw eich hawliad')
   end
-
 end

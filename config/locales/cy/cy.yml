@@ -34,66 +34,21 @@ cy:
 
   simple_form:
     include_blanks:
-      claimant:
-        title: Dewiswch
-      representative:
-        type: Dewiswch
       additional_claimants:
         collection:
           title: Dewiswch
 
     options:
-      claimant:
-        gender:
-          male: Gwryw
-          female: Benyw
-          prefer_not_to_say: Mae'n well gen i beidio dweud
-        contact_preference:
-          email: E-bost
-          post: Post
-        title:
-          Mr: Mr
-          Mrs: Mrs
-          Miss: Miss
-          Ms: Ms
-        address_country:
-          united_kingdom: Deyrnas Unedig
-          other: Tu allan i'r Deyrnas Unedig
-        allow_video_attendance:
-          'true': 'Gallaf'
-          'false': 'Na allaf'
       additional_claimants:
         collection:
           title:
-            mr: Mr
-            mrs: Mrs
-            miss: Miss
-            ms: Ms
+            Mr: Mr
+            Mrs: Mrs
+            Miss: Miss
+            Ms: Ms
       allow_analytics:
         true: 'Ydw'
         false: 'Nac ydw'
-
-      representative:
-        type:
-          citizen_advice_bureau: "Cynghorydd Cyflogaeth, Cyngor ar Bopeth"
-          free_representation_unit: Uned Cynrychiolaeth am Ddim
-          law_centre: Canolfan y Gyfraith
-          trade_union: Undeb llafur
-          solicitor: Cyfreithiwr
-          private_individual: Unigolyn preifat
-          trade_association: Cymdeithas llafur
-          other: Arall
-        contact_preference:
-          email: E-bost
-          post: Post
-          dx_number: Rhif cyfnewid dogfennau
-
-      respondent:
-        no_acas_number_reason:
-          joint_claimant_has_acas_number: "Mae gan unigolyn arall yr wyf yn gwneud hawliad ag ef/ȃ hi rif tystysgrif cymodi cynnar Acas"
-          acas_has_no_jurisdiction: "Nid oes gan Acas y pŵer i gymodi ar rai agweddau o fy hawliad neu fy hawliad cyfan"
-          employer_contacted_acas: "Mae fy nghyflogwr eisoes wedi bod mewn cysylltiad ag Acas"
-          interim_relief: "Mae'r hawliad yn ymwneud â chwyn am ddiswyddo annheg yn unig sy'n cynnwys cais am gymorth interim."
 
       additional_respondents:
         collection:
@@ -105,10 +60,6 @@ cy:
 
 
       employment:
-        current_situation:
-          still_employed: "Dal i weithio i'r cyflogwr hwn"
-          notice_period: "Gweithio cyfnod rhybudd i'r cyflogwr hwn"
-          employment_terminated: Dim yn gweithio i'r cyflogwr hwn mwyach
         notice_pay_period_type:
           weeks: Wythnosau
           months: Misoedd
@@ -129,16 +80,6 @@ cy:
           reinstated_employment_and_compensation: I gael fy hen swydd yn ôl
           new_employment_and_compensation: "I gael swydd arall gyda'r un cyflogwr neu gyflogwr cysylltiedig"
       claim_type:
-        discrimination_claims:
-          sex_including_equal_pay: Rhyw (gan gynnwys tâl cyfartal)
-          disability: Anabledd
-          race: Hil
-          age: Oedran
-          pregnancy_or_maternity: "Beichiogrwydd neu famolaeth"
-          religion_or_belief: Crefydd neu gred
-          sexual_orientation: Cyfeiriadedd rhywiol
-          marriage_or_civil_partnership: Priodas neu bartneriaeth sifil
-          gender_reassignment: Ailbennu rhywedd
         discrimination_claims_for_review:
           sex_including_equal_pay: Gwahaniaethu ar sail rhyw (gan gynnwys tâl cyfartal)
           disability: Gwahaniaethu ar sail anabledd
@@ -149,19 +90,6 @@ cy:
           sexual_orientation: Gwahaniaethu ar sail cyfeiriadedd rhywiol
           marriage_or_civil_partnership: Gwahaniaethu ar sail priodas neu bartneriaeth sifil
           gender_reassignment: Gwahaniaethu ar sail ailbennu rhywedd
-        pay_claims:
-          redundancy: Tâl dileu swydd
-          notice: Tâl cyfnod rhybudd
-          holiday: Tâl gwyliau
-          arrears: Tâl dyledus
-          other: Taliadau eraill
-      claim_outcome:
-        desired_outcomes:
-          compensation_only: Iawndal
-          tribunal_recommendation: "Argymhelliad gan dribiwnlys (bod y cyflogwr yn cymryd camau gweithredu fel nad yw'r broblem yn y gwaith yn digwydd eto)"
-          reinstated_employment_and_compensation: I gael eich hen swydd yn ôl
-          new_employment_and_compensation: "I gael swydd arall gyda'r un cyflogwr neu gyflogwr cysylltiedig"
-
     labels:
       user_session:
         destroy:
@@ -171,10 +99,6 @@ cy:
           new:
             reference: "Rhif cadw a dychwelyd"
             password: Gair cofiadwy
-        user:
-          new:
-            email: Nodwch eich cyfeiriad e-bost i gael eich rhif hawliad
-            password: Crëwch eich gair cofiadwy
         password:
           new:
             email: "Nodwch eich cyfeiriad e-bost"
@@ -183,31 +107,10 @@ cy:
             password: "Gair cofiadwy"
             password_confirmation: "Cadarnhau gair cofiadwy"
       claimant:
-        first_name: Enw cyntaf
-        last_name: Enw olaf
-        title: Teitl
-        date_of_birth:
-          day: "Diwrnod"
-          month: "Mis"
-          year: "Blwyddyn"
-
-        mobile_number: Rhif ffôn neu rif ffôn symudol arall
         fax_number: Ffacs
-        has_special_needs: "Oes gennych chi anabledd sy'n golygu eich bod angen cymorth yn y gwrandawiad tribiwnlys?"
-        special_needs: Disgrifiwch y cymorth sydd ei angen arnoch
-        address_telephone_number: "Rhif ffôn neu rif ffôn symudol"
-        address_building: Rhif neu enw'r adeilad
-        address_locality: Tref/dinas
-        address_street: Stryd
-        address_county: Sir
-        address_post_code: Cod post
-        address_country: Gwlad
         applying_for_remission: "Ydych chi eisiau gwneud cais am help i dalu eich ffi (a elwir yn \"help i dalu ffioedd\")?"
         contact_preference: Y ffordd orau i anfon gohebiaeth atoch (yr hawlydd)
-        allow_video_attendance: "A allech chi gymryd rhan mewn gwrandawiad drwy fideo? (angen mynediad i'r rhyngrwyd)."
         _destroy: 'Dileu''r hawlydd yma'
-        email_address: Cyfeiriad e-bost
-        gender: Rhywedd
 
       additional_claimants:
         of_collection_type: |
@@ -232,44 +135,12 @@ cy:
 
 
       additional_claimants_upload:
-        has_additional_claimants: "Ydych chi eisiau uwchlwytho manylion 6 hawlydd neu fwy?"
-        additional_claimants_csv: Uwchlwytho taenlen
         claimants: ""
 
       representative:
-        has_representative: "Oes gennych chi rywun sydd wedi cytuno i'ch cynrychioli (e.e. trwy ddelio â gohebiaeth)?"
-        address_telephone_number: "Rhif ffôn neu rif ffôn symudol"
-        address_building: Rhif neu enw'r adeilad
-        address_locality: Tref/dinas
-        address_street: Stryd
-        address_county: Sir
-        address_post_code: Cod post
         type: Math o gynrychiolydd
-        organisation_name: Enw sefydliad y cynrychiolydd
-        name: Enw'r cynrychiolydd
-        mobile_number: Rhif ffôn neu rif ffôn symudol arall
-        dx_number: Rhif cyfnewid dogfennau (DX)
-        contact_preference: Y ffordd orau i anfon gohebiaeth at eich cynrychiolydd
-        email_address: Cyfeiriad e-bost
 
       respondent:
-        name: Enw'r atebydd
-        address_telephone_number: Rhif ffôn
-        address_building: Rhif neu enw'r adeilad
-        address_locality: Tref/dinas
-        address_street: Stryd
-        address_county: Sir
-        address_post_code: Cod post
-        work_address_telephone_number: Rhif ffôn
-        work_address_building: Rhif neu enw'r adeilad
-        work_address_locality: Tref/dinas
-        work_address_street: Stryd
-        work_address_county: Sir
-        work_address_post_code: Cod post
-        worked_at_same_address: "Oeddech chi'n gweithio yn yr un cyfeiriad a roddwyd uchod?"
-        acas_early_conciliation_certificate_number: Rhif Acas
-        no_acas_number: Nid oes gen i rif Acas
-        no_acas_number_reason: "Pam nad oes gennych rif Acas?"
         _destroy: 'Dileu''r atebydd yma '
 
       additional_respondents:
@@ -344,20 +215,10 @@ cy:
       confirmation_email:
         email_addresses: Dewiswch neu rhowch fanylion yr unigolion yr hoffech anfon copi atynt
 
-      claim_type:
-        is_unfair_dismissal: Diswyddo annheg (gan gynnwys diswyddo deongliadol)
-        is_other_type_of_claim: Math arall o hawliad
-        other_claim_details: Nodwch y math arall o hawliad(au) ydych yn gwneud
-        is_whistleblowing: "Ydych chi'n riportio'r posibilrwydd o gamymddwyn yn y gwaith?"
-        send_claim_to_whistleblowing_entity: |
-          Ydych chi eisiau i ni anfon copi o'ch hawliad at yr unigolyn neu gorff perthnasol sy'n delio â chwythu'r chwiban?
       claim_details:
         other_known_claimants: "Ydych chi'n gwybod am unrhyw hawlwyr eraill (nad ydynt eisoes wedi'u rhestru) sy'n gwneud hawliadau tebyg yn erbyn yr un cyflogwr?"
         other_known_claimant_names: "Gallwch ychwanegu enwau unigolion eraill yma."
         claim_details_rtf: Mae angen i'r ddogfen fod mewn Rich Text Format(RTF)
-      claim_outcome:
-        desired_outcomes: "Beth ydych chi eisiau os yw eich hawliad yn llwyddiannus?"
-        other_outcome: "Pa fath o iawndal neu ganlyniad arall ydych chi eisiau?"
       your_fee:
         applying_for_remission: "Ydych chi eisiau gwneud cais am help i dalu ffioedd?"
         remission_claimant_count: "Faint yn eich grŵp chi sydd eisiau gwneud cais am help i dalu ffioedd?"
@@ -365,9 +226,6 @@ cy:
 
     hints:
       save_and_return:
-        user:
-          new:
-            password: "Os ydych wedi nodi eich cyfeiriad e-bost uchod, byddwch yn gallu ailosod eich gair cofiadwy os byddwch yn ei anghofio"
         session:
           new:
             reference: Cafodd hwn ei anfon atoch drwy e-bost (os wnaethoch chi nodi cyfeiriad e-bost)
@@ -377,22 +235,13 @@ cy:
             email: "Os bu ichi nodi cyfeiriad e-bost dilys pan wnaethoch ddechrau eich hawliad, byddwn yn anfon neges e-bost atoch gyda chyfarwyddiadau ar sut i ailosod eich gair cofiadwy. Os nad yw eich cyfeiriad e-bost yn cyfateb i unrhyw gais presennol, neu os nad ydych wedi nodi cyfeiriad e-bost dilys, bydd rhaid ichi ddechrau cais o’r newydd."
       address_county: "Ee os Llundain, Llundain Fwyaf; os Manceinion, Manceinion Fwyaf"
       claimant:
-        date_of_birth: "Er enghraifft, 23 04 1981"
-        has_special_needs: |
-          Ee dogfennau Braille, neu ddehonglydd iaith arwyddion
         has_representative: |
           Rhywun sydd wedi cytuno i'ch cynrychioli (er enghraifft, i baratoi eich achos a/neu gweithredu ar eich rhan os bydd gwrandawiad).
         applying_for_remission: |
           Efallai na fydd rhaid i chi dalu ffi os nad oes gennych lawer o gynilion a'ch bod yn cael budd-daliadau neu ar incwm isel. Ydw i'n gymwys i gael help?
-        contact_preference: |
-          Noder, os oes gennych gynrychiolydd (ee cyfreithiwr), yna fe anfonir pob gohebiaeth atynt
-        allow_video_attendance: "Ceir rhagor o fanylion am wrandawiadau fideo drwy ddilyn y ddolen a ganlyn: https://www.gov.uk/guidance/hmcts-telephone-and-video-hearings-during-coronavirus-outbreak"
-        address_county: "Ee os Llundain, Llundain Fwyaf; os Manceinion, Manceinion Fwyaf"
-      claimants:
         address_county: "Ee os Llundain, Llundain Fwyaf; os Manceinion, Manceinion Fwyaf"
         date_of_birth: "Er enghraifft, 23 04 1981"
       representative:
-        address_county: "Ee os Llundain, Llundain Fwyaf; os Manceinion, Manceinion Fwyaf"
         respondent:
         acas_early_conciliation_certificate_number: |
           Mae hwn ar y dystysgrif y mae Acas yn ei hanfon os nad yw cymodi yn llwyddiannus. Mae'r rhif yn cychwyn gyda ’R’ neu ’MU’.
@@ -418,41 +267,21 @@ cy:
           Os ydych chi'n hawlio iawndal ariannol, ceisiwch ddweud faint ydych chi eisiau a sut y gwnaethoch gyfrifo'r swm. Bydd unrhyw swm a nodir gennych yn wybodaeth ddefnyddiol ond gallwch ei newid hwyrach ymlaen.
         miscellaneous_information: |
           Ee efallai hoffech ddweud wrthym pam fod eich hawliad yn hwyr, neu a ydych wedi siarad â'ch cyflogwr am y broblem yn y gwaith
-      respondent:
-        address_county: "Ee os Llundain, Llundain Fwyaf; os Manceinion, Manceinion Fwyaf"
-        work_address_county: "Ee os Llundain, Llundain Fwyaf; os Manceinion, Manceinion Fwyaf"
       additional_respondents:
         has_additional_respondents: "Gallwch wneud hawliad yn erbyn mwy nag un atebydd. Ee os ydych chi'n hawlio eich bod wedi profi gwahaniaethu, efallai eich bod yn cwyno am unigolyn(ion) yn ogystal â'ch cyflogwr."
         respondents:
           address_county: "Ee os Llundain, Llundain Fwyaf; os Manceinion, Manceinion Fwyaf"
-      claim_type:
-        is_discrimination: Gwahaniaethu
-        is_other_type_of_claim: |
-          Os na allwch weld opsiwn sy'n addas ar gyfer eich hawliad chi neu eich bod eisiau ychwanegu hawliad sydd ddim yn ymddangos yn yr opsiynau uchod.
-        other_claim_details: |
-          Rhowch ddisgrifiad byr iawn o'ch hawliad; cewch gyfle i ychwanegu mwy o fanylion ar y dudalen nesaf
-        is_whistleblowing: |
-          Gallwch riportio pethau yn y gwaith sydd ddim yn iawn, sy'n anghyfreithlon neu os yw rhywun yn esgeuluso eu dyletswyddau (a elwir hefyd yn 'datgelu er lles y cyhoedd').<br />
       claim_details:
         other_known_claimants: |
           Efallai y bydd y barnwr yn cyfuno hawliadau tebyg i'w rheoli a'u gwrando gyda'i gilydd. Efallai y bydd hyn yn arbed amser ac arian i chi a'r tribiwnlys.
-        other_known_claimant_names: "Cewch ddefnyddio hyd at 350 o nodau."
         claim_details_rtf: |
           Fel arfer gallwch gadw dogfen fel ffeil RTF drwy ddewis File> Save As> Export To> Format: Rich Text Format
-      claim_outcome:
-        desired_outcomes: Gallwch ddewis mwy nag un
-        other_outcome: |
-          Os ydych chi'n hawlio iawndal ariannol, gallwch ddweud faint ydych chi eisiau a sut y gwnaethoch gyfrifo'r swm. Gallwch newid y manylion hyn hwyrach ymlaen, neu adael yr adran hon yn wag os nad ydych yn gwybod.
-      additional_information:
-        miscellaneous_information: "Rhowch fwy o fanylion am eich hawliad. Cewch ddefnyddio hyd at 2500 o nodau."
-
       user_session:
         destroy:
           email_address: Cael eich rhif hawliad drwy neges e-bost
 
   helpers:
     submit:
-      update: Cadw a pharhau
       return: Cwblhau wedyn
       claim:
         create: Cychwyn hawliad
@@ -470,6 +299,10 @@ cy:
         return: Dychwelyd i hawliad
 
   shared:
+    optional: '(dewisol)'
+    error_notification:
+      default_message: "Rhowch wybodaeth yn y blychau testun sydd wedi'u hamlygu."
+    continue_button: Cadw a pharhau
     reference: Eich rhif hawliad yw
     aside:
       skip_link: Neidio i'r cynnwys
@@ -481,7 +314,7 @@ cy:
       contact_us_link: "http://www.justice.gov.uk/contacts/hmcts/tribunals/employment"
       signout: Cadw a chwblhau wedyn
     feedback_link:
-      feedback_statement_html: "<a href=\"%{path}\">Bydd eich adborth</a>  yn ein helpu i wella’r gwasanaeth."
+      feedback_statement_html: "<a class='govuk-link' href=\"%{path}\">Bydd eich adborth</a>  yn ein helpu i wella’r gwasanaeth."
     mobile_nav:
       save_and_complete: Cadw a chwblhau wedyn
       support: Cymorth
@@ -514,6 +347,31 @@ cy:
       immutable: "Mae'r hawliad hwn wedi'i gyflwyno ac ni allwch bellach ei olygu ar-lein"
 
   timeout_sessions:
+    new:
+      header: Dychwelyd i'ch hawliad
+      forgot_password: "Wedi anghofio eich gair cofiadwy?"
+      reset_password: "Cliciwch yma i'w ailosod"
+      hint_html: "Nid yw'r manylion hyn gennych? <a class=\"govuk-link\" href=\"%{path}\">Cychwynnwch hawliad newydd</a>."
+    edit:
+      header: "Cadw eich hawliad"
+      print_link: Argraffu'r dudalen hon
+      print_copy: "i gael copi o'ch rhif hawliad er mwyn i chi allu cyfeirio ato"
+    session:
+      subheader: Rhowch eich manylion isod
+    registration:
+      application_number: Eich rhif cadw a dychwelyd
+      intro_text: Gallwch gadw eich hawliad a dychwelyd iddo unrhyw dro. Byddwch angen eich rhif cadw a dychwelyd (uchod), a’ch gair cofiadwy, y byddwch yn ei greu isod. Os byddwch yn nodi eich cyfeiriad e-bost, byddwch yn gallu ailosod eich gair cofiadwy os byddwch yn ei anghofio.
+      email_address:
+        label: Nodwch eich cyfeiriad e-bost i gael eich rhif hawliad
+      password:
+        label: Crëwch eich gair cofiadwy
+        hint: Os ydych wedi nodi eich cyfeiriad e-bost uchod, byddwch yn gallu ailosod eich gair cofiadwy os byddwch yn ei anghofio
+    reference:
+      label: Rhif cadw a dychwelyd
+      hint: Cafodd hwn ei anfon atoch drwy e-bost (os wnaethoch chi nodi cyfeiriad e-bost)
+    password:
+      label: Gair cofiadwy
+      hint: Os ydych wedi nodi eich cyfeiriad e-bost uchod, byddwch yn gallu ailosod eich gair cofiadwy os byddwch yn ei anghofio
     create:
       header: Dychwelyd i'ch hawliad
     reminder:
@@ -526,7 +384,7 @@ cy:
 
     expired:
       header: Mae'r sesiwn wedi dod i ben
-      content_html: "Mae eich sesiwn wedi dod i ben oherwydd anactifedd. <a href=\"%{new_user_session_path}\">Dychwelwch i'ch hawliad</a>."
+      content_html: "Mae eich sesiwn wedi dod i ben oherwydd anactifedd. <a class=\"govuk-link\" href=\"%{new_user_session_path}\">Dychwelwch i'ch hawliad</a>."
     destroy:
       logout: Rydych wedi cael eich allgofnodi
 
@@ -544,7 +402,13 @@ cy:
         exit_guide: Dychwelyd i'r ffurflen
         contact_us: Cysylltu â ni
         contact_us_link: "http://www.justice.gov.uk/contacts/hmcts/tribunals/employment"
-
+  cookies:
+    edit:
+      usage:
+        label: A ydych eisiau derbyn cwcis dadansoddol?
+        options:
+          'true': 'Ydw'
+          'false': 'Nac ydw'
   banner:
     title: Cwcis ar gyfer Tribiwnlysoedd Cyflogaeth
     first_line: Rydym yn defnyddio cwcis hanfodol i wneud i'r wefan hon weithio.
@@ -590,7 +454,7 @@ cy:
       new:
         header: Dychwelyd i'ch hawliad
         subheader: Rhowch eich manylion isod
-        hint_html: "Nid yw'r manylion hyn gennych? <a href=\"%{path}\">Cychwynnwch hawliad newydd</a>."
+        hint_html: "Nid yw'r manylion hyn gennych? <a class=\"govuk-link\" href=\"%{path}\">Cychwynnwch hawliad newydd</a>."
         forgot_password: "Wedi anghofio eich gair cofiadwy?"
         reset_password: "Cliciwch yma i'w ailosod"
     passwords:
@@ -613,8 +477,36 @@ cy:
         paste_in_browser: "Efallai na fyddwch yn gallu clicio ar y ddolen. Os na, copïwch yr url a'i gludo i'ch porwr."
   claims:
     personal_details:
-      date_of_birth: Dyddiad geni
-
+      date_of_birth:
+        label: Dyddiad geni
+        hint: "Er enghraifft, 23 04 1981"
+        day: "Diwrnod"
+        month: "Mis"
+        year: "Blwyddyn"
+      title:
+        label: Teitl
+        options:
+          '': Dewiswch
+          Mr: Mr
+          Mrs: Mrs
+          Miss: Miss
+          Ms: Ms
+      first_name:
+        label: Enw cyntaf
+      last_name:
+        label: Enw olaf
+    address:
+      address_building:
+        label: Rhif neu enw'r adeilad
+      address_locality:
+        label: Tref/dinas
+      address_street:
+        label: Stryd
+      address_county:
+        label: Sir
+        hint: "Ee os Llundain, Llundain Fwyaf; os Manceinion, Manceinion Fwyaf"
+      address_post_code:
+        label: Cod post
     show:
       page_number: "Tudalen %{current_page} o %{total_pages}"
 
@@ -625,21 +517,66 @@ cy:
       are_you_in_time:
         legend: "Ydych chi o fewn y terfyn amser?"
         body_html: |
-          Fel arfer, mae'n rhaid i chi wneud hawliad i'r tribiwnlys o fewn 3 mis o'ch cyflogaeth yn dod i ben neu o’r dyddiad y bu i’r broblem ddigwydd. Gall y tribiwnlys, o dan amgylchiadau eithriadol, dderbyn eich hawliad os bydd yn cyrraedd yn hwyr. Os bydd eich hawliad yn cyrraedd yn hwyr, rhaid i chi egluro pam a’r tribiwnlys fydd yn penderfynu os oes modd i’r gwrandawiad fynd yn ei flaen. <a href="%{path}#time_limits">Dysgu mwy am pryd allwch wneud cais</a>.
+          Fel arfer, mae'n rhaid i chi wneud hawliad i'r tribiwnlys o fewn 3 mis o'ch cyflogaeth yn dod i ben neu o’r dyddiad y bu i’r broblem ddigwydd. Gall y tribiwnlys, o dan amgylchiadau eithriadol, dderbyn eich hawliad os bydd yn cyrraedd yn hwyr. Os bydd eich hawliad yn cyrraedd yn hwyr, rhaid i chi egluro pam a’r tribiwnlys fydd yn penderfynu os oes modd i’r gwrandawiad fynd yn ei flaen. <a class="govuk-link" href="%{path}#time_limits">Dysgu mwy am pryd allwch wneud cais</a>.
       have_you_contacted_acas:
         legend: "Ydych chi wedi cysylltu ag Acas?"
         body_html: |
-          Cyn gwneud hawliad i dribiwnlys cyflogaeth, mae'n rhaid i chi gysylltu ag Acas i ddefnyddio eu gwasanaeth rhad ac am ddim <a href="%{path}" rel="external" target="_blank">Cymodi Cynnar</a>.
+          Cyn gwneud hawliad i dribiwnlys cyflogaeth, mae'n rhaid i chi gysylltu ag Acas i ddefnyddio eu gwasanaeth rhad ac am ddim <a class="govuk-link" href="%{path}" rel="external" target="_blank">Cymodi Cynnar</a>.
       what_you_need_to_know:
         legend: Beth fydd arnoch ei angen
         body_html: |
-          <ul>
-           <li>eich <a href="%{path}#acas_early_conciliation">rhif tystysgrif cymodi cynnar Acas</a></li>
+          <ul class="govuk-list govuk-list--bullet">
+           <li>eich <a class="govuk-link" href="%{path}#acas_early_conciliation">rhif tystysgrif cymodi cynnar Acas</a></li>
            <li>manylion eich hawliad gan gynnwys y cefndir, y dyddiadau a'r unigolion sy'n gysylltiedig â'r hawliad </li>
           </ul>
+      continue: Cychwyn hawliad
+    application_number:
+      header: "Cadw eich hawliad"
+      application_number: Eich rhif hawliad
+      intro_text: "Gallwch gadw eich hawliad a dychwelyd iddo unrhyw bryd. Byddwch angen eich rhif hawliad (uchod), a gair cofiadwy y byddwch yn ei greu isod."
+      email_hint: Rhowch eich cyfeiriad e-bost i gael y rhif hawliad drwy neges e-bost.
+      print_link: Argraffu'r dudalen hon
+      print_copy: "i gael copi o'ch rhif hawliad er mwyn i chi allu cyfeirio ato"
+
     claimant:
       header: Manylion yr hawlydd
-      gender: Rhywedd
+      gender:
+        label: Rhywedd
+        options:
+          male: Gwryw
+          female: Benyw
+          prefer_not_to_say: Mae'n well gen i beidio dweud
+      has_special_needs:
+        label: "Oes gennych chi anabledd sy'n golygu eich bod angen cymorth yn y gwrandawiad tribiwnlys?"
+        hint: Ee dogfennau Braille, neu ddehonglydd iaith arwyddion
+        options:
+          'true': 'Ydw'
+          'false': 'Nac ydw'
+      special_needs:
+        label: Disgrifiwch y cymorth sydd ei angen arnoch
+      address_country:
+        label: Gwlad
+        options:
+          united_kingdom: Deyrnas Unedig
+          other: Tu allan i'r Deyrnas Unedig
+      address_telephone_number:
+        label: "Rhif ffôn neu rif ffôn symudol"
+      mobile_number:
+        label: Rhif ffôn neu rif ffôn symudol arall
+      contact_preference:
+        label: Y ffordd orau i anfon gohebiaeth atoch (yr hawlydd)
+        hint: Noder, os oes gennych gynrychiolydd (ee cyfreithiwr), yna fe anfonir pob gohebiaeth atynt
+        options:
+          email: E-bost
+          post: Post
+      email_address:
+        label: Cyfeiriad e-bost
+      allow_video_attendance:
+        label: "A allech chi gymryd rhan mewn gwrandawiad drwy fideo? (angen mynediad i'r rhyngrwyd)."
+        hint: "Ceir rhagor o fanylion am wrandawiadau fideo drwy ddilyn y ddolen a ganlyn: https://www.gov.uk/guidance/hmcts-telephone-and-video-hearings-during-coronavirus-outbreak"
+        options:
+          'true': 'Gallaf'
+          'false': 'Na allaf'
       legend_disability: "Oes gennych chi anabledd sy'n golygu eich bod angen cymorth yn y gwrandawiad tribiwnlys?"
       legend_personal_details: Ynglŷn â’r hawlydd
       legend_contact_details: "Manylion cyswllt yr hawlydd"
@@ -653,9 +590,19 @@ cy:
       add_fields: "Ychwanegu mwy o hawlwyr"
       remove_resource_link: Dileu'r hawlydd yma
       number_claimants_info: "Ar gyfer 5 hawlydd neu lai, rhowch eu manylion isod."
-      csv_upload_text_html: "Ar gyfer 6 hawlydd neu fwy, gallwch <a href=\"%{path}\" >uwchlwytho eu manylion mewn taenlen ar wahân</a>."
-
+      csv_upload_text_html: "Ar gyfer 6 hawlydd neu fwy, gallwch <a class=\"govuk-link\" href=\"%{path}\" >uwchlwytho eu manylion mewn taenlen ar wahân</a>."
+      has_multiple_claimants:
+        label: A oes unigolion eraill sy'n gwneud hawliad gyda chi (yn erbyn yr un cyflogwr neu sefydliad)?
+        options:
+          "true": 'Oes'
+          "false": 'Nac oes'
     additional_claimants_upload:
+      has_additional_claimants:
+        label: "Ydych chi eisiau uwchlwytho manylion 6 hawlydd neu fwy?"
+        hint: "Ar gyfer hyd at 5 hawlydd arall gallwch roi eu manylion <a class=\"govuk-link\" href=\"%{path}\">â llaw</a>."
+        options:
+          "true": 'Oes'
+          "false": 'Nac oes'
       header: "Hawliadau grŵp"
       subheader: Unigolion sy'n gwneud hawliad gyda chi
       steps_header: Taenlen ar gyfer hawliad grŵp
@@ -663,11 +610,10 @@ cy:
       malformatted_csv: "Nid yw'r CSV wedi cael ei fformatio'n gywir."
       remove_additional_claimants_csv: ""
       number_claimants_info: "Ar gyfer 6 hawlydd neu fwy, rhowch eu manylion isod."
-      has_additional_claimants_html: "Ar gyfer hyd at 5 hawlydd arall gallwch roi eu manylion <a href=\"%{path}\">â llaw</a>."
       step_one_header: Cam 1
       download_template_html: |
-        <a href="%{path}" download="group-claims-template-cy.csv">Lawrlwythwch templed ar gyfer creu taenlen</a> neu defnyddiwch eich un chi os yw'n dilyn yr un fformat.
-      download_template_asset: 'group-claims-template-cy.csv'
+        <a class="govuk-link" href="%{path}" download="group-claims-template-cy.csv">Lawrlwythwch templed ar gyfer creu taenlen</a> neu defnyddiwch eich un chi os yw'n dilyn yr un fformat.
+      download_template_asset: 'group-claims-template-cy'
       dob_info: "Ar gyfer dyddiadau geni, defnyddiwch rifau a/neu lythrennau wedi'u gwahanu gan flaen slaesau. Ee 23/04/1983 neu 23/Ebr/1983"
       step_two_header: Cam 2
       save_csv_format: Cadw ffeil mewn fformat CSV
@@ -675,11 +621,60 @@ cy:
       no_spaces: Peidiwch â chynnwys bylchau yn enw'r ffeil.
       step_three_header: Cam 3
       upload_limit: "Uchafswm maint ffeil: 5MB"
+      additional_claimants_csv:
+        label: Uwchlwytho taenlen
+
 
     representative:
       header: "Manylion y cynrychiolydd"
       form_legend: "Yr unigolyn sy'n eich cynrychioli"
-      representative_type_legend: Math o gynrychiolydd
+      has_representative:
+        label: "Oes gennych chi rywun sydd wedi cytuno i'ch cynrychioli (e.e. trwy ddelio â gohebiaeth)?"
+        options:
+          "true": 'Oes'
+          "false": 'Nac oes'
+      type:
+        label: Math o gynrychiolydd
+        options:
+          '': Dewiswch
+          citizen_advice_bureau: "Cynghorydd Cyflogaeth, Cyngor ar Bopeth"
+          free_representation_unit: Uned Cynrychiolaeth am Ddim
+          law_centre: Canolfan y Gyfraith
+          trade_union: Undeb llafur
+          solicitor: Cyfreithiwr
+          private_individual: Unigolyn preifat
+          trade_association: Cymdeithas llafur
+          other: Arall
+      organisation_name:
+        label: Enw sefydliad y cynrychiolydd
+      name:
+        label: Enw'r cynrychiolydd
+      address_telephone_number:
+        label: "Rhif ffôn neu rif ffôn symudol"
+      address_building:
+        label: Rhif neu enw'r adeilad
+      address_locality:
+        label: Tref/dinas
+      address_street:
+        label: Stryd
+      address_county:
+        label: Sir
+        hint: "Ee os Llundain, Llundain Fwyaf; os Manceinion, Manceinion Fwyaf"
+      address_post_code:
+        label: Cod post
+      mobile_number:
+        label: Rhif ffôn neu rif ffôn symudol arall
+      email_address:
+        label: Cyfeiriad e-bost
+      dx_number:
+        label: Rhif cyfnewid dogfennau (DX)
+      contact_preference:
+        label: Y ffordd orau i anfon gohebiaeth at eich cynrychiolydd
+        options:
+          contact_preference:
+            email: E-bost
+            post: Post
+            dx_number: Rhif cyfnewid dogfennau
       representative_legend: Ynglŷn â’ch cynrychiolydd
       contact_legend: "Manylion cyswllt y cynrychiolydd"
       contact_info: |
@@ -690,47 +685,188 @@ cy:
 
     respondent:
       header: Manylion yr atebydd
-      no_acas_number_reason: "Pam nad oes gennych rif Acas?"
       respondent_legend: Ynglŷn â’r atebydd
       no_acas_number_note_one: "Noder: Mae’n bosib y bydd eich hawliad yn cael ei wrthod os byddwch yn hawlio esemptiad yn anghywir. Os oes gennych amheuaeth, cysylltwch ag ACAS."
       no_acas_number_note_two: "Noder: Mae hwn yn fath anghyffredin o hawliad. Nid yw'r ffaith eich bod yn gwneud hawliad am ddiswyddo annheg yn golygu eich bod o reidrwydd yn gwneud hawliad am gymorth interim."
 
-      acas_legend: Rhif tystysgrif cymodi cynnar Acas
       workaddress_legend: Eich cyfeiriad gwaith
       form_hint: |
         Manylion cyswllt yr unigolyn neu sefydliad yr ydych chi'n gwneud hawliad yn ei erbyn (a elwir yn 'atebydd'). Fe ddefnyddir y cyfeiriad ar gyfer anfon gohebiaeth am yr achos.
       work_address: "Rhowch fanylion eich cyfeiriad gwaith"
-      acas_early_conciliation_certificate_number_html: |
-        Dylai fod gan bron iawn bawb y rhif hwn cyn iddynt lenwi ffurflen hawlio. Gallwch ddod o hyd iddo ar eich tystysgrif Acas. Darllenwch fwy am <a href="%{path}#acas_early_conciliation">wasanaeth cymodi cynnar Acas</a>.
       'true': 'Oeddwn'
       'false': 'Nac oeddwn'
+      name:
+        label: Enw'r atebydd
+      address_building:
+        label: Rhif neu enw'r adeilad
+      address_locality:
+        label: Tref/dinas
+      address_street:
+        label: Stryd
+      address_county:
+        label: Sir
+        hint: "Ee os Llundain, Llundain Fwyaf; os Manceinion, Manceinion Fwyaf"
+      address_telephone_number:
+        label: Rhif ffôn
+      address_post_code:
+        label: Cod post
+      worked_at_same_address:
+        label: "Oeddech chi'n gweithio yn yr un cyfeiriad a roddwyd uchod?"
+        options:
+          'true': 'Oeddwn'
+          'false': 'Nac oeddwn'
+      work_address_telephone_number:
+        label: Rhif ffôn
+      work_address_building:
+        label: Rhif neu enw'r adeilad
+      work_address_locality:
+        label: Tref/dinas
+      work_address_street:
+        label: Stryd
+      work_address_county:
+        label: Sir
+        hint: "Ee os Llundain, Llundain Fwyaf; os Manceinion, Manceinion Fwyaf"
+      work_address_post_code:
+        label: Cod post
+      acas_early_conciliation_certificate_number:
+        label: Rhif tystysgrif cymodi cynnar Acas
+        hint: Dylai fod gan bron iawn bawb y rhif hwn cyn iddynt lenwi ffurflen hawlio. Gallwch ddod o hyd iddo ar eich tystysgrif Acas. Darllenwch fwy am <a class="govuk-link" href="%{path}#acas_early_conciliation">wasanaeth cymodi cynnar Acas</a>.
+      no_acas_number:
+        label: Nid oes gen i rif Acas
+        options:
+          'true': 'Oeddwn'
+          'false': 'Nac oeddwn'
+      no_acas_number_reason:
+        label: "Pam nad oes gennych rif Acas?"
+        hint: "Noder: Mae’n bosib y bydd eich hawliad yn cael ei wrthod os byddwch yn hawlio esemptiad yn anghywir. Os oes gennych amheuaeth, cysylltwch ag ACAS."
+        options:
+          joint_claimant_has_acas_number: "Mae gan unigolyn arall yr wyf yn gwneud hawliad ag ef/ȃ hi rif tystysgrif cymodi cynnar Acas"
+          acas_has_no_jurisdiction: "Nid oes gan Acas y pŵer i gymodi ar rai agweddau o fy hawliad neu fy hawliad cyfan"
+          employer_contacted_acas: "Mae fy nghyflogwr eisoes wedi bod mewn cysylltiad ag Acas"
+          interim_relief: "Mae'r hawliad yn ymwneud â chwyn am ddiswyddo annheg yn unig sy'n cynnwys cais am gymorth interim."
+
 
     additional_respondents:
-      no_acas_number_reason: "Pam nad oes gennych rif Acas?"
       header: Atebwyr ychwanegol
-      additional_repsondents_legend: Hawliadau yn erbyn mwy nag un cyflogwr
-      additional_respondents_intro: "Ydych chi'n gwneud hawliad yn erbyn unigolyn neu sefydliad arall?"
       person: "Atebydd %{number}"
       add_fields: Ychwanegu atebydd arall
       remove_resource_link: "Dileu'r atebydd yma"
       additional_respondents_limit: "Os ydych chi'n gwneud hawliad yn erbyn mwy na %{max} atebydd ychwanegol, rhowch eu manylion yn yr adran ‘mwy am yr hawliad’ yn y ffurflen."
-      no_acas_number_note_one: :claims.respondent.no_acas_number_note_one
-      no_acas_number_note_two: :claims.respondent.no_acas_number_note_two
-      'true': 'Ydw'
-      'false': 'Nac ydw'
-
+      has_additional_respondents:
+        label: Hawliadau yn erbyn mwy nag un cyflogwr
+        hint: "Ydych chi'n gwneud hawliad yn erbyn unigolyn neu sefydliad arall?"
+        options:
+          'true': 'Ydw'
+          'false': 'Nac ydw'
+      name:
+        label: Enw'r atebydd
+      address_building:
+        label: Rhif neu enw'r adeilad
+      address_locality:
+        label: Tref/dinas
+      address_street:
+        label: Stryd
+      address_county:
+        label: Sir
+        hint: "Ee os Llundain, Llundain Fwyaf; os Manceinion, Manceinion Fwyaf"
+      address_telephone_number:
+        label: Rhif ffôn
+      address_post_code:
+        label: Cod post
+      acas_early_conciliation_certificate_number:
+        label: Rhif tystysgrif cymodi cynnar Acas
+      no_acas_number:
+        label: Nid oes gen i rif Acas
+        options:
+          'true': 'Oeddwn'
+          'false': 'Nac oeddwn'
+      no_acas_number_reason:
+        label: "Pam nad oes gennych rif Acas?"
+        hint: "Noder: Mae’n bosib y bydd eich hawliad yn cael ei wrthod os byddwch yn hawlio esemptiad yn anghywir. Os oes gennych amheuaeth, cysylltwch ag ACAS."
+        options:
+          joint_claimant_has_acas_number: "Mae gan unigolyn arall yr wyf yn gwneud hawliad ag ef/ȃ hi rif tystysgrif cymodi cynnar Acas"
+          acas_has_no_jurisdiction: "Nid oes gan Acas y pŵer i gymodi ar rai agweddau o fy hawliad neu fy hawliad cyfan"
+          employer_contacted_acas: "Mae fy nghyflogwr eisoes wedi bod mewn cysylltiad ag Acas"
+          interim_relief: "Mae'r hawliad yn ymwneud â chwyn am ddiswyddo annheg yn unig sy'n cynnwys cais am gymorth interim."
     employment:
       header: Manylion cyflogaeth
       situation_legend: "Eich manylion cyflogaeth"
-      current_situation: "Beth yw eich sefyllfa bresennol yn y gwaith o ran y cyflogwr yr ydych chi'n gwneud hawliad yn ei erbyn?"
-      start_date: Dyddiad cychwyn cyflogaeth
-      end_date: Dyddiad gorffen cyflogaeth
-      worked_notice_period_or_paid_in_lieu: "A wnaethoch weithio cyfnod rhybudd (neu gael tâl amdano)?"
-      new_job_start_date: Dyddiad cychwyn swydd newydd
-      notice_period_end_date: Dyddiad gorffen y cyfnod rhybudd
+      current_situation:
+        label: "Beth yw eich sefyllfa bresennol yn y gwaith o ran y cyflogwr yr ydych chi'n gwneud hawliad yn ei erbyn?"
+        options:
+          still_employed: "Dal i weithio i'r cyflogwr hwn"
+          notice_period: "Gweithio cyfnod rhybudd i'r cyflogwr hwn"
+          employment_terminated: Dim yn gweithio i'r cyflogwr hwn mwyach
+      job_title:
+        label: Teitl swydd
+        hint: Y swydd yr oeddech yn ei gwneud adeg y broblem yn y gwaith
+      start_date:
+        label: Dyddiad cychwyn cyflogaeth
+        hint: Er enghraifft, 22 04 2014 (os nad ydych yn gwybod yr union ddyddiad, rhowch eich amcangyfrif gorau)
+      end_date:
+        label: Dyddiad gorffen cyflogaeth
+        hint: Er enghraifft, 22 04 2014 (os nad ydych yn gwybod yr union ddyddiad, rhowch eich amcangyfrif gorau)
+      worked_notice_period_or_paid_in_lieu:
+        label: "A wnaethoch weithio cyfnod rhybudd (neu gael tâl amdano)?"
+        options:
+          'true': 'Do'
+          'false': 'Naddo'
+      notice_pay_period_count:
+        label: Am faint o wythnosau neu fisoedd gawsoch chi dâl?
+      new_job_start_date:
+        label: Dyddiad cychwyn swydd newydd
+        hint: Er enghraifft, 22 04 2014
+      notice_period_end_date:
+        label: Dyddiad gorffen y cyfnod rhybudd
+        hint: Y dyddiad daw eich cyflogaeth i ben. Er enghraifft, 22 04 2014
+      notice_pay_period_type:
+        label: "A oedd yr wythnosau neu'r misoedd hyn ?"
+        options:
+          weeks: Wythnosau
+          months: Misoedd
+      average_hours_worked_per_week:
+        label: Oriau gwaith bob wythnos ar gyfartaledd
+        hint: Peidiwch â chynnwys goramser
+      gross_pay:
+        label: Tâl cyn treth
+        hint: Hwn yw eich tâl gros, cyn treth a didyniadau eraill. Gallwch ddod o hyd iddo ar eich slip cyflog. Peidiwch â chynnwys unrhyw daliadau goramser
+      pay_period_type:
+        label: 'Pa mor aml y cawsoch eich talu'
+        options:
+          weekly: Wythnosau
+          monthly: Misoedd
+      net_pay:
+        label: Tâl ar ôl treth
+        hint: Hwn yw eich tâl net neu dâl terfynol, ar ôl treth a didyniadau eraill. Gallwch ddod o hyd iddo ar eich slip cyflog. Dylech gynnwys unrhyw daliadau goramser, comisiwn a bonws
+      enrolled_in_pension_scheme:
+        label: Ydych chi - neu oeddech chi - yn aelod o gynllun pensiwn eich cyflogwr?
+        options:
+          'true': 'Do'
+          'false': 'Naddo'
+      benefit_details:
+        label: A oes - neu a oedd - gennych chi unrhyw fuddion, fel car cwmni?
+        hint: Manylion budd(ion)
+      found_new_job:
+        label: Oes gennych chi swydd newydd?
+        options:
+          'true': 'Do'
+          'false': 'Naddo'
+      new_job_gross_pay:
+        label: Tâl y swydd newydd cyn treth
+        hint: Hwn yw eich tâl gros, cyn treth a didyniadau eraill. Gallwch ddod o hyd iddo ar eich slip cyflog. Peidiwch â chynnwys unrhyw daliadau goramser
+      new_job_gross_pay_frequency:
+        label: Pa mor aml ydych chi'n cael eich talu
+        options:
+          weekly: Wythnosau
+          monthly: Misoedd
       employment_details_legend: Manylion cyflogaeth
       pay_legend: "Tâl, pensiwn a buddion"
       new_job_legend: Swydd newydd
+      was_employed:
+        label: Ydych chi erioed wedi cael eich cyflogi gan yr unigolyn neu'r sefydliad yr ydych chi'n gwneud yr hawliad hwn yn ei erbyn?
+        options:
+          'true': 'Do'
+          'false': 'Naddo'
       'true': 'Do'
       'false': 'Naddo'
       'true_v2': 'Ydw'
@@ -745,48 +881,101 @@ cy:
       header: Ynglŷn â'r hawliad
       claim_type: Ynglŷn â beth mae eich hawliad
       claim_type_label: "Dewiswch o leiaf un o'r mathau isod o hawliad."
-      unfair_dismissal: Diswyddo annheg
+      is_unfair_dismissal:
+        label: Diswyddo annheg
+        hint: Fe all eich diswyddiad fod yn annheg os nad oes gan eich cyflogwr reswm da dros eich diswyddo neu os nad yw wedi dilyn proses ddisgyblu ffurfiol neu broses ddiswyddo'r cwmni. Diswyddo deongliadol yw pan fyddwch yn cael eich gorfodi i adael eich swydd yn erbyn eich ewyllys oherwydd ymddygiad eich cyflogwr.
+        options:
+          1: Diswyddo annheg (gan gynnwys diswyddo deongliadol)
       summary:  "Beth yw hyn?"
-      unfair_dismissal_summary_detail: |
-        Fe all eich diswyddiad fod yn annheg os nad oes gan eich cyflogwr reswm da dros eich diswyddo neu os nad yw wedi dilyn proses ddisgyblu ffurfiol neu broses ddiswyddo'r cwmni. Diswyddo deongliadol yw pan fyddwch yn cael eich gorfodi i adael eich swydd yn erbyn eich ewyllys oherwydd ymddygiad eich cyflogwr.
-      discrimination: Gwahaniaethu
-      pay: Tâl
-      other_type: Math arall o hawliad (na ddangosir uchod)
-      whistleblowing: Hawliad chwythu'r chwiban
-      'true': 'Ydw'
-      'false': 'Nac ydw'
-
-
+      discrimination_claims:
+        label: Gwahaniaethu
+        options:
+          sex_including_equal_pay: Rhyw (gan gynnwys tâl cyfartal)
+          disability: Anabledd
+          race: Hil
+          age: Oedran
+          pregnancy_or_maternity: "Beichiogrwydd neu famolaeth"
+          religion_or_belief: Crefydd neu gred
+          sexual_orientation: Cyfeiriadedd rhywiol
+          marriage_or_civil_partnership: Priodas neu bartneriaeth sifil
+          gender_reassignment: Ailbennu rhywedd
+      pay_claims:
+        label: Tâl
+        options:
+          redundancy: Tâl dileu swydd
+          notice: Tâl cyfnod rhybudd
+          holiday: Tâl gwyliau
+          arrears: Tâl dyledus
+          other: Taliadau eraill
+      is_other_type_of_claim:
+        label: Math arall o hawliad (na ddangosir uchod)
+        hint: Os na allwch weld opsiwn sy'n addas ar gyfer eich hawliad chi neu eich bod eisiau ychwanegu hawliad sydd ddim yn ymddangos yn yr opsiynau uchod.
+        options:
+          'true': Math arall o hawliad
+      other_claim_details:
+        label: Nodwch y math arall o hawliad(au) ydych yn gwneud
+        hint: Rhowch ddisgrifiad byr iawn o'ch hawliad; cewch gyfle i ychwanegu mwy o fanylion ar y dudalen nesaf
+      is_whistleblowing:
+        heading: Hawliad chwythu'r chwiban
+        label: "Ydych chi'n riportio'r posibilrwydd o gamymddwyn yn y gwaith?"
+        hint: Gallwch riportio pethau yn y gwaith sydd ddim yn iawn, sy'n anghyfreithlon neu os yw rhywun yn esgeuluso eu dyletswyddau (a elwir hefyd yn 'datgelu er lles y cyhoedd').
+        options:
+          'true': 'Ydw'
+          'false': 'Nac ydw'
+      send_claim_to_whistleblowing_entity:
+        label: Ydych chi eisiau i ni anfon copi o'ch hawliad at yr unigolyn neu gorff perthnasol sy'n delio â chwythu'r chwiban?
+        options:
+          'true': 'Ydw'
+          'false': 'Nac ydw'
     claim_details:
       header: Manylion yr hawliad
-      claim_details: Disgrifiwch eich hawliad
+      describe: Disgrifiwch eich hawliad
       claim_details_upload: neu uwchlwytho'r manylion fel dogfen ar wahân
       claim_details_html: |
         Ysgrifennwch ddatganiad i gefnogi eich hawliad isod.
         Dylech gyfeirio at y cefndir, y dyddiadau a'r unigolion a oedd yn gysylltiedig â'r broblem.
-        <a href="%{path}#writing_your_claim_statement">Mwy am ysgrifennu datganiad i gefnogi eich hawliad</a>.
-      claim_details_hint_html: "Cewch ddefnyddio hyd at 2500 o nodau."
-      remove_claim_details_rtf: |
-        Dileu'r ddogfen a gafodd ei huwchlwytho yn flaenorol: %{file}
+        <a class="govuk-link" href="%{path}#writing_your_claim_statement">Mwy am ysgrifennu datganiad i gefnogi eich hawliad</a>.
       similar_claims: Hawliadau tebyg
       'true': 'Ydw'
       'false': 'Nac ydw'
-
-
+      other_known_claimants:
+        label: "Ydych chi'n gwybod am unrhyw hawlwyr eraill (nad ydynt eisoes wedi'u rhestru) sy'n gwneud hawliadau tebyg yn erbyn yr un cyflogwr?"
+        hint: Efallai y bydd y barnwr yn cyfuno hawliadau tebyg i'w rheoli a'u gwrando gyda'i gilydd. Efallai y bydd hyn yn arbed amser ac arian i chi a'r tribiwnlys.
+      other_known_claimant_names:
+        label: "Gallwch ychwanegu enwau unigolion eraill yma."
+      claim_details_rtf:
+        label: Mae angen i'r ddogfen fod mewn Rich Text Format(RTF)
+        hint: "Fel arfer gallwch gadw dogfen fel ffeil RTF drwy ddewis File> Save As> Export To> Format: Rich Text Format"
+      remove_claim_details_rtf:
+        label: "Dileu'r ddogfen a gafodd ei huwchlwytho yn flaenorol: %{file}"
+      claim_details:
+        label: Disgrifiwch eich hawliad
     claim_outcome:
       header: Canlyniad yr hawliad
       claim_outcome: Dewiswch y canlyniad(au) a fyddai orau gennych
+      desired_outcomes:
+        label: "Beth ydych chi eisiau os yw eich hawliad yn llwyddiannus?"
+        hint: "Beth ydych chi eisiau os yw eich hawliad yn llwyddiannus?"
+        options:
+          compensation_only: Iawndal
+          tribunal_recommendation: "Argymhelliad gan dribiwnlys (bod y cyflogwr yn cymryd camau gweithredu fel nad yw'r broblem yn y gwaith yn digwydd eto)"
+          reinstated_employment_and_compensation: I gael eich hen swydd yn ôl
+          new_employment_and_compensation: "I gael swydd arall gyda'r un cyflogwr neu gyflogwr cysylltiedig"
+      other_outcome:
+        label: "Pa fath o iawndal neu ganlyniad arall ydych chi eisiau?"
+        hint: Os ydych chi'n hawlio iawndal ariannol, gallwch ddweud faint ydych chi eisiau a sut y gwnaethoch gyfrifo'r swm. Gallwch newid y manylion hyn hwyrach ymlaen, neu adael yr adran hon yn wag os nad ydych yn gwybod.
 
     additional_information:
       header: Mwy am yr hawliad
       legend: "Manylion pwysig eraill"
-      has_miscellaneous_information: "Ydych chi eisiau darparu gwybodaeth ychwanegol am eich hawliad? (dewisol)"
-      has_miscellaneous_information_hint: |
-        Include anything that will help the tribunal come to a decision about whether your case can be heard.
-        What you write may be seen by the respondent. If you are making a claim against more than 3 additional respondents,
-        enter their details below.
-      has_miscellaneous_information_hint: "Dylech gynnwys unrhyw beth fyddai'n helpu'r tribiwnlys i ddod i benderfyniad ynghylch p'un a ellir gwrando eich achos. Efallai y bydd yr atebydd yn gweld beth ydych yn ysgrifennu."
-      additional_respondents_callout: "Os ydych chi'n gwneud hawliad yn erbyn mwy na 3 atebydd ychwanegol, rhowch eu manylion isod."
+      has_miscellaneous_information:
+        label: "Ydych chi eisiau darparu gwybodaeth ychwanegol am eich hawliad?"
+        hint: "Dylech gynnwys unrhyw beth fyddai'n helpu'r tribiwnlys i ddod i benderfyniad ynghylch p'un a ellir gwrando eich achos. Efallai y bydd yr atebydd yn gweld beth ydych yn ysgrifennu."
+        options:
+          "true": 'Oes'
+          "false": 'Nac oes'
+      miscellaneous_information:
+        label: "Rhowch fwy o fanylion am eich hawliad."
 
     your_fee:
       header: Ffi
@@ -795,9 +984,9 @@ cy:
       application_fee: Ffi
       reduce_fee: "Esemptiad rhag talu ffioedd"
       applying_for_remission_single_html:
-        "Efallai y byddwch yn gymwys i dalu ffi is neu dim ffi o gwbl (a elwir yn help i dalu ffioedd). Gwiriwch y <a href=\"%{path}#reducing_fees\">canllaw ar help i dalu ffioedd</a>."
+        "Efallai y byddwch yn gymwys i dalu ffi is neu dim ffi o gwbl (a elwir yn help i dalu ffioedd). Gwiriwch y <a class=\"govuk-link\" href=\"%{path}#reducing_fees\">canllaw ar help i dalu ffioedd</a>."
       applying_for_remission_multiple_html:
-        "Efallai y byddwch yn gymwys i dalu ffi is neu dim ffi o gwbl (a elwir yn help i dalu ffioedd). Gwiriwch y <a href=\"%{path}#reducing_fees\">canllaw ar help i dalu ffioedd</a>."
+        "Efallai y byddwch yn gymwys i dalu ffi is neu dim ffi o gwbl (a elwir yn help i dalu ffioedd). Gwiriwch y <a class=\"govuk-link\" href=\"%{path}#reducing_fees\">canllaw ar help i dalu ffioedd</a>."
       applying_for_remission_multiple_note_html: "Byddwch yn gallu gwneud cais am help i dalu ffioedd pan fyddwch wedi cyflwyno'r hawliad hwn. Bydd angen i bob hawlydd cymwys wneud cais ar wahân o fewn 7 diwrnod iddynt gyflwyno'r hawliad hwn (neu bydd yr hawliad yn cael ei wrthod)."
       remission_applied_info_html:
         "<p>Rydych chi'n gwneud cais am help i dalu ffioedd.</p>\n<p>Mae'n rhaid i chi lenwi a chyflwyno eich cais am help i dalu ffioedd o fewn 7 diwrnod i chi gyflwyno eich hawliad, neu bydd eich cais am help i dalu ffioedd yn cael ei wrthod.</p>\n<p>Ni fydd angen i chi dalu'r ffi cyflwyno pan fyddwch chi'n cyflwyno'r hawliad hwn.</p>"
@@ -806,6 +995,172 @@ cy:
         Ar sail y wybodaeth yr ydych wedi'i rhoi i ni, mae'n rhaid i chi dalu <strong>£%{fee}</strong> gyda cherdyn debyd neu gredyd.
       hearing_fee: |
         Os bydd eich achos yn mynd i dribiwnlys, bydd rhaid i chi dalu ffi gwrandawiad o <strong>£%{fee}</strong>.
+
+    feedback:
+      header: Eich adborth
+      feedback_comments: Ydych chi wedi cael unrhyw broblemau wrth ddefnyddio'r gwasanaeth hwn? (dewisol)
+      feedback_suggestions: Oes gennych chi unrhyw sylwadau neu awgrymiadau eraill? (dewisol)
+      feedback_email_address: Eich cyfeiriad e-bost (dewisol)
+      feedback_submit_button: Anfon adborth
+
+    registration:
+      header: "Cadw eich hawliad"
+      application_number: Eich rhif cadw a dychwelyd
+      intro_text: Gallwch gadw eich hawliad a dychwelyd iddo unrhyw dro. Byddwch angen eich rhif cadw a dychwelyd (uchod), a’ch gair cofiadwy, y byddwch yn ei greu isod. Os byddwch yn nodi eich cyfeiriad e-bost, byddwch yn gallu ailosod eich gair cofiadwy os byddwch yn ei anghofio.
+      email_address:
+        label: Nodwch eich cyfeiriad e-bost i gael eich rhif hawliad
+      password:
+        label: Crëwch eich gair cofiadwy
+        hint: Os ydych wedi nodi eich cyfeiriad e-bost uchod, byddwch yn gallu ailosod eich gair cofiadwy os byddwch yn ei anghofio
+    session:
+      header: Dychwelyd i'ch hawliad
+      subheader: Rhowch eich manylion isod
+      reference:
+        label: Rhif cadw a dychwelyd
+        hint: Cafodd hwn ei anfon atoch drwy e-bost (os wnaethoch chi nodi cyfeiriad e-bost)
+      password:
+        label: Gair cofiadwy
+        hint: Os ydych wedi nodi eich cyfeiriad e-bost uchod, byddwch yn gallu ailosod eich gair cofiadwy os byddwch yn ei anghofio
+    password:
+      new:
+        header: Ailosod y gair cofiadwy
+        enter_your_details: Nodwch eich manylion isod
+        email:
+          label: Nodwch eich cyfeiriad e-bost
+          hint: Os bu ichi nodi cyfeiriad e-bost dilys pan wnaethoch ddechrau eich hawliad, byddwn yn anfon neges e-bost atoch gyda chyfarwyddiadau ar sut i ailosod eich gair cofiadwy. Os nad yw eich cyfeiriad e-bost yn cyfateb i unrhyw gais presennol, neu os nad ydych wedi nodi cyfeiriad e-bost dilys, bydd rhaid ichi ddechrau cais o’r newydd.
+        reference:
+          label: Rhif cadw a dychwelyd
+          hint: Cafodd hwn ei anfon atoch drwy e-bost (os wnaethoch chi nodi cyfeiriad e-bost).
+      edit:
+        header: Ailosod y gair cofiadwy
+        enter_your_details: Rhowch eich manylion newydd isod
+        password:
+          label: Gair cofiadwy
+          hint: Eich gair cofiadwy newydd
+  diversities:
+    claim_type:
+      diversities_claim_type:
+        claim_type:
+          options:
+            unfair-dismissal-or-constructive-dismissal: "Diswyddo annheg neu ddiswyddo deongliadol"
+            discrimination: "Gwahaniaethu"
+            redundancy-payment: "Taliad dileu swydd"
+            other-payments-you-are-owed: "Taliadau eraill sy'n ddyledus ichi"
+            other-complaints: "Cwynion eraill"
+    diversities_identity:
+      sex:
+        label: Beth yw eich rhyw?
+        options:
+          male: Gwryw
+          female: Benyw
+          prefer_not_to_say: Mae'n well gen i beidio dweud
+      gender:
+        label: Beth yw eich hunaniaeth ryweddol?
+        options:
+          male-including-female-to-male-trans-men: Gwryw (yn cynnwys dynion trawsrywiol benyw i wryw)
+          female-including-male-to-female-trans-women: Benyw (yn cynnwys menywod trawsrywiol gwryw i fenyw)
+          prefer-not-to-say: Mae'n well gen i beidio dweud
+      gender_at_birth:
+        label: A yw eich hunaniaeth ryweddol yn wahanol i'ch rhyw tybiedig pan gawsoch eich geni?
+        options:
+          yes_answer: Ydi
+          no_answer: Nac ydi
+          prefer-not-to-say: Mae'n well gen i beidio dweud
+      sexual_identity:
+        label: Which of the options below best describes your sexual identity?
+        options:
+          heterosexual-straight: Heterorywiol
+          gay-lesbian: Hoyw / Lesbiaidd
+          bisexual: Deurywiol
+          other: Arall
+          prefer-not-to-say: Mae'n well gen i beidio dweud
+    diversities_relationship:
+      relationship:
+        label:
+        options:
+          single-that-is-never-married-and-never-registered-in-a-same-sex-civil-partnership: Sengl, hynny yw, heb briodi erioed a heb gofrestru erioed mewn partneriaeth sifil gyfunrywiol
+          married: Priod
+          separated-but-still-legally-married: Wedi gwahanu ond yn parhau i fod yn briod yn ôl y gyfraith
+          divorced: Wedi ysgaru
+          widowed: Gweddw
+          in-a-registered-same-sex-civil-partnership: Mewn partneriaeth sifil gyfunrywiol gofrestredig
+          separated-but-still-legally-in-a-same-sex-civil-partnership: Wedi gwahanu ond yn parhau i fod mewn partneriaeth sifil gyfunrywiol yn ôl y gyfraith
+          formerly-in-a-same-sex-civil-partnership-which-is-now-legally-dissolved: Yn flaenorol mewn partneriaeth sifil gyfunrywiol sydd yn awr wedi ei diddymu'n gyfreithiol
+          surviving-partner-from-a-same-sex-civil-partnership: Wedi colli partner sifil o’r un rhyw trwy farwolaeth
+          prefer-not-to-say: Mae'n well gen i beidio dweud
+    diversities_age_caring:
+      age_group:
+        label: Ym mha grŵp oedran ydych chi?
+        options:
+          under-25: Dan 25
+          25-34: 25 - 34
+          35-44: 35 - 44
+          45-54: 45 - 54
+          55-64: 55 - 64
+          65-over: 65 a throsodd
+          prefer-not-to-say: Mae'n well gen i beidio dweud
+      caring_responsibility:
+        label: A oes gennych chi unrhyw gyfrifoldebau gofalu?
+        hint: Er enghraifft, plant, perthnasau neu bartneriaid oedrannus
+        options:
+          yes_answer: 'Oes'
+          no_answer: 'Nac oes'
+          prefer-not-to-say: Mae'n well gen i beidio dweud
+    diversities_religion:
+      religion:
+        options:
+          no-religion: Dim crefydd
+          christian-including-church-of-england-catholic-protestant-and-all-other-christian-denominations: Cristion (yn cynnwys Eglwys Loegr, yr Eglwys Gatholig, Protestannaidd a phob enwad Cristnogol arall)
+          buddhist: Bwdhydd
+          hindu: Hindŵ
+          jewish: Iddew
+          muslim: Mwslim
+          sikh: Sikh
+          prefer-not-to-say: Mae'n well gen i beidio dweud
+          any-other-religion: Unrhyw grefydd arall
+      religion_text:
+        hint: Rhowch ddisgrifiad os gwelwch yn dda
+    diversities_disability:
+      disability:
+        options:
+          yes_answer: 'Oes'
+          no_answer: 'Nac oes'
+          prefer-not-to-say: Mae'n well gen i beidio dweud
+    diversities_pregnancy:
+      pregnancy:
+        options:
+          yes_answer: 'Oes'
+          no_answer: 'Nac oes'
+          prefer-not-to-say: Mae'n well gen i beidio dweud
+    diversities_ethnicity:
+      ethnicity:
+        options:
+          white: Gwyn
+          mixed-multiple-ethnic-groups: Cymysg / grwpiau aml-ethnig
+          asian-asian-british: Asiaidd / Asiaidd Prydeinig
+          black-african-caribbean-black-british: Du / Affricanaidd / Caribïaidd / Du Prydeinig
+          other-ethnic-group: Grŵp ethnig arall
+          prefer-not-to-say: Mae'n well gen i beidio dweud
+      ethnicity_subgroup:
+          english-welsh-scottish-northern-irish-british: Seisnig / Cymreig / Albanaidd / Gwyddelig o Ogledd Iwerddon / Prydeinig
+          irish: Gwyddelig
+          gypsy-or-irish-traveller: Sipsiwn neu Deithiwr Gwyddelig
+          any-other-white-background: Unrhyw gefndir Gwyn arall
+          white-and-black-caribbean: Gwyn a Du Caribïaidd
+          white-and-black-african: Gwyn a Du Affricanaidd
+          white-and-asian: Gwyn ac Asiaidd
+          any-other-mixed-multiple-ethnic-background: Unrhyw gefndir ethnig cymysg / aml-ethnig arall
+          none-of-the-above: Dim un o'r uchod
+          indian: Indiaidd
+          pakistani: Pacistanaidd
+          bangladeshi: Bangladesiaidd
+          chinese: Tsieniaidd
+          any-other-asian-background: Unrhyw gefndir Asiaidd arall
+          african: Affricanaidd
+          caribbean: Caribïaidd
+          any-other-black-african-caribbean-background: Unrhyw gefndir Du / Affricanaidd / Caribïaidd arall
+          arab: Arabaidd
+          any-other-ethnic-group: Unrhyw grŵp ethnig arall
 
   activerecord:
     errors:
@@ -833,6 +1188,12 @@ cy:
             reference:
               blank: "Rhowch eich rhif hawliad"
               invalid: Rydych wedi rhoi rhif hawliad annilys
+        application_number:
+          attributes:
+            password:
+              blank: Dylech greu gair cofiadwy er mwyn i chi allu dychwelyd i'ch hawliad
+            email_address:
+              invalid: Rydych wedi rhoi cyfeiriad e-bost annilys
         additional_claimants_form/additional_claimant:
           attributes:
             title:
@@ -1058,3 +1419,11 @@ cy:
               invalid_ccd_post_code: :'activemodel.errors.models.additional_respondents_form/additional_respondent.attributes.address_post_code.invalid'
   date:
     month_names: [~, Ionawr, Chwefror, Mawrth, Ebrill, Mai, Mehefin, Gorffennaf, Awst, Medi, Hydref, Tachwedd, Rhagfyr]
+  claim:
+    application_number:
+      email_address:
+        label: Nodwch eich cyfeiriad e-bost i gael eich rhif hawliad
+      password:
+        label: Crëwch eich gair cofiadwy
+        hint: "Os ydych wedi nodi eich cyfeiriad e-bost uchod, byddwch yn gallu ailosod eich gair cofiadwy os byddwch yn ei anghofio"
+

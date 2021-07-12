@@ -38,19 +38,20 @@ def and_i_want_a_refund_for_my_previous_et_claim_with_case_number_1234567_2016
 
   fees = OpenStruct.new et_issue_fee: '1000',
                         et_issue_payment_method: 'Card',
-                        et_issue_payment_date: 'January 2016',
+                        et_issue_payment_date: '1/2016',
                         et_hearing_fee: '1001',
                         et_hearing_payment_method: 'Cash',
-                        et_hearing_payment_date: 'February 2016',
+                        et_hearing_payment_date: '2/2016',
                         eat_issue_fee: '1002',
                         eat_issue_payment_method: 'Cheque',
-                        eat_issue_payment_date: 'March 2016',
+                        eat_issue_payment_date: '3/2016',
                         eat_hearing_fee: '1003',
                         eat_hearing_payment_method: 'Don\'t know',
-                        eat_hearing_payment_date: 'April 2016',
+                        eat_hearing_payment_date: '4/2016',
                         et_reconsideration_fee: '1004',
                         et_reconsideration_payment_method: 'Card',
-                        et_reconsideration_payment_date: 'Don\'t know'
+                        et_reconsideration_payment_date: nil,
+                        et_reconsideration_payment_date_unknown: true
 
   test_user.et_claim_to_refund = OpenStruct.new et_case_number: '1234567/2016',
                                                 eat_case_number: 'UKEAT/1234/16/123',
@@ -71,7 +72,7 @@ def and_i_want_a_refund_for_my_previous_et_claim_with_case_number_1234567_2015
 
   fees = OpenStruct.new et_issue_fee: '1000',
                         et_issue_payment_method: 'Card',
-                        et_issue_payment_date: 'April 2016'
+                        et_issue_payment_date: '4/2016'
 
   test_user.et_claim_to_refund = OpenStruct.new respondent: respondent.freeze,
                                                 fees: fees.freeze,

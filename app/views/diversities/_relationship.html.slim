@@ -1,8 +1,2 @@
-fieldset
-  = f.input :relationship,
-    as: :radio_buttons,
-    readonly: nil,
-    include_hidden: false,
-    collection: Diversities::RelationshipForm::RELATIONSHIP,
-    item_wrapper_class: 'govuk-radios__item',
-    label: false, input_html: {class: 'govuk-radios__input'}
+= f.govuk_collection_radio_buttons :relationship, Diversities::RelationshipForm::RELATIONSHIP.map { |relation_ship| [relation_ship, t("diversities.diversities_relationship.relationship.options.#{relation_ship}")]}, :first, :last, label: {text: false}
+

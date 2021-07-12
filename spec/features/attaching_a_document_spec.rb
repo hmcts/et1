@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Attaching a document' do
+feature 'Attaching a document', js: true do
   include FormMethods
   include Messages
 
@@ -9,19 +9,24 @@ feature 'Attaching a document' do
   let(:invalid_file_path) { file_path + './phil.jpg' }
 
   before do
-    visit new_user_session_path
-    fill_in_return_form claim.reference, 'lollolol'
+    return_to_your_claim_page
+      .load
+      .return_to_your_claim claim_number: claim.reference, memorable_word: 'lollolol'
+    claimants_details_page.assert_claim_retrieved_success
   end
 
   describe 'For claim details RTF upload' do
     let(:rtf_file_path) { file_path + './file.rtf' }
     let(:alternative_rtf_file_path) { file_path + './alt_file.rtf' }
+    let(:ui_claim_details) { build(:ui_claim_details, :default) }
 
     context 'Uploading a valid RTF file' do
+      let(:ui_claim_details) { build(:ui_claim_details, :default, rtf_file_path: rtf_file_path) }
       before do
-        visit '/apply/claim-details'
-        attach_file "claim_details_claim_details_rtf", rtf_file_path, visible: false
-        fill_in_claim_details
+        claim_details_page
+          .load
+          .fill_in_all(claim_details: ui_claim_details)
+          .save_and_continue
       end
 
       scenario 'Attaching the file' do
@@ -29,26 +34,31 @@ feature 'Attaching a document' do
       end
 
       scenario 'Deleting the file' do
-        visit '/apply/claim-details'
-        check "claim_details_remove_claim_details_rtf"
-        click_button 'Save and continue'
+        claim_details_page
+          .load
+          .remove_rtf_file
+          .save_and_continue
 
         expect(claim.reload.claim_details_rtf.present?).to be false
       end
 
       scenario 'Replacing the file' do
-        visit '/apply/claim-details'
-        attach_file "claim_details_claim_details_rtf", alternative_rtf_file_path, visible: false
-        click_button 'Save and continue'
+        ui_claim_details.rtf_file_path = alternative_rtf_file_path
+        claim_details_page
+          .load
+          .fill_in_all(claim_details: ui_claim_details)
+          .save_and_continue
 
         expect(claim.reload.claim_details_rtf_file.read).to eq File.read(alternative_rtf_file_path)
       end
     end
 
     scenario 'Uploading a non text file' do
-      visit '/apply/claim-details'
-      attach_file "claim_details_claim_details_rtf", invalid_file_path, visible: false
-      click_button 'Save and continue'
+      ui_claim_details.rtf_file_path = invalid_file_path
+      claim_details_page
+        .load
+        .fill_in_all(claim_details: ui_claim_details)
+        .save_and_continue
 
       expect(page).to have_text('is not an RTF')
       expect(claim.claim_details_rtf).not_to be_present
@@ -62,10 +72,8 @@ feature 'Attaching a document' do
 
     context 'A valid CSV file' do
       before do
-        visit '/apply/additional-claimants-upload'
-        choose "Yes"
-        attach_file "additional_claimants_upload_additional_claimants_csv", csv_file_path
-        click_button 'Save and continue'
+        group_claims_upload_page.load
+        group_claims_upload_page.upload_secondary_claimants_csv(csv_file_path).save_and_continue
       end
 
       scenario 'Attaching the file' do
@@ -74,16 +82,16 @@ feature 'Attaching a document' do
 
       scenario 'Deleting the file' do
         visit '/apply/additional-claimants-upload'
-        check "additional_claimants_upload_remove_additional_claimants_csv"
+        sleep 2
+        group_claims_upload_page.remove_csv_file
         click_button 'Save and continue'
 
         expect(claim.reload.additional_claimants_csv_file.present?).to be false
       end
 
       scenario 'Replacing the file' do
-        visit '/apply/additional-claimants-upload'
-        attach_file "additional_claimants_upload_additional_claimants_csv", alternative_csv_file_path
-        click_button 'Save and continue'
+        group_claims_upload_page.load
+        group_claims_upload_page.upload_secondary_claimants_csv(alternative_csv_file_path).save_and_continue
 
         expect(claim.reload.additional_claimants_csv_file.read).to eq File.read(alternative_csv_file_path)
       end
@@ -93,11 +101,8 @@ feature 'Attaching a document' do
       let(:invalid_csv_path) { file_path + './invalid_file.csv' }
 
       scenario 'Uploading a CSV file with errors' do
-        visit '/apply/additional-claimants-upload'
-        choose "Yes"
-        attach_file "additional_claimants_upload_additional_claimants_csv", invalid_csv_path
-
-        click_button 'Save and continue'
+        group_claims_upload_page.load
+        group_claims_upload_page.upload_secondary_claimants_csv(invalid_csv_path).save_and_continue
 
         expect(page).to have_text('An error has been found on line 4 of the uploaded file.')
         expect(page).to have_text('Postcode - Enter a valid UK postcode. If you live abroad, enter SW55 9QT')
@@ -105,11 +110,9 @@ feature 'Attaching a document' do
         expect(claim.additional_claimants_csv).not_to be_present
       end
 
-      scenario 'Uploading a file not of a CSV type' do
-        visit '/apply/additional-claimants-upload'
-        choose "Yes"
-        attach_file "additional_claimants_upload_additional_claimants_csv", invalid_file_path
-        click_button 'Save and continue'
+      scenario 'Uploading a file not of a CSV type', js:true do
+        group_claims_upload_page.load
+        group_claims_upload_page.upload_secondary_claimants_csv(invalid_file_path).save_and_continue
 
         expect(page).to have_text('is not a CSV')
         expect(claim.additional_claimants_csv).not_to be_present

@@ -1,26 +1,23 @@
 class EmploymentForm < Form
   CURRENT_SITUATION  = [:still_employed, :notice_period, :employment_terminated].freeze
-  PAY_PERIODS        = [:weekly, :monthly].freeze
-  NOTICE_PAY_PERIODS = [:weeks, :months].freeze
 
   attribute :average_hours_worked_per_week,        :float
   attribute :benefit_details,                      :string
   attribute :current_situation,                    :string
-  attribute :end_date,                             :gds_date_type
+  attribute :end_date,                             :et_date
   attribute :enrolled_in_pension_scheme,           :boolean
   attribute :found_new_job,                        :boolean
   attribute :gross_pay,                            :integer
-  attribute :gross_pay_period_type,                :string
+  attribute :pay_period_type,                      :string
   attribute :job_title,                            :string
   attribute :net_pay,                              :integer
-  attribute :net_pay_period_type,                  :string
   attribute :new_job_gross_pay,                    :integer
   attribute :new_job_gross_pay_frequency,          :string
-  attribute :new_job_start_date,                   :gds_date_type
+  attribute :new_job_start_date,                   :et_date
   attribute :notice_pay_period_count,              :float
   attribute :notice_pay_period_type,               :string
-  attribute :notice_period_end_date,               :gds_date_type
-  attribute :start_date,                           :gds_date_type
+  attribute :notice_period_end_date,               :et_date
+  attribute :start_date,                           :et_date
   attribute :worked_notice_period_or_paid_in_lieu, :boolean
 
   [:gross_pay, :net_pay, :new_job_gross_pay].each do |attribute|
@@ -48,8 +45,7 @@ class EmploymentForm < Form
 
   validates :new_job_gross_pay_frequency, presence: { if: :new_job_gross_pay? }
   validates :notice_pay_period_type,      presence: { if: :notice_pay_period_count? }
-  validates :gross_pay_period_type,       presence: { if: :gross_pay? }
-  validates :net_pay_period_type,         presence: { if: :net_pay? }
+  validates :pay_period_type,             presence: { if: :gross_pay? || net_pay? }
   validates :current_situation,           presence: { if: :was_employed? }
 
   def was_employed

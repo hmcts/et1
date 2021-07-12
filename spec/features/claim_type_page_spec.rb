@@ -1,38 +1,27 @@
 require 'rails_helper'
 
-feature 'Claim type page' do
+feature 'Claim type page', js: true do
   include FormMethods
 
   let(:claim) { Claim.create user: User.new(password: 'lollolol') }
 
   before do
-    visit new_user_session_path
-    fill_in_return_form claim.reference, 'lollolol'
+    return_to_your_claim_page.load
+      .return_to_your_claim(claim_number: claim.reference, memorable_word: 'lollolol')
+    claimants_details_page.assert_claim_retrieved_success
   end
 
   describe 'Claim type' do
     before do
-      visit claim_claim_type_path
+      about_the_claim_page.load
     end
 
     scenario "I don’t need the words optional against specific types of claim" do
-      expect(page).not_to have_text("Unfair dismissal (including constructive dismissal) (optional)")
-      expect(page).to have_text("Unfair dismissal (including constructive dismissal)")
-
-      expect(page).not_to have_text("Other type of claim (optional)")
-      expect(page).to have_text("Other type of claim")
-
-      expect(page).not_to have_text("Are you reporting suspected wrongdoing at work? (optional)")
-      expect(page).to have_text("Are you reporting suspected wrongdoing at work?")
-      within(:xpath, ".//fieldset[contains(.,'Whistleblowing claim')]/div[1]") do
-        choose 'Yes'
-      end
-
-      expect(page).not_to have_text("Do you want us to send a copy of your claim to the relevant person or body that deals with whistleblowing? (optional)")
-      expect(page).to have_text("Do you want us to send a copy of your claim to the relevant person or body that deals with whistleblowing?")
-
-      click_button "Save and continue"
-      expect(page).to have_text("Claim details")
+      about_the_claim_page.assert_questions
+      .whistle_blowing_fieldset.whistle_blowing_question.set(:'claim_type.is_whistleblowing.options.true')
+      expect(about_the_claim_page.whistle_blowing_fieldset).to have_whistle_blowing_body_question
+      about_the_claim_page.save_and_continue
+      expect(claim_details_page).to be_displayed
     end
 
   end

@@ -8,7 +8,7 @@ module Refunds
     it_behaves_like 'a Form', {
       et_issue_fee: '12',
       et_issue_fee_payment_method: 'card',
-      et_issue_fee_payment_date: { day: '1', month: '1', year: '2016' }
+      et_issue_fee_payment_date: { 3 => '1', 2 => '1', 1 => '2016' }
     }, Session
 
     describe 'validation' do
@@ -26,7 +26,9 @@ module Refunds
           end
 
           it 'validates date allowing valid value using partial date without day' do
-            form.send("#{fee_payment_date_field}=".to_sym, ActionController::Parameters.new(month: '12', year: '2016'))
+            value = { "#{fee_payment_date_field}(2i)" => '12',
+                      "#{fee_payment_date_field}(1i)" => '2016' }
+            form.assign_attributes(value)
             form.valid?
             expect(form.errors).not_to include fee_payment_date_field
           end
@@ -234,17 +236,19 @@ module Refunds
         reader_method = "#{fee_name}_fee_payment_date".to_sym
         writer_method = "#{fee_name}_fee_payment_date=".to_sym
         it 'converts a partial date from a hash' do
-          form.send(writer_method, 'month' => '12', 'year' => '2016')
+          form.send(writer_method, 2 => '12', 1 => '2016')
           expect(form.send(reader_method)).to eql Date.parse('1 December 2016')
         end
 
         it 'converts an empty partial date from a hash to nil' do
-          form.send(writer_method, 'month' => '', 'year' => '')
+          value = { "#{reader_method}(2i)" => '',
+                    "#{reader_method}(1i)" => '' }
+          form.assign_attributes(value)
           expect(form.send(reader_method)).to be_nil
         end
 
         it 'converts a full date from a hash' do
-          form.send(writer_method, 'month' => '12', 'year' => '2016', 'day' => '12')
+          form.send(writer_method, 2 => '12', 1 => '2016', 3 => '12')
           expect(form.send(reader_method)).to eql Date.parse('12 December 2016')
         end
 
@@ -254,28 +258,37 @@ module Refunds
         end
 
         it 'leaves an invalid date from a hash as is' do
-          form.send(writer_method, 'month' => '13', 'year' => '2016')
-          expect(form.send(reader_method)).to eql('month' => '13', 'year' => '2016', 'day' => '1')
+          form.send(writer_method, 2 => '13', 1 => '2016')
+          expect(form.send(reader_method)).to eql(1 => '2016', 2 => '13'), "Expected invalid month to have converted to nil for '#{writer_method}'"
         end
 
         it 'converts a partial date from an action controller params instance' do
-          form.send(writer_method, ActionController::Parameters.new('month' => '12', 'year' => '2016'))
+          value = ActionController::Parameters.new("#{reader_method}(2i)" => '12',
+                                                   "#{reader_method}(1i)" => '2016').permit!
+          form.assign_attributes(value)
           expect(form.send(reader_method)).to eql Date.parse('1 December 2016')
         end
 
-        it 'converts an empty partial date from an action controller params instance to nil' do
-          form.send(writer_method, ActionController::Parameters.new('month' => '', 'year' => ''))
+        it 'converts an empty partial date from an action controller to nil' do
+          value = ActionController::Parameters.new("#{reader_method}(2i)" => '',
+                                                   "#{reader_method}(1i)" => '').permit!
+          form.assign_attributes(value)
           expect(form.send(reader_method)).to be_nil
         end
 
         it 'converts a full date from an action controller params instance' do
-          form.send(writer_method, ActionController::Parameters.new('month' => '12', 'year' => '2016', 'day' => '10'))
+          value = ActionController::Parameters.new("#{reader_method}(3i)" => '10',
+                                                   "#{reader_method}(2i)" => '12',
+                                                   "#{reader_method}(1i)" => '2016').permit!
+          form.assign_attributes(value)
           expect(form.send(reader_method)).to eql Date.parse('10 December 2016')
         end
 
         it 'leaves an invalid date as a hash from an action controller params instance as is' do
-          form.send(writer_method, ActionController::Parameters.new('month' => '13', 'year' => '2016'))
-          expect(form.send(reader_method)).to eql('month' => '13', 'year' => '2016', 'day' => '1')
+          value = ActionController::Parameters.new("#{reader_method}(2i)" => '13',
+                                                   "#{reader_method}(1i)" => '2016').permit!
+          form.assign_attributes(value)
+          expect(form.send(reader_method)).to eql 2 => 13, 1 => 2016
         end
 
         it 'does not convert nil' do

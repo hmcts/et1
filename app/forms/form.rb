@@ -12,6 +12,25 @@ class Form < ApplicationRecord
     yield self if block_given?
   end
 
+  def self.has_many_forms(collection_name, class_name: "#{collection_name.to_s.singularize.camelize}Form")
+    class_eval do
+      define_method :"#{collection_name}_proxy" do
+        existing = instance_variable_get("@#{collection_name}_proxy")
+        return existing unless existing.nil?
+
+        instance_variable_set("@#{collection_name}_proxy", FormCollectionProxy.new(class_name, collection_name, self))
+      end
+
+      define_method :"#{collection_name}" do
+        send("#{collection_name}_proxy")
+      end
+
+      define_method :"#{collection_name}_attributes=" do |attrs|
+        send("#{collection_name}_proxy").collection_attributes = attrs
+      end
+    end
+  end
+
   # Form Methods
   def form_name
     self.class.model_name_i18n_key.to_s.dasherize
@@ -73,7 +92,7 @@ class Form < ApplicationRecord
   # bypassing strong parameters
   # @TODO Work out how to remove this
   def assign_attributes(attrs)
-    attrs = attrs.to_unsafe_hash if attrs.respond_to?(:to_unsafe_hash)
+    #attrs = attrs.to_unsafe_hash if attrs.respond_to?(:to_unsafe_hash)
     super(attrs)
   end
 
@@ -103,7 +122,9 @@ class Form < ApplicationRecord
 
   # Loads the form object with values from the target
   def reload
-    attributes.each_key { |key| send "#{key}=", target.send(key) }
+    attributes.each_key do |key|
+      send "#{key}=", target.try(key)
+    end
   end
 
   private

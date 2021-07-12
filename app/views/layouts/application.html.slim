@@ -2,74 +2,59 @@
   = render "shared/google_tag_manager_head", account: Rails.application.config.google_tag_manager_account
   = csrf_meta_tag
 
-- content_for :stylesheets do
-
-  = "<!--[if IE 6]> #{stylesheet_link_tag("application-ie6", media: "all")} <![endif]-->".html_safe
-
-  = "<!--[if IE 7]> #{stylesheet_link_tag("application-ie7", media: "all")} <![endif]-->".html_safe
-
-  = "<!--[if IE 8]> #{stylesheet_link_tag("application-ie8", media: "all")} <![endif]-->".html_safe
-
-  = "<!--[if gt IE 8]><!-->#{stylesheet_link_tag("application", media: "all")}<!--<![endif]-->".html_safe
-
-
 - content_for :javascripts do
-  = javascript_include_tag "application"
-
   - if ENV.has_key?('GOOGLE_ANALYTICS_ID') && ENV["GOOGLE_ANALYTICS_ID"].present? && cookie_settings['usage']
     javascript:
       gaTracker.init('#{ENV.fetch("GOOGLE_ANALYTICS_ID")}');
-  javascript:
-    revealPubSub.init();
-
   - if start_session_timer?
     javascript:
-      sessionPrompt.init();
+      Et.components.SessionPrompt.init();
+
+
+// @TODO Check on removed content here
 - content_for :after_header do
   = render "shared/google_tag_manager_body", account: Rails.application.config.google_tag_manager_account
 
-- content_for :body_classes, "#{config_item(:phase).to_s.downcase} #{config_item(:product_type).to_s.downcase} #{controller.controller_name} #{controller.action_name}"
+- content_for :body_classes, "#{Rails.configuration.phase.to_s.downcase} #{Rails.configuration.product_type.to_s.downcase} #{controller.controller_name} #{controller.action_name}"
 
 - content_for :footer_support_links do
-  li= link_to "Guide", guide_path
-  li= link_to "Terms and Conditions", terms_path
-  li= link_to "Cookies", edit_cookies_path
-  li= link_to "Contact us", 'http://www.justice.gov.uk/contacts/hmcts/tribunals/employment'
+  li.govuk-footer__inline-list-item= link_to "Guide", guide_path, class: 'govuk-footer__link'
+  li.govuk-footer__inline-list-item= link_to "Terms and Conditions", terms_path, class: 'govuk-footer__link'
+  li.govuk-footer__inline-list-item= link_to "Cookies", edit_cookies_path, class: 'govuk-footer__link'
+  li.govuk-footer__inline-list-item= link_to "Contact us", 'http://www.justice.gov.uk/contacts/hmcts/tribunals/employment', class: 'govuk-footer__link'
 - unless content_for?(:before_alerts)
   - content_for :before_alerts do
     = render partial: 'shared/feedback_link'
     = render "shared/maintenance_notice" if ENV['SHOW_DOWNTIME_BANNER'].present?
 
 - content_for :content_override do
-  main#content(role="main")
-    = render partial: 'shared/mobile_nav'
-    .container
-      = content_for(:before_alerts)
-      - %w<info notice alert>.each do |type|
-        - next unless flash[type].present?
-        = render partial: 'shared/flash_message', locals: { type: type }
-      = render partial: 'shared/session_prompt'
-      = yield
+  .govuk-width-container
+    main#main-content(role="main")
+      .container
+        = content_for(:before_alerts)
+        - %w<info notice alert>.each do |type|
+          - next unless flash[type].present?
+          = render partial: 'shared/flash_message', locals: { type: type }
+        = render partial: 'shared/session_prompt'
+        = yield
 
 - content_for :cookie_message do
   - unless cookie_settings['seen']
-    .govuk-cookie-banner.confirmation aria-label= t('cookies.edit.cookie_aria_label') role="region"
-      .govuk-cookie-banner__message.banner-container
-        .govuk-grid-row
-          .govuk-grid-column-two-thirds
-            h2.govuk-cookie-banner__heading.govuk-heading-m.bold= t('banner.title')
-            .govuk-cookie-banner__content
-              p= t('banner.first_line')
-              p= t('banner.second_line')
+    = form_for cookie_form, as: :cookie, url: cookies_path, method: :post, builder: EtGdsDesignSystem.form_builder_class do |f|
+      = f.hidden_field :return_path, value: path_only(request.url)
+      .govuk-cookie-banner aria-label= t('cookies.edit.cookie_aria_label') role="region" data-nosnippet= true
+        .govuk-cookie-banner__message.govuk-width-container
+          .govuk-grid-row
+            .govuk-grid-column-two-thirds
+              h2.govuk-cookie-banner__heading.govuk-heading-m= t('banner.title')
+              .govuk-cookie-banner__content
+                p= t('banner.first_line')
+                p= t('banner.second_line')
           .govuk-button-group
-            = simple_form_for cookie_form, as: :cookie, url: cookies_path, method: :post, html: {style: 'display: inline'} do |f|
-              = f.hidden_field :usage, value: 'true'
-              = f.hidden_field :return_path, value: path_only(request.url)
-              = f.button :submit, t('banner.accept_analytics')
-            = simple_form_for cookie_form, as: :cookie, url: cookies_path, method: :post, html: {style: 'display: inline'} do |f|
-              = f.hidden_field :usage, value: 'false'
-              = f.hidden_field :return_path, value: path_only(request.url)
-              = f.button :submit, t('banner.reject_analytics')
+            button.govuk-button.button data-module="govuk-button" value= "true" name= "cookie[usage]" type= "submit"
+              = t('banner.accept_analytics')
+            button.govuk-button.button data-module="govuk-button" value= "false" name= "cookie[usage]" type= "submit"
+              = t('banner.reject_analytics')
             = link_to t('banner.cookie_link'), edit_cookies_path
   - if flash[:cookie_banner_confirmation].present?
     .govuk-cookie-banner.confirmation aria-label= t('cookies.edit.cookie_aria_label') role="region"

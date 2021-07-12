@@ -1,61 +1,30 @@
-fieldset
-  legend = t('.additional_repsondents_legend')
-  p = t('.additional_respondents_intro')
+= f.collection_radio_buttons :has_multiple_respondents, inline: true
+  hr class="govuk-section-break.govuk-section-break--visible govuk-!-margin-bottom-3"
+= f.revealed_content :has_multiple_respondents, values: [:true]
+  = f.fields_for :secondary_respondents do |builder|
+    .multiple id=("resource_#{builder.index}")
+      = builder.fieldset label: t('.person', number: builder.index + 2)
 
-  = f.input :of_collection_type,
-    as: :radio_buttons,
-    readonly: nil,
-    include_hidden: false,
-    label: false,
-    collection: responses_collection,
-    item_wrapper_class: 'block-label',
-    wrapper_class: 'form-group-reveal reveal-publish-delegate',
-    input_html: { :class => 'reveal-publish-publisher ga-vpv'},
-    reveal: { true => 'sub1', false => 'sub1' }
+        = link_to t('.remove_resource_link'), 'javascript:void(0);', data: { 'multiple-remove': "resource_#{builder.index}" }
 
-  .multiples.reveal-subscribe data-target="sub1" data-show-array="true"
-    = f.simple_fields_for :collection do |builder|
-      .multiple id=("resource_#{builder.index}")
-        fieldset
-          legend= t('.person', number: builder.index + 2)
+        = builder.text_field :name
 
-          = link_to t('.remove_resource_link'), 'javascript:void(0);', { class: 'remove-multiple' }
-
-          = builder.input :name
-
-          = render 'address', f: builder
-
-          .js-enabled-hidden.destroy
-            = builder.input :_destroy,
-              as: :gds_check_boxes,
-              item_wrapper_class: 'block-label',
-              wrapper_class: 'input',
-              input_html: { class: 'destroy-checkbox' }
-          = builder.input :acas_early_conciliation_certificate_number, required: true
-
-          = builder.input :no_acas_number,
-            as: :gds_check_boxes,
-            required: true,
-            wrapper_class: 'reveal-publish-delegate clearfix options',
-            input_html: { :class => 'reveal-publish-publisher',
-                          :'data-target' => "main-#{builder.index}" }
-
-
-          .clearfix.toggle-content.reveal-subscribe data-target="main-#{builder.index}" data-show-array="true"
-            fieldset.panel-indent
-                legend.visuallyhidden.form-label = t '.no_acas_number_reason'
-                span.form-hint = t '.no_acas_number_note_one'
-                = builder.input :no_acas_number_reason,
-                  label:false,
-                  collection: RespondentForm::NO_ACAS_REASON,
-                  as: :radio_buttons,
-                  readonly: nil,
-                  include_hidden: false,
-                  required: true,
-                  item_wrapper_class: 'block-label large-label'
-                span.form-hint.toggle-content.reveal-acas-hint = t '.no_acas_number_note_two'
-
-    - if resource.collection.length >= Rails.application.config.additional_respondents_limit
-        p= t '.additional_respondents_limit', max: Rails.application.config.additional_respondents_limit
-    - else
-        = f.submit value: t('.add_fields'), class: 'hyperlink', id: 'button_add_resource'
+        = builder.text_field :address_building
+        = builder.text_field :address_street
+        = builder.text_field :address_locality
+        = builder.text_field :address_county
+        = builder.text_field :address_post_code
+        = builder.text_field :acas_early_conciliation_certificate_number
+        = builder.collection_radio_buttons :no_acas_number, inline: true
+        = builder.revealed_content :no_acas_number, values: [:true], classes: ['govuk-inset-text']
+          = builder.collection_radio_buttons :no_acas_number_reason, include_hidden: false
+          = builder.revealed_content :no_acas_number_reason, values: [:interim_relief], classes: ['form-hint'], tag: 'span'
+            = t 'claims.respondent.no_acas_number_note_two'
+        = builder.hidden_field :_destroy, data: { 'multiple-mark-for-destroy': true }
+  - if resource.secondary_respondents.length >= Rails.application.config.additional_respondents_limit
+      p= t '.additional_respondents_limit', max: Rails.application.config.additional_respondents_limit
+  - else
+      = f.submit t('.add_fields')
+- content_for(:javascripts)
+  javascript:
+    Et.pages.claims.AdditionalRespondentsPage()

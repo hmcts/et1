@@ -68,6 +68,6 @@ RSpec.feature 'Refund Validations - Case Details Page', js: true do
     when_i_answer_no_to_the_has_your_address_changed_question_for_refunds
     and_i_answer_no_to_the_had_representative_question_for_refunds
     and_i_enter_501_characters_into_the_additional_information_field_in_the_refund_case_details
-    then_i_should_see_500_characters_in_the_additional_information_field_in_the_refund_case_details
+    then_i_should_see_too_many_chars_message_in_the_additional_information_field_in_the_refund_case_details
   end
 end

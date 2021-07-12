@@ -1,8 +1,7 @@
-tr
-  th = t "claim_reviews.item.#{section_name}.#{question}"
-  - if value.present? && [:building, :street, :locality, :county, :post_code].any? { |attr| value.send(attr).present? }
-    td
+div.govuk-summary-list__row
+  dt.govuk-summary-list__key = t "claim_reviews.item.#{section_name}.#{question}"
+  dt.govuk-summary-list__value
+    - if value.present? && [:building, :street, :locality, :county, :post_code].any? { |attr| value.send(attr).present? }
       = render partial: 'address', locals: { address: value }
-  - else
-    td.not-entered
+    - else
       = t 'claim_reviews.item.not_entered'

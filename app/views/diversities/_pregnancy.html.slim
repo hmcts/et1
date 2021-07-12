@@ -1,8 +1,2 @@
-fieldset
-  = f.input :pregnancy,
-    as: :radio_buttons,
-    readonly: nil,
-    include_hidden: false,
-    collection: Diversities::PregnancyForm::PREGNANCY,
-    item_wrapper_class: 'govuk-radios__item',
-    label: false, input_html: {class: 'govuk-radios__input'}
+= f.govuk_collection_radio_buttons :pregnancy, Diversities::PregnancyForm::PREGNANCY.map { |pregnancy| [pregnancy, t("diversities.diversities_pregnancy.pregnancy.options.#{pregnancy}")]}, :first, :last, label: {text: false}
+

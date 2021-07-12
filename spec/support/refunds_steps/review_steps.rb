@@ -1,5 +1,5 @@
 def and_i_accept_the_refund_final_declaration
-  refund_review_page.declaration.set("Yes")
+  refund_review_page.declaration.confirm_question.set(true)
   refund_review_page.save_and_continue.click
 end
 
@@ -78,7 +78,7 @@ def and_i_verify_the_fees_in_the_case_details_of_the_refund_review_page
       refund_review_page.original_claim_fees.et_issue do |section|
         expect(section.fee.text).to eql "£#{fees.et_issue_fee}"
         expect(section.payment_method.text).to eql fees.et_issue_payment_method.to_s
-        expect(section.payment_date.text).to eql fees.et_issue_payment_date.to_s
+        expect(section.payment_date.text).to eql fee_date_for(fees.et_issue_payment_date, unknown: fees.et_issue_payment_date_unknown)
       end
     else
       expect(refund_review_page.original_claim_fees).to have_no_et_issue
@@ -87,7 +87,7 @@ def and_i_verify_the_fees_in_the_case_details_of_the_refund_review_page
       refund_review_page.original_claim_fees.et_hearing do |section|
         expect(section.fee.text).to eql "£#{fees.et_hearing_fee}"
         expect(section.payment_method.text).to eql fees.et_hearing_payment_method.to_s
-        expect(section.payment_date.text).to eql fees.et_hearing_payment_date.to_s
+        expect(section.payment_date.text).to eql fee_date_for(fees.et_hearing_payment_date, unknown: fees.et_hearing_payment_date_unknown)
       end
     else
       expect(refund_review_page.original_claim_fees).to have_no_et_hearing
@@ -96,7 +96,7 @@ def and_i_verify_the_fees_in_the_case_details_of_the_refund_review_page
       refund_review_page.original_claim_fees.et_reconsideration do |section|
         expect(section.fee.text).to eql "£#{fees.et_reconsideration_fee}"
         expect(section.payment_method.text).to eql fees.et_reconsideration_payment_method.to_s
-        expect(section.payment_date.text).to eql fees.et_reconsideration_payment_date.to_s
+        expect(section.payment_date.text).to eql fee_date_for(fees.et_reconsideration_payment_date, unknown: fees.et_reconsideration_payment_date_unknown)
       end
     else
       expect(refund_review_page.original_claim_fees).to have_no_et_reconsideration
@@ -105,7 +105,7 @@ def and_i_verify_the_fees_in_the_case_details_of_the_refund_review_page
       refund_review_page.original_claim_fees.eat_issue do |section|
         expect(section.fee.text).to eql "£#{fees.eat_issue_fee}"
         expect(section.payment_method.text).to eql fees.eat_issue_payment_method.to_s
-        expect(section.payment_date.text).to eql fees.eat_issue_payment_date.to_s
+        expect(section.payment_date.text).to eql fee_date_for(fees.eat_issue_payment_date, unknown: fees.eat_issue_payment_date_unknown)
       end
     else
       expect(refund_review_page.original_claim_fees).to have_no_eat_issue
@@ -114,7 +114,7 @@ def and_i_verify_the_fees_in_the_case_details_of_the_refund_review_page
       refund_review_page.original_claim_fees.eat_hearing do |section|
         expect(section.fee.text).to eql "£#{fees.eat_hearing_fee}"
         expect(section.payment_method.text).to eql fees.eat_hearing_payment_method.to_s
-        expect(section.payment_date.text).to eql fees.eat_hearing_payment_date.to_s
+        expect(section.payment_date.text).to eql fee_date_for(fees.eat_hearing_payment_date, unknown: fees.eat_hearing_payment_date_unknown)
       end
     else
       expect(refund_review_page.original_claim_fees).to have_no_eat_hearing
@@ -190,4 +190,11 @@ end
 
 def then_the_continue_button_should_be_disabled_on_the_review_page
   expect(refund_review_page.save_and_continue).to be_disabled
+end
+
+def fee_date_for(str, unknown: false)
+  return "Don't know" if unknown
+  return nil if str.nil?
+
+  Date.parse("1/#{str}").strftime('%B %Y')
 end

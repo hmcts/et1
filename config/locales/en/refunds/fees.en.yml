@@ -1,0 +1,133 @@
+en:
+  refunds:
+    fees:
+      header: "About the fees you paid"
+      fee_details: "Complete the relevant fields for fees you have paid"
+      issue_fee: "ET Issue fee"
+      fee: "Fee (in pounds)"
+      date_paid: "Date paid"
+      payment_method: "Payment method"
+      hearing_fee: "ET Hearing fee"
+      fee_payment_date: "Payment date (year / month)"
+      total_fees: "Total fees paid"
+      fees_help: "Fees were charged in the Employment Tribunal and Employment Appeals Tribunal between 29 July 2013 and 26 July 2017"
+      fees_help_type_a: "A type A claim had an issue fee of £160 and a hearing fee of £230."
+      fees_help_type_b: "A type B claim had an issue fee of £250 and a hearing fee of £950."
+      fees_help_type_appeal: "An Employment Appeal Tribunal fee had a lodgement fee of £400 and a hearing fee of £1200."
+      et_issue_fee:
+        label: Fee
+      et_hearing_fee:
+        label: Fee
+      et_reconsideration_fee:
+        label: Fee
+      eat_issue_fee:
+        label: Fee
+      eat_hearing_fee:
+        label: Fee
+      et_issue_fee_payment_date:
+        label: Payment date
+      et_hearing_fee_payment_date:
+        label: Payment date
+      et_reconsideration_fee_payment_date:
+        label: Payment date
+      eat_issue_fee_payment_date:
+        label: Payment date
+      eat_hearing_fee_payment_date:
+        label: Payment date
+      et_issue_fee_payment_date_unknown:
+        label: Don't know
+      et_hearing_fee_payment_date_unknown:
+        label: Don't know
+      et_reconsideration_fee_payment_date_unknown:
+        label: Don't know
+      eat_issue_fee_payment_date_unknown:
+        label: Don't know
+      eat_hearing_fee_payment_date_unknown:
+        label: Don't know
+      et_issue_fee_payment_method:
+        label: Payment method
+        options:
+          '': Please select
+          unknown: Don't know
+          cheque: Cheque
+          card: Card
+          cash: Cash
+      et_hearing_fee_payment_method:
+        label: Payment method
+        options:
+          '': Please select
+          unknown: Don't know
+          cheque: Cheque
+          card: Card
+          cash: Cash
+      eat_issue_fee_payment_method:
+        label: Payment method
+        options:
+          '': Please select
+          unknown: Don't know
+          cheque: Cheque
+          card: Card
+          cash: Cash
+      eat_hearing_fee_payment_method:
+        label: Payment method
+        options:
+          '': Please select
+          unknown: Don't know
+          cheque: Cheque
+          card: Card
+          cash: Cash
+      et_reconsideration_fee_payment_method:
+        label: Payment method
+        options:
+          '': Please select
+          unknown: Don't know
+          cheque: Cheque
+          card: Card
+          cash: Cash
+  activemodel:
+    errors:
+      models:
+        refunds/fees:
+          attributes:
+            et_issue_fee:
+              greater_than_or_equal_to: Fee must be greater than %{count}
+            et_issue_fee_payment_method:
+              blank: Please select a payment method
+            et_issue_fee_payment_date:
+              blank: Please enter the payment year and month or tick 'Don't know'
+              date_range: The payment date must be between %{start_date} and %{end_date}
+              invalid: Enter the date in the correct format (DD/MM/YYYY)
+            et_hearing_fee:
+              greater_than_or_equal_to: Fee must be greater than %{count}
+            et_hearing_fee_payment_method:
+              blank: Please select a payment method
+            et_hearing_fee_payment_date:
+              blank: Please enter the payment year and month or tick 'Don't know'
+              date_range: The payment date must be between %{start_date} and %{end_date}
+              invalid: Enter the date in the correct format (DD/MM/YYYY)
+            et_reconsideration_fee:
+              greater_than_or_equal_to: Fee must be greater than %{count}
+            et_reconsideration_fee_payment_method:
+              blank: Please select a payment method
+            et_reconsideration_fee_payment_date:
+              blank: Please enter the payment year and month or tick 'Don't know'
+              date_range: The payment date must be between %{start_date} and %{end_date}
+              invalid: Enter the date in the correct format (DD/MM/YYYY)
+            eat_issue_fee:
+              greater_than_or_equal_to: Fee must be greater than %{count}
+            eat_issue_fee_payment_method:
+              blank: Please select a payment method
+            eat_issue_fee_payment_date:
+              blank: Please enter the payment year and month or tick 'Don't know'
+              date_range: The payment date must be between %{start_date} and %{end_date}
+              invalid: Enter the date in the correct format (DD/MM/YYYY)
+            eat_hearing_fee:
+              greater_than_or_equal_to: Fee must be greater than %{count}
+            eat_hearing_fee_payment_method:
+              blank: Please select a payment method
+            eat_hearing_fee_payment_date:
+              blank: Please enter the payment year and month or tick 'Don't know'
+              date_range: The payment date must be between %{start_date} and %{end_date}
+              invalid: Enter the date in the correct format (DD/MM/YYYY)
+            base:
+              fees_must_be_positive: You must enter a fee in the relevant field

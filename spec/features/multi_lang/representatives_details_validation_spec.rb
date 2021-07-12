@@ -12,7 +12,7 @@ RSpec.describe 'Representatives Details Validation', type: :feature, js: true do
     claimants_details_page.save_and_continue
     group_claims_page.no_secondary_claimants
     group_claims_page.save_and_continue
-    representatives_details_page.fill_in_representative(representative)
+    representatives_details_page.fill_in_all(representative: representative)
 
     # ACT - Click the save and continue button
     representatives_details_page.save_and_continue

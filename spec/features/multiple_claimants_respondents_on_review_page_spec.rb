@@ -30,7 +30,7 @@ feature 'Multiple claimants/respondents on the review page' do
     end
 
     it "does show a list of additional claimants" do
-      text = find(:xpath, ".//div[@class='review-list-entry additional-claimants']").text
+      text = review_page.group_claim.text
 
       expect(text).
         to include(
@@ -64,7 +64,7 @@ feature 'Multiple claimants/respondents on the review page' do
     end
 
     it "does show a list of additional respondents" do
-      text = find(:xpath, ".//div[@class='review-list-entry additional-respondents']").text
+      text = review_page.additional_respondents_section.text
 
       expect(text).
         to include(

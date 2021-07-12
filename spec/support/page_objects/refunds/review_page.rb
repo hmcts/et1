@@ -97,13 +97,15 @@ module ET1
           element :sort_code, :refund_review_section_field_labelled, 'Sort code'
         end
 
-        section :declaration, :xpath, (XPath.generate { |x| x.descendant(:fieldset)[x.descendant(:legend)[x.string.n.is("Declaration")]] }) do
-          element :accept, 'Tick to confirm'
-
-          def set(value)
-            check 'refunds_review[accept_declaration]' if value == 'Yes'
-            uncheck 'refunds_review[accept_declaration]' if value == 'No'
-          end
+        # @!method declaration
+        #   A govuk fieldset component
+        #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+        section :declaration, govuk_component(:fieldset), :govuk_fieldset, 'Declaration' do
+          include EtTestHelpers::Section
+          # @!method confirm_question
+          #   A govuk file field component wrapping the input, label, hint etc..
+          #   @return [EtTestHelpers::Components::GovUKCheckbox] The site prism section
+          section :confirm_question, govuk_component(:checkbox), :govuk_checkbox, 'Tick to confirm'
         end
         element :save_and_continue, 'form.edit_refunds_review input[value="Submit Claim"]'
       end

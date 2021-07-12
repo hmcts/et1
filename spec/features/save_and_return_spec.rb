@@ -1,19 +1,20 @@
 require 'rails_helper'
 
-feature 'Save and Return' do
+feature 'Save and Return', js: true do
   include FormMethods
   include Messages
   include MailMatchers
   include ActiveJob::TestHelper
   include ActiveJobPerformHelper
+  let(:ui_claimant) { build(:ui_claimant, :default) }
 
   scenario 'ending the session actually ends the session' do
     start_claim
-    fill_in_password
-    fill_in_personal_details(submit_form: false)
+    saving_your_claim_page.register(password: 'green')
+    claimants_details_page.fill_in_all(claimant: ui_claimant)
 
     within 'aside' do
-      click_button 'Save and complete later'
+      click_link 'Save and complete later'
     end
 
     click_button 'Sign out now'
@@ -25,11 +26,11 @@ feature 'Save and Return' do
 
   scenario 'ending the session with email address' do
     start_claim
-    fill_in_password
-    fill_in_personal_details(submit_form: false)
+    saving_your_claim_page.register(password: 'green')
+    claimants_details_page.fill_in_all(claimant: ui_claimant)
 
     within 'aside' do
-      click_button 'Save and complete later'
+      click_link 'Save and complete later'
     end
 
     expect(page).to have_text('Claim saved')
@@ -50,14 +51,11 @@ feature 'Save and Return' do
 
   scenario 'ending the session when email address previously entered', js: true do
     start_claim
-    fill_in_password_and_email('green',
-      FormMethods::SAVE_AND_RETURN_EMAIL,
-      "save_and_return_user_email")
-
-    fill_in_personal_details(submit_form: false)
+    saving_your_claim_page.register(email_address: 'mail@example.com', password: 'green')
+    claimants_details_page.fill_in_all(claimant: ui_claimant)
 
     within 'aside' do
-      click_button 'Save and complete later'
+      click_link 'Save and complete later'
     end
 
     expect(page).to have_text(claim_heading_for(:new))
@@ -65,10 +63,10 @@ feature 'Save and Return' do
 
   scenario 'ending the session when current page invalid' do
     start_claim
-    fill_in_password
+    saving_your_claim_page.register(password: 'green')
 
     within 'aside' do
-      click_button 'Save and complete later'
+      click_link 'Save and complete later'
     end
 
     expect(page).to have_text('Claim saved')
@@ -77,24 +75,31 @@ feature 'Save and Return' do
 
   scenario 'returning to existing application', js: true do
     start_claim
-    fill_in_password 'green'
-    fill_in_personal_details
-    end_session
-    fill_in_return_form Claim.last.reference, 'green'
+    saving_your_claim_page.register(password: 'green')
+    claimants_details_page.fill_in_all(claimant: ui_claimant)
+    claimants_details_page.save_and_continue
+    group_claims_page
+      .save_and_complete_later
+      .sign_out_now
+    apply_page
+      .load
+      .return_to_a_claim
+      .return_to_your_claim claim_number: Claim.last.reference, memorable_word: 'green'
 
     expect(page).to have_text(claim_heading_for(:claimant))
-    expect(page).to have_field('Last name', with: 'Wrigglesworth')
+    claimants_details_page.about_the_claimant_group.last_name_question.assert_value(ui_claimant.last_name)
   end
 
   scenario 'returning to an existing application after session expiration' do
     start_claim
-    fill_in_password 'green'
-    fill_in_personal_details
+    saving_your_claim_page.register(password: 'green')
+    claimants_details_page.fill_in_all(claimant: ui_claimant)
+    claimants_details_page.save_and_continue
 
     travel_to TimeHelper.session_expiry_time do
       fill_in_return_form Claim.last.reference, 'green'
       expect(page).to have_text(claim_heading_for(:claimant))
-      expect(page).to have_field('Last name', with: 'Wrigglesworth')
+      claimants_details_page.about_the_claimant_group.last_name_question.assert_value(ui_claimant.last_name)
     end
   end
 
@@ -108,7 +113,7 @@ feature 'Save and Return' do
     end
   end
 
-  context 'forgotten memorable word', js:true do
+  context 'forgotten memorable word', js: true do
     let(:email_address) { 'doesntmatter@example.com' }
     it 'recovers correctly when the email is not used at the beginning but when saved' do
 

@@ -44,83 +44,18 @@ en:
 
   simple_form:
     include_blanks:
-      claimant:
-        title: Please select
-      representative:
-        type: Please select
       additional_claimants:
         claimants: :"simple_form.include_blanks.claimant"
 
     options:
-      claimant:
-        gender:
-          male: Male
-          female: Female
-          prefer_not_to_say: Prefer not to say
-        contact_preference:
-          email: Email
-          post: Post
-        title:
-          Mr: Mr
-          Mrs: Mrs
-          Miss: Miss
-          Ms: Ms
-        address_country:
-          united_kingdom: United Kingdom
-          other: Outside United Kingdom
-        allow_video_attendance:
-          "true": 'Yes'
-          "false": 'No'
       additional_claimants:
         collection: :"simple_form.options.claimant"
       allow_analytics:
         "true": 'Yes'
         "false": 'No'
 
-      representative:
-        type:
-          citizen_advice_bureau: Employment advisor, Citizens Advice Bureau
-          free_representation_unit: Free Representation Unit
-          law_centre: Law centre
-          trade_union: Trade union
-          solicitor: Solicitor
-          private_individual: Private individual
-          trade_association: Trade association
-          other: Other
-        contact_preference:
-          email: Email
-          post: Post
-          dx_number: DX number
-
-      respondent:
-        no_acas_number_reason:
-          joint_claimant_has_acas_number: Another person I’m making the claim with has an Acas early conciliation certificate number
-          acas_has_no_jurisdiction: Acas doesn’t have the power to conciliate on some or all of my claim
-          employer_contacted_acas: My employer has already been in touch with Acas
-          interim_relief: The claim consists only of a complaint of unfair dismissal which contains an application for interim relief.
-
       additional_respondents:
         collection: :"simple_form.options.respondent"
-
-      employment:
-        current_situation:
-          still_employed: Still working for this employer
-          notice_period: Working a notice period for this employer
-          employment_terminated: No longer working for this employer
-        notice_pay_period_type:
-          weeks: Weeks
-          months: Months
-        gross_pay_period_type:
-          weekly: Weekly
-          monthly: Monthly
-        net_pay_period_type:
-          weekly: Weekly
-          monthly: Monthly
-        new_job_gross_pay_frequency:
-          weekly: Weekly
-          monthly: Monthly
-
-
       claim:
         desired_outcomes:
           compensation_only: Compensation
@@ -128,16 +63,6 @@ en:
           reinstated_employment_and_compensation: To get my old job back
           new_employment_and_compensation: To get another job with the same employer or associated employer
       claim_type:
-        discrimination_claims:
-          sex_including_equal_pay: Sex (including equal pay)
-          disability: Disability
-          race: Race
-          age: Age
-          pregnancy_or_maternity: Pregnancy or maternity
-          religion_or_belief: Religion or belief
-          sexual_orientation: Sexual orientation
-          marriage_or_civil_partnership: Marriage or civil partnership
-          gender_reassignment: Gender reassignment
         discrimination_claims_for_review:
           sex_including_equal_pay: Sex (including equal pay) discrimination
           disability: Disability discrimination
@@ -148,19 +73,6 @@ en:
           sexual_orientation: Sexual orientation discrimination
           marriage_or_civil_partnership: Marriage or civil partnership discrimination
           gender_reassignment: Gender reassignment discrimination
-        pay_claims:
-          redundancy: Redundancy pay
-          notice: Notice pay
-          holiday: Holiday pay
-          arrears: Arrears of pay
-          other: Other payments
-      claim_outcome:
-        desired_outcomes:
-          compensation_only: Compensation
-          tribunal_recommendation: A recommendation from a tribunal (that the employer takes action so that the problem at work doesn’t happen again)
-          reinstated_employment_and_compensation: To get your old job back
-          new_employment_and_compensation: To get another job with the same employer or associated employer
-
     labels:
       user_session:
         destroy:
@@ -170,10 +82,6 @@ en:
           new:
             reference: Save and return number
             password: Memorable word
-        user:
-          new:
-            email: Enter your email address to receive your claim number
-            password: Create your memorable word
         password:
           new:
             email: Enter your email address
@@ -181,77 +89,20 @@ en:
 
 
       claimant:
-        first_name: First name
-        last_name: Last name
-        title: Title
-        date_of_birth:
-          day: Day
-          month: Month
-          year: Year
-
-
-        mobile_number: Alternative phone or mobile number
         fax_number: Fax
-        has_special_needs: Do you have a disability which means you require assistance at the tribunal hearing?
-        special_needs: Describe the assistance you require
-        address_telephone_number: Phone or mobile number
-        address_building: Building number or name
-        address_locality: Town/city
-        address_street: Street
-        address_county: County
-        address_post_code: Postcode
-        address_country: Country
         applying_for_remission: Do you want to get help paying your fee (known as ‘help with fees’)?
-        contact_preference: Best way to send correspondence to you (the claimant)
         _destroy: 'Remove this claimant'
-        allow_video_attendance: "Would you be able to take part in a hearing by video? (Requires internet access)."
 
       additional_claimants:
-        of_collection_type: |
-          Are other people making a claim with you (against the same employer or organisation)?
         collection: :"simple_form.labels.claimant"
 
       additional_claimants_upload:
-        has_additional_claimants: Do you want to upload details of 6 claimants or more?
-        additional_claimants_csv: Upload spreadsheet
         claimants: :"simple_form.labels.claimant"
 
       cookies:
         allow_analytics: Do you want to accept analytics cookies?
 
-      representative:
-        has_representative: Do you have someone who’s agreed to represent you (eg by handling correspondence)?
-        address_telephone_number: Phone or mobile number
-        address_building: Building number or name
-        address_locality: Town/city
-        address_street: Street
-        address_county: County
-        address_post_code: Postcode
-        type: Type of representative
-        organisation_name: Name of the representative’s organisation
-        name: Representative’s name
-        mobile_number: Alternative phone or mobile number
-        dx_number: Document exchange (DX) number
-        contact_preference: Best way to send correspondence to your representative
-
       respondent:
-        name: Name of respondent
-        address_telephone_number: Phone number
-        address_building: Building number or name
-        address_locality: Town/city
-        address_street: Street
-        address_county: County
-        address_post_code: Postcode
-        work_address_telephone_number: Phone number
-        work_address_building: Building number or name
-        work_address_locality: Town/city
-        work_address_street: Street
-        work_address_county: County
-        work_address_post_code: Postcode
-        worked_at_same_address: Did you work at the same address to the one given above?
-        acas_early_conciliation_certificate_number: Acas number
-        no_acas_number: I don’t have an Acas number
-        no_acas_number_reason: Why don’t you have an Acas number?
         _destroy: 'Remove this respondent'
 
       additional_respondents:
@@ -286,30 +137,18 @@ en:
       confirmation_email:
         email_addresses: Select or enter the recipients you’d like to send a copy to
 
-      claim_type:
-        is_unfair_dismissal: Unfair dismissal (including constructive dismissal)
-        is_other_type_of_claim: Other type of claim
-        other_claim_details: State the other type of claim(s) that you’re making
-        is_whistleblowing: Are you reporting suspected wrongdoing at work?
-        send_claim_to_whistleblowing_entity: |
-          Do you want us to send a copy of your claim to the relevant person or body that deals with whistleblowing?
       claim_details:
         other_known_claimants: Do you know of any other claimants (not already listed) making similar claims against the same employer?
         other_known_claimant_names: You can add the names of other people here.
         claim_details_rtf: The document needs to be in Rich Text Format(RTF)
-      claim_outcome:
-        desired_outcomes: What do you want if your claim is successful?
-        other_outcome: What compensation or other outcome do you want?
       your_fee:
         applying_for_remission: Do you want to apply for help with fees?
         remission_claimant_count: How many in your group want to apply for help with fees?
 
 
     hints:
+      address_county: Eg if London, Greater London; if Manchester, Greater Manchester
       save_and_return:
-        user:
-          new:
-            password: If you have entered your email address above, you will be able to reset your memorable word if you forget it
         session:
           new:
             reference: This was emailed to you (if you entered your email address)
@@ -317,24 +156,16 @@ en:
           new:
             reference: "This was emailed to you (if you entered an email address)."
             email: "If you entered a valid email address when you started your claim, we will email you with instructions on how to reset your memorable word. If we cannot match your email address or you did not enter a valid email address you will need to start a new claim."
-      address_county: Eg if London, Greater London; if Manchester, Greater Manchester
       claimant:
-        date_of_birth: For example, 23 04 1981
-        has_special_needs: |
-          Eg documents in Braille, or a sign language interpreter
         has_representative: |
           Someone who has agreed to represent you (for example, to prepare your case and/or act on your behalf if there is a hearing).
         applying_for_remission: |
           You may not have to pay a fee if you have limited savings and you’re on benefits or a low income. Do I qualify for help?
         contact_preference: |
           Note that if you have a representative (eg solicitor), then all future correspondence will be sent to them
-        allow_video_attendance: "Further details on video hearings can be found on the following link https://www.gov.uk/guidance/hmcts-telephone-and-videohearings-during-coronavirus-outbreak"
-        address_county: Eg if London, Greater London; if Manchester, Greater Manchester
-      claimants:
         address_county: Eg if London, Greater London; if Manchester, Greater Manchester
         date_of_birth: For example, 23 04 1981
       representative:
-        address_county: Eg if London, Greater London; if Manchester, Greater Manchester
         respondent:
         acas_early_conciliation_certificate_number: |
           This is on the certificate that Acas sends if conciliation doesn’t work. The number starts with ’R’ or ’MU’.
@@ -360,34 +191,15 @@ en:
           If you’re claiming financial compensation, try to say how much you want and how you worked out the sum. Any amount you give will be helpful information but you can change it later.
         miscellaneous_information: |
           Eg you may want to tell us why your claim is late, or whether you’ve spoken to your employer about the problem at work
-      respondent:
-        address_county: Eg if London, Greater London; if Manchester, Greater Manchester
-        work_address_county: Eg if London, Greater London; if Manchester, Greater Manchester
       additional_respondents:
         has_additional_respondents: You can claim against more than one respondent. Eg if you’re claiming discrimination, you may be complaining about individual(s) as well as your employer.
         respondents:
           address_county: Eg if London, Greater London; if Manchester, Greater Manchester
-      claim_type:
-        is_discrimination: Discrimination
-        is_other_type_of_claim: |
-          If you can’t see a good match for your claim or want to add a claim that doesn’t appear in the options above.
-        other_claim_details: |
-          Give a very short description of your claim; you will have the opportunity to add more detail on the next page
-        is_whistleblowing: |
-          You can report things at work that aren’t right, are illegal or if anyone is neglecting their duties (also known as making ‘disclosure in the public interest’).<br />
       claim_details:
         other_known_claimants: |
           A judge may combine similar claims to manage and hear them together. This may save you and the tribunal time and money.
-        other_known_claimant_names: Limit is 350 characters.
         claim_details_rtf: |
           You can usually save a file as RTF by selecting File> Save As> Export To> Format: Rich Text Format
-
-      claim_outcome:
-        desired_outcomes: You can select more than one
-        other_outcome: |
-           If you’re claiming financial compensation, you can say how much you want and how you worked out the sum. You can change these details later, or leave this section blank if you don’t know.
-      additional_information:
-        miscellaneous_information: Enter more detail about your claim. Limit is 2500 characters.
 
       user_session:
         destroy:
@@ -395,7 +207,6 @@ en:
 
   helpers:
     submit:
-      update: Save and continue
       return: Complete later
       claim:
         create: Start a claim
@@ -411,12 +222,15 @@ en:
       save_and_return[password]:
         create: Reset memorable word
 
-
     link:
       claim:
         return: Return to a claim
 
   shared:
+    optional: '(optional)'
+    error_notification:
+      default_message: Provide information in the highlighted fields.
+    continue_button: Save and continue
     reference: Your claim number is
     aside:
       skip_link: Skip to content
@@ -428,7 +242,7 @@ en:
       contact_us_link: http://www.justice.gov.uk/contacts/hmcts/tribunals/employment
       signout: Save and complete later
     feedback_link:
-      feedback_statement_html: <a href="%{path}">Your feedback</a> helps us to improve this service.
+      feedback_statement_html: <a class="govuk-link" href="%{path}">Your feedback</a> helps us to improve this service.
     mobile_nav:
       save_and_complete: Save and complete later
       support: Support
@@ -460,6 +274,31 @@ en:
       immutable: This claim has been submitted and can no longer be edited online
 
   timeout_sessions:
+    new:
+      header: Return to your claim
+      forgot_password: Forgot your memorable word?
+      reset_password: Click here to reset
+      hint_html: Don’t have these details? <a class="govuk-link" href="%{path}">Start a new claim</a>.
+    edit:
+      header: Saving your claim
+      print_link: Print this page
+      print_copy: to have a copy of your claim number for reference
+    session:
+      subheader: Enter your details below
+    registration:
+      application_number: Your save and return number
+      intro_text: You can save your claim and return to it at any time. You will need your save and return number (above), and memorable word, which you create below.  If you enter your email address you will be able to reset your memorable word if you forget it.
+      email_address:
+        label: Enter your email address to receive your claim number
+      password:
+        label: Create your memorable word
+        hint: If you have entered your email address above, you will be able to reset your memorable word if you forget it
+    reference:
+      label: Save and return number
+      hint: This was emailed to you (if you entered your email address)
+    password:
+      label: Memorable word
+      hint: If you have entered your email address above, you will be able to reset your memorable word if you forget it
     create:
       header: Return to your claim
     reminder:
@@ -472,7 +311,7 @@ en:
 
     expired:
       header: Session expired
-      content_html: Your session has expired due to inactivity. <a href="%{new_user_session_path}">Return to your claim</a>.
+      content_html: Your session has expired due to inactivity. <a class="govuk-link" href="%{new_user_session_path}">Return to your claim</a>.
     destroy:
       logout: You have been logged out
 
@@ -518,7 +357,7 @@ en:
       new:
         header: Return to your claim
         subheader: Enter your details below
-        hint_html: Don’t have these details? <a href="%{path}">Start a new claim</a>.
+        hint_html: Don’t have these details? <a class="govuk-link" href="%{path}">Start a new claim</a>.
         forgot_password: "Forgot your memorable word? "
         reset_password: "Click here to reset"
     passwords:
@@ -539,6 +378,13 @@ en:
         reset: "Reset my memorable word"
         didnt_request: "If you didn't request this, please ignore this email"
         paste_in_browser: "You may not be able to click on the link. If not, please copy the url and paste it into your browser."
+  cookies:
+    edit:
+      usage:
+        label: 'Do you want to accept analytics cookies?'
+        options:
+          'true': 'Yes'
+          'false': 'No'
   banner:
     title: Cookies on Employment tribunals
     first_line: We use some essential cookies to make this service work.
@@ -554,8 +400,36 @@ en:
       cookie_flashes: You've set your cookie preferences
   claims:
     personal_details:
-      date_of_birth: Date of birth
-
+      date_of_birth:
+        label: Date of birth
+        hint: For example, 23 04 1981
+        day: Day
+        month: Month
+        year: Year
+      title:
+        label: Title
+        options:
+          '': Please select
+          Mr: Mr
+          Mrs: Mrs
+          Miss: Miss
+          Ms: Ms
+      first_name:
+        label: First name
+      last_name:
+        label: Last name
+    address:
+      address_building:
+        label: Building number or name
+      address_locality:
+        label: Town/city
+      address_street:
+        label: Street
+      address_county:
+        label: County
+        hint: Eg if London, Greater London; if Manchester, Greater Manchester
+      address_post_code:
+        label: Postcode
     show:
       page_number: Page %{current_page} of %{total_pages}
 
@@ -566,21 +440,58 @@ en:
       are_you_in_time:
         legend: Are you in time?
         body_html: |
-          You usually have to make a claim to the tribunal within 3 months of your employment ending or the problem happening. In exceptional circumstances the tribunal can accept your claim late. If your claim is late, you must explain why - the tribunal will decide if it can still hear your claim. <a href="%{path}#time_limits">Learn about when you can apply</a>.
+          You usually have to make a claim to the tribunal within 3 months of your employment ending or the problem happening. In exceptional circumstances the tribunal can accept your claim late. If your claim is late, you must explain why - the tribunal will decide if it can still hear your claim. <a class="govuk-link" href="%{path}#time_limits">Learn about when you can apply</a>.
       have_you_contacted_acas:
         legend: Have you contacted Acas?
         body_html: |
-          Before making a claim to an employment tribunal you have to contact Acas to use their free <a href="%{path}" rel="external" target="_blank">Early Conciliation service</a>.
+          Before making a claim to an employment tribunal you have to contact Acas to use their free <a class="govuk-link" href="%{path}" rel="external" target="_blank">Early Conciliation service</a>.
       what_you_need_to_know:
         legend: What you’ll need
         body_html: |
-          <ul>
-            <li>your <a href="%{path}#acas_early_conciliation">Acas early conciliation certificate number</a></li>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>your <a class="govuk-link" href="%{path}#acas_early_conciliation">Acas early conciliation certificate number</a></li>
             <li>details of your claim including the background, dates and people involved</li>
           </ul>
+      continue: Start a claim
     claimant:
       header: Claimant’s details
-      gender: Gender
+      gender:
+        label: Gender
+        options:
+          male: Male
+          female: Female
+          prefer_not_to_say: Prefer not to say
+      has_special_needs:
+        label: Do you have a disability which means you require assistance at the tribunal hearing?
+        hint: Eg documents in Braille, or a sign language interpreter
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      special_needs:
+        label: Describe the assistance you require
+      address_country:
+        label: Country
+        options:
+          united_kingdom: United Kingdom
+          other: Outside United Kingdom
+      address_telephone_number:
+        label: Phone or mobile number
+      mobile_number:
+        label: Alternative phone or mobile number
+      contact_preference:
+        label: Best way to send correspondence to you (the claimant)
+        hint: Note that if you have a representative (eg solicitor), then all future correspondence will be sent to them
+        options:
+          email: Email
+          post: Post
+      email_address:
+        label: Email address
+      allow_video_attendance:
+        label: "Would you be able to take part in a hearing by video? (Requires internet access)."
+        hint: "Further details on video hearings can be found on the following link https://www.gov.uk/guidance/hmcts-telephone-and-videohearings-during-coronavirus-outbreak"
+        options:
+          "true": 'Yes'
+          "false": 'No'
       legend_disability: Do you have a disability which means you require assistance at the tribunal hearing?
       legend_personal_details: About the claimant
       legend_contact_details: Claimant’s contact details
@@ -594,21 +505,32 @@ en:
       add_fields: Add more claimants
       remove_resource_link: Remove this claimant
       number_claimants_info: For 5 or fewer claimants, enter their details below.
-      csv_upload_text_html: For 6 or more claimants, you can <a href="%{path}">upload their details in a separate spreadsheet</a>.
+      csv_upload_text_html: For 6 or more claimants, you can <a class="govuk-link" href="%{path}">upload their details in a separate spreadsheet</a>.
+      has_multiple_claimants:
+        label: Are other people making a claim with you (against the same employer or organisation)?
+        options:
+          'true': 'Yes'
+          'false': 'No'
 
     additional_claimants_upload:
+      has_additional_claimants:
+        label: Do you want to upload details of 6 claimants or more?
+        hint: For up to 5 other claimants you can enter their details <a class="govuk-link" href="%{path}">manually</a>.
+        options:
+          'true': 'Yes'
+          'false': 'No'
       header: :"claims.additional_claimants.header"
       subheader: :"claims.additional_claimants.subheader"
       steps_header: Spreadsheet for group claim
       error_line: "An error has been found on line %{line_number} of the uploaded file."
       malformatted_csv: The CSV doesn’t appear to be formatted correctly.
-      remove_additional_claimants_csv: :"claims.claim_details.remove_claim_details_rtf"
+      remove_additional_claimants_csv:
+        label: :"claims.claim_details.remove_claim_details_rtf.label"
       number_claimants_info: For 6 or more claimants, enter their details below.
-      has_additional_claimants_html: For up to 5 other claimants you can enter their details <a href="%{path}">manually</a>.
       step_one_header: Step 1
       download_template_html: |
-        <a href="%{path}" download="group-claims-template.csv">Download spreadsheet template</a> or use your own if it follows the same format.
-      download_template_asset: 'group-claims-template.csv'
+        <a class="govuk-link" href="%{path}" download="group-claims-template.csv">Download spreadsheet template</a> or use your own if it follows the same format.
+      download_template_asset: 'group-claims-template'
       dob_info: For dates of birth, use numbers and/or letters separated by forward slashes. Eg 23/04/1983 or 23/Apr/1983
       step_two_header: Step 2
       save_csv_format: Save in CSV format.
@@ -616,11 +538,57 @@ en:
       no_spaces: Don’t include spaces in the file name.
       step_three_header: Step 3
       upload_limit: Maximum file size is 5MB.
-
+      additional_claimants_csv:
+        label: Upload spreadsheet
     representative:
       header: Representative’s details
       form_legend: The person representing you
-      representative_type_legend: Type of representative
+      has_representative:
+        label: Do you have someone who’s agreed to represent you (eg by handling correspondence)?
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      type:
+        label: Type of representative
+        options:
+          '': Please select
+          citizen_advice_bureau: Employment advisor, Citizens Advice Bureau
+          free_representation_unit: Free Representation Unit
+          law_centre: Law centre
+          trade_union: Trade union
+          solicitor: Solicitor
+          private_individual: Private individual
+          trade_association: Trade association
+          other: Other
+      organisation_name:
+        label: Name of the representative’s organisation
+      name:
+        label: Representative’s name
+      address_telephone_number:
+        label: Phone or mobile number
+      address_building:
+        label: Building number or name
+      address_locality:
+        label: Town/city
+      address_street:
+        label: Street
+      address_county:
+        label: County
+        hint: Eg if London, Greater London; if Manchester, Greater Manchester
+      address_post_code:
+        label: Postcode
+      mobile_number:
+        label: Alternative phone or mobile number
+      email_address:
+        label: Email address
+      dx_number:
+        label: Document exchange (DX) number
+      contact_preference:
+        label: Best way to send correspondence to your representative
+        options:
+          email: Email
+          post: Post
+          dx_number: DX number
       representative_legend: About your representative
       contact_legend: Representative’s contact details
       contact_info: |
@@ -628,50 +596,193 @@ en:
       what_is_dx:
         detail: What is a DX number?
         summary: DX is a private mail system used by organisations (eg legal firms)
-
     respondent:
       header: Respondent’s details
-      no_acas_number_reason: Why don’t you have an Acas number?
       respondent_legend: About the respondent
       no_acas_number_note_one: "Please note: Incorrectly claiming an exemption may lead to your claim being rejected. If in doubt, please contact ACAS."
       no_acas_number_note_two: "Please note: This is a rare type of claim. The fact that you are making a claim of unfair dismissal does not mean you are necessarily making a claim for interim relief."
 
-      acas_legend: Acas early conciliation certificate number
       workaddress_legend: Your work address
       form_hint: |
         The contact details of the person or organisation you're making a claim against (known as the 'respondent'). The address will be used for correspondence about the case.
       work_address: Give details of your work address.
-      acas_early_conciliation_certificate_number_html: |
-          Nearly everyone should have this number before they fill in a claim form. You can find it on your Acas certificate. Read more about the <a href="%{path}#acas_early_conciliation">Acas early conciliation service</a>.
       'true': 'Yes'
       'false': 'No'
+      name:
+        label: Name of respondent
+      address_building:
+        label: Building number or name
+      address_locality:
+        label: Town/city
+      address_street:
+        label: Street
+      address_county:
+        label: County
+        hint: Eg if London, Greater London; if Manchester, Greater Manchester
+      address_telephone_number:
+        label: Phone number
+      address_post_code:
+        label: Postcode
+      worked_at_same_address:
+        label: Did you work at the same address to the one given above?
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      work_address_telephone_number:
+        label: Phone number
+      work_address_building:
+        label: Building number or name
+      work_address_locality:
+        label: Town/city
+      work_address_street:
+        label: Street
+      work_address_county:
+        label: County
+        hint: Eg if London, Greater London; if Manchester, Greater Manchester
+      work_address_post_code:
+        label: Postcode
+      acas_early_conciliation_certificate_number:
+        label: Acas early conciliation certificate number
+        hint: Nearly everyone should have this number before they fill in a claim form. You can find it on your Acas certificate. Read more about the <a class="govuk-link" href="%{path}#acas_early_conciliation">Acas early conciliation service</a>.
+      no_acas_number:
+        label: I don’t have an Acas number
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      no_acas_number_reason:
+        label: Why don’t you have an Acas number?
+        hint: "Please note: Incorrectly claiming an exemption may lead to your claim being rejected. If in doubt, please contact ACAS."
+        options:
+          joint_claimant_has_acas_number: Another person I’m making the claim with has an Acas early conciliation certificate number
+          acas_has_no_jurisdiction: Acas doesn’t have the power to conciliate on some or all of my claim
+          employer_contacted_acas: My employer has already been in touch with Acas
+          interim_relief: The claim consists only of a complaint of unfair dismissal which contains an application for interim relief.
+
+
+
 
     additional_respondents:
-      no_acas_number_reason: Why don’t you have an Acas number?
       header: Additional respondents
-      additional_repsondents_legend: Claims against more than one employer
-      additional_respondents_intro: Are you making a claim against another person or organisation?
       person: Respondent %{number}
       add_fields: Add another respondent
       remove_resource_link: Remove this respondent
       additional_respondents_limit: If you are making a claim against more than %{max} additional respondents, enter their details in the ‘more about the claim’ section later in the form.
-      no_acas_number_note_one: :claims.respondent.no_acas_number_note_one
-      no_acas_number_note_two: :claims.respondent.no_acas_number_note_two
-      'true': 'Yes'
-      'false': 'No'
+      has_multiple_respondents:
+        label: Claims against more than one employer
+        hint: Are you making a claim against another person or organisation?
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      name:
+        label: Name of respondent
+      address_building:
+        label: Building number or name
+      address_locality:
+        label: Town/city
+      address_street:
+        label: Street
+      address_county:
+        label: County
+        hint: Eg if London, Greater London; if Manchester, Greater Manchester
+      address_telephone_number:
+        label: Phone number
+      address_post_code:
+        label: Postcode
+      acas_early_conciliation_certificate_number:
+        label: Acas early conciliation certificate number
+      no_acas_number:
+        label: I don’t have an Acas number
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      no_acas_number_reason:
+        label: Why don’t you have an Acas number?
+        hint: "Please note: Incorrectly claiming an exemption may lead to your claim being rejected. If in doubt, please contact ACAS."
+        options:
+          joint_claimant_has_acas_number: Another person I’m making the claim with has an Acas early conciliation certificate number
+          acas_has_no_jurisdiction: Acas doesn’t have the power to conciliate on some or all of my claim
+          employer_contacted_acas: My employer has already been in touch with Acas
+          interim_relief: The claim consists only of a complaint of unfair dismissal which contains an application for interim relief.
 
     employment:
       header: Employment details
       situation_legend: Your employment details
-      current_situation: What is your current work situation in relation to the employer you're making a claim against?
-      start_date: Employment start date
-      end_date: Employment end date
-      worked_notice_period_or_paid_in_lieu: Did you work (or get paid for) a period of notice?
-      new_job_start_date: New job start date
-      notice_period_end_date: Notice period end date
+      current_situation:
+        label: What is your current work situation in relation to the employer you're making a claim against?
+        options:
+          still_employed: Still working for this employer
+          notice_period: Working a notice period for this employer
+          employment_terminated: No longer working for this employer
+      job_title:
+        label: Job title
+        hint: The job you were doing at the time of the problem at work
+      start_date:
+        label: Employment start date
+        hint: For example, 22 04 2014 (if you don’t know the exact date then put your best estimate)
+      end_date:
+        label: Employment end date
+        hint: For example, 22 04 2014 (if you don’t know the exact date then put your best estimate)
+      worked_notice_period_or_paid_in_lieu:
+        label: Did you work (or get paid for) a period of notice?
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      new_job_start_date:
+        label: New job start date
+        hint: For example, 22 04 2014
+      notice_period_end_date:
+        label: Notice period end date
+        hint: The date your employment ends. For example, 22 04 2014
+      notice_pay_period_count:
+        label: For how many weeks or months did you get paid?
+      notice_pay_period_type:
+        label: Was this weeks or months ?
+        options:
+          weeks: Weeks
+          months: Months
+      average_hours_worked_per_week:
+        label: Average hours worked per week
+        hint: Don’t include overtime
+      gross_pay:
+        label: Pay before tax
+        hint: This is your gross pay, before tax and other deductions. You can find it on your payslip. Don’t include any overtime payments
+      pay_period_type:
+        label: How often were you paid
+        options:
+          weekly: Weekly
+          monthly: Monthly
+      net_pay:
+        label: Pay after tax
+        hint: This is your net or take-home pay, after tax and other deductions. You can find it on your payslip. Include overtime, commission and bonuses
+      enrolled_in_pension_scheme:
+        label: Are – or were – you a member of your employer’s pension scheme?
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      benefit_details:
+        label: Do – or did – you have any benefits, like a company car?
+        hint: Details of benefit(s)
+      found_new_job:
+        label: Have you got a new job?
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      new_job_gross_pay:
+        label: New job pay before tax
+        hint: This is your gross pay, before tax and other deductions. You can find it on your payslip. Don’t include any overtime payments
+      new_job_gross_pay_frequency:
+        label: How often are you paid
+        options:
+          weekly: Weekly
+          monthly: Monthly
       employment_details_legend: Employment details
       pay_legend: Pay, pension and benefits
       new_job_legend: New Job
+      was_employed:
+        label: Have you ever been employed by the person or organisation that you’re making this claim against?
+        options:
+          'true': 'Yes'
+          'false': 'No'
       'true': 'Yes'
       'false': 'No'
       'true_v2': 'Yes'
@@ -686,47 +797,271 @@ en:
       header: About the claim
       claim_type: What your claim is about
       claim_type_label: Select at least one of the claim types below.
-      unfair_dismissal: Unfair dismissal
+      is_unfair_dismissal:
+        label: Unfair dismissal
+        hint: Your dismissal could be unfair if your employer doesn’t have a good reason for dismissing you or follow the company’s formal disciplinary or dismissal process. Constructive dismissal is when you’re forced to leave your job against your will because of your employer’s conduct.
+        options:
+          1: Unfair dismissal (including constructive dismissal)
       summary:  What is this?
-      unfair_dismissal_summary_detail: |
-        Your dismissal could be unfair if your employer doesn’t have a good reason for dismissing you or follow the company’s formal disciplinary or dismissal process. Constructive dismissal is when you’re forced to leave your job against your will because of your employer’s conduct.
-      discrimination: Discrimination
-      pay: Pay
-      other_type: Other type of claim (not shown above)
-      whistleblowing: Whistleblowing claim
-      'true': 'Yes'
-      'false': 'No'
+      discrimination_claims:
+        label: Discrimination
+        options:
+          sex_including_equal_pay: Sex (including equal pay)
+          disability: Disability
+          race: Race
+          age: Age
+          pregnancy_or_maternity: Pregnancy or maternity
+          religion_or_belief: Religion or belief
+          sexual_orientation: Sexual orientation
+          marriage_or_civil_partnership: Marriage or civil partnership
+          gender_reassignment: Gender reassignment
+      pay_claims:
+        label: Pay
+        options:
+          redundancy: Redundancy pay
+          notice: Notice pay
+          holiday: Holiday pay
+          arrears: Arrears of pay
+          other: Other payments
+      is_other_type_of_claim:
+        label: Other type of claim (not shown above)
+        hint: If you can’t see a good match for your claim or want to add a claim that doesn’t appear in the options above.
+        options:
+          'true': Other type of claim
+      other_claim_details:
+        label: State the other type of claim(s) that you’re making
+        hint: Give a very short description of your claim; you will have the opportunity to add more detail on the next page
+      is_whistleblowing:
+        heading: Whistleblowing claim
+        label: Are you reporting suspected wrongdoing at work?
+        hint: You can report things at work that aren’t right, are illegal or if anyone is neglecting their duties (also known as making ‘disclosure in the public interest’).
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      send_claim_to_whistleblowing_entity:
+        label: Do you want us to send a copy of your claim to the relevant person or body that deals with whistleblowing?
+        options:
+          'true': 'Yes'
+          'false': 'No'
 
     claim_details:
       header: Claim details
-      claim_details: Describe your claim
+      describe: Describe your claim
       claim_details_upload: Or upload it as a separate document
       claim_details_html: |
         Write your claim statement below.
         Include the background, dates and people involved.
-        <a href="%{path}#writing_your_claim_statement">More about writing your claim statement</a>.
-      claim_details_hint_html: Limit is 2500 characters.
-      remove_claim_details_rtf: |
-        Remove previously uploaded document: %{file}
+        <a class="govuk-link" href="%{path}#writing_your_claim_statement">More about writing your claim statement</a>.
       similar_claims: Similar claims
       'true': 'Yes'
       'false': 'No'
-
+      other_known_claimants:
+        label: Do you know of any other claimants (not already listed) making similar claims against the same employer?
+        hint: A judge may combine similar claims to manage and hear them together. This may save you and the tribunal time and money.
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      other_known_claimant_names:
+        label: You can add the names of other people here.
+      claim_details_rtf:
+        label: The document needs to be in Rich Text Format(RTF)
+        hint: "You can usually save a file as RTF by selecting File> Save As> Export To> Format: Rich Text Format"
+      remove_claim_details_rtf:
+        label: "Remove previously uploaded document: %{file}"
+      claim_details:
+        label: 'Describe your claim'
 
     claim_outcome:
       header: Claim outcome
       claim_outcome: Choose your preferred outcome(s)
+      desired_outcomes:
+        label: What do you want if your claim is successful?
+        hint: You can select more than one
+        options:
+          compensation_only: Compensation
+          tribunal_recommendation: A recommendation from a tribunal (that the employer takes action so that the problem at work doesn’t happen again)
+          reinstated_employment_and_compensation: To get your old job back
+          new_employment_and_compensation: To get another job with the same employer or associated employer
+      other_outcome:
+        label: What compensation or other outcome do you want?
+        hint: If you’re claiming financial compensation, you can say how much you want and how you worked out the sum. You can change these details later, or leave this section blank if you don’t know.
 
     additional_information:
       header: More about the claim
       legend: Other important details
-      has_miscellaneous_information: Do you want to provide additional information about your claim? (optional)
-      has_miscellaneous_information_hint: |
-        Include anything that will help the tribunal come to a decision about whether your case can be heard.
-        What you write may be seen by the respondent. If you are making a claim against more than 3 additional respondents,
-        enter their details below.
-      has_miscellaneous_information_hint: Include anything that will help the tribunal come to a decision about whether your case can be heard. What you write may be seen by the respondent.
-      additional_respondents_callout: If you are making a claim against more than 3 additional respondents, enter their details below.
+      has_miscellaneous_information:
+        label: Do you want to provide additional information about your claim?
+        hint: Include anything that will help the tribunal come to a decision about whether your case can be heard. What you write may be seen by the respondent.
+        options:
+          "true": 'Yes'
+          "false": 'No'
+      miscellaneous_information:
+        label: Enter more detail about your claim.
+
+    feedback:
+      header: Your feedback
+      feedback_comments: Have you had any problems using this service? (optional)
+      feedback_suggestions: Do you have any other comments or suggestions? (optional)
+      feedback_email_address: Your email address (optional)
+      feedback_submit_button: Send feedback
+
+    registration:
+      header: Saving your claim
+      application_number: Your save and return number
+      intro_text: You can save your claim and return to it at any time. You will need your save and return number (above), and memorable word, which you create below.  If you enter your email address you will be able to reset your memorable word if you forget it.
+      email_address:
+        label: Enter your email address to receive your claim number
+      password:
+        label: Create your memorable word
+        hint: If you have entered your email address above, you will be able to reset your memorable word if you forget it
+    session:
+      header: Return to your claim
+      subheader: Enter your details below
+      reference:
+        label: Save and return number
+        hint: This was emailed to you (if you entered your email address)
+      password:
+        label: Memorable word
+        hint: If you have entered your email address above, you will be able to reset your memorable word if you forget it
+    password:
+      new:
+        header: Reset memorable word
+        enter_your_details: Enter your details below
+        email:
+          label: Enter your email address
+          hint: If you entered a valid email address when you started your claim, we will email you with instructions on how to reset your memorable word. If we cannot match your email address or you did not enter a valid email address you will need to start a new claim.
+        reference:
+          label: Save and return number
+          hint: This was emailed to you (if you entered an email address).
+      edit:
+        header: Reset memorable word
+        enter_your_details: Enter your new details below
+        password:
+          label: Memorable word
+          hint: Your new memorable word
+  diversities:
+    claim_type:
+      diversities_claim_type:
+        claim_type:
+          options:
+            unfair-dismissal-or-constructive-dismissal: "Unfair dismissal or constructive dismissal"
+            discrimination: "Discrimination"
+            redundancy-payment: "Redundancy payment"
+            other-payments-you-are-owed: "Other payments you are owed"
+            other-complaints: "Other complaints"
+    diversities_identity:
+      sex:
+        label: What is your sex?
+        options:
+          male: Male
+          female: Female
+          prefer-not-to-say: Prefer not to say
+      gender:
+        label: What is your gender identity?
+        options:
+          male-including-female-to-male-trans-men: Male (including female-to-male trans men)
+          female-including-male-to-female-trans-women: Female (including male-to-female trans women)
+          prefer-not-to-say: Prefer not to say
+      gender_at_birth:
+        label: Is your gender identity different to the sex you were assumed to be at birth?
+        options:
+          yes_answer: 'Yes'
+          no_answer: 'No'
+          prefer-not-to-say: Prefer not to say
+      sexual_identity:
+        label: Which of the options below best describes your sexual identity?
+        options:
+          heterosexual-straight: Heterosexual / Straight
+          gay-lesbian: Gay / Lesbian
+          bisexual: Bisexual
+          other: Other
+          prefer-not-to-say: Prefer not to say
+    diversities_relationship:
+      relationship:
+        options:
+          single-that-is-never-married-and-never-registered-in-a-same-sex-civil-partnership: Single, that is, never married and never registered in a same-sex civil partnership
+          married: Married
+          separated-but-still-legally-married: Separated, but still legally married
+          divorced: Divorced
+          widowed: Widowed
+          in-a-registered-same-sex-civil-partnership: In a registered same-sex civil partnership
+          separated-but-still-legally-in-a-same-sex-civil-partnership: Separated, but still legally in a same-sex civil partnership
+          formerly-in-a-same-sex-civil-partnership-which-is-now-legally-dissolved: Formerly in a same-sex civil partnership which is now legally dissolved
+          surviving-partner-from-a-same-sex-civil-partnership: Surviving partner from a same-sex civil partnership
+          prefer-not-to-say: Prefer not to say
+    diversities_age_caring:
+      age_group:
+        label: Which age group are you in?
+        options:
+          under-25: Under 25
+          25-34: 25 - 34
+          35-44: 35 - 44
+          45-54: 45 - 54
+          55-64: 55 - 64
+          65-over: 65 and over
+          prefer-not-to-say: Prefer not to say
+      caring_responsibility:
+        label: Do you have any caring responsibilities?
+        hint: For example, children, elderly relatives or partners
+        options:
+          yes_answer: 'Yes'
+          no_answer: 'No'
+          prefer-not-to-say: Prefer not to say
+    diversities_religion:
+      religion:
+        options:
+          no-religion: No religion
+          christian-including-church-of-england-catholic-protestant-and-all-other-christian-denominations: Christian (including Church of England, Catholic, Protestant and all other Christian denominations)
+          buddhist: Buddhist
+          hindu: Hindu
+          jewish: Jewish
+          muslim: Muslim
+          sikh: Sikh
+          prefer-not-to-say: Prefer not to say
+          any-other-religion: Any other religion
+      religion_text:
+        hint: Please describe
+    diversities_disability:
+      disability:
+        options:
+          yes_answer: 'Yes'
+          no_answer: 'No'
+          prefer-not-to-say: Prefer not to say
+    diversities_pregnancy:
+      pregnancy:
+        options:
+          yes_answer: 'Yes'
+          no_answer: 'No'
+          prefer-not-to-say: Prefer not to say
+    diversities_ethnicity:
+      ethnicity:
+        options:
+          white: White
+          mixed-multiple-ethnic-groups: Mixed / multiple ethnic groups
+          asian-asian-british: Asian / Asian British
+          black-african-caribbean-black-british: Black / African / Caribbean / Black British
+          other-ethnic-group: Other ethnic group
+          prefer-not-to-say: Prefer not to say
+      ethnicity_subgroup:
+          english-welsh-scottish-northern-irish-british: English / Welsh / Scottish / Northern Irish / British
+          irish: Irish
+          gypsy-or-irish-traveller: Gypsy or Irish Traveller
+          any-other-white-background: Any other White background
+          white-and-black-caribbean: White and Black Caribbean
+          white-and-black-african: White and Black African
+          white-and-asian: White and Asian
+          any-other-mixed-multiple-ethnic-background: Any other Mixed / multiple ethnic background
+          none-of-the-above: None of the above
+          indian: Indian
+          pakistani: Pakistani
+          bangladeshi: Bangladeshi
+          chinese: Chinese
+          any-other-asian-background: Any other Asian background
+          african: African
+          caribbean: Caribbean
+          any-other-black-african-caribbean-background: Any other Black / African / Caribbean background
+          arab: Arab
+          any-other-ethnic-group: Any other ethnic group
 
   activerecord:
     errors:
@@ -965,3 +1300,11 @@ en:
               blank: Enter the additional respondent's postcode
               invalid: Enter a valid UK postcode. If you live abroad, enter SW55 9QT
               invalid_ccd_post_code: :'activemodel.errors.models.additional_respondents_form/additional_respondent.attributes.address_post_code.invalid'
+  claim:
+    application_number:
+      email_address:
+        label: "Enter your email address to receive your claim number"
+      password:
+        label: Create your memorable word
+        hint: If you have entered your email address above, you will be able to reset your memorable word if you forget it
+

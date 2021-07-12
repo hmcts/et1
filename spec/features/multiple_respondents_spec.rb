@@ -1,26 +1,10 @@
 require 'rails_helper'
 
-feature 'Multiple respondents' do
+feature 'Multiple respondents', js: true do
   include FormMethods
 
   let(:claim) { Claim.create user: User.new(password: 'lollolol') }
-  let(:attributes) do
-    {
-      'Name'                    => 'Butch McTaggert',
-      'Acas number'             => 'XX123456/12/12',
-      'Building number or name' => '3',
-      'Street'                  => 'Lol Lane',
-      'Town/city'               => 'Jokesville',
-      'County'                  => 'Anyfordshire',
-      'Postcode'                => 'SW1A 1AA'
-    }
-  end
-
-  let(:secondary_attributes) do
-    attributes.
-      update('Name' => 'Pablo Noncer').
-      except('Acas number')
-  end
+  let(:ui_secondary_respondents) { build_list(:ui_secondary_respondent, 1, :default) }
 
   before do
     visit new_user_session_path
@@ -29,47 +13,28 @@ feature 'Multiple respondents' do
 
   describe 'adding respondents' do
     before do
-      visit claim_additional_respondents_path
-
-      choose 'Yes'
-
-      attributes.each do |field, value|
-        fill_in field, with: value
-      end
+      additional_respondents_page.load
+      additional_respondents_page.fill_in_all(secondary_respondents: ui_secondary_respondents)
     end
 
     scenario "filling in a respondent and clicking 'Add another respondent' does not lose the entered details" do
+      extra_ui_respondent = build(:ui_secondary_respondent, :default)
       expect(page).not_to have_selector '#resource_1'
 
-      click_button "Add another respondent"
-
-      expect(page).to have_selector '#resource_1'
-
-      within '#resource_0' do
-
-        attributes.each do |field, value|
-          expect(page).to have_field(field, with: value)
-        end
-      end
+      additional_respondents_page.append_secondary_respondents([extra_ui_respondent])
+      expect(additional_respondents_page.secondary_respondents).to match_array(ui_secondary_respondents + [extra_ui_respondent])
     end
 
     scenario 'adding more than one additional respondent' do
-      click_button "Add another respondent"
+      extra_ui_respondent = build(:ui_secondary_respondent, :default)
+      additional_respondents_page
+        .append_secondary_respondents([extra_ui_respondent])
+        .save_and_continue
 
-      within '#resource_1' do
-        secondary_attributes.each do |field, value|
-          fill_in field, with: value
-        end
-
-        check "I don’t have an Acas number"
-
-        choose "My employer has already been in touch with Acas"
-      end
-
-      click_button 'Save and continue'
+      employment_details_page.wait_until_displayed
       claim.reload
       expect(claim.secondary_respondents.pluck(:name)).
-        to match_array ['Butch McTaggert', 'Pablo Noncer']
+        to match_array (ui_secondary_respondents + [extra_ui_respondent]).map(&:name)
     end
   end
 
@@ -77,66 +42,43 @@ feature 'Multiple respondents' do
     before { add_some_additional_respondents }
 
     scenario 'deleting arbitrary respondents' do
-      visit claim_additional_respondents_path
+      additional_respondents_page.load
       expect(claim.secondary_respondents.count).to eq 2
-
-      within '#resource_1' do
-        check 'Remove this respondent'
-      end
-
-      click_button 'Save and continue'
-
+      additional_respondents_page
+        .remove_respondent(index: 0)
+        .save_and_continue
+      employment_details_page.wait_until_displayed
       expect(claim.secondary_respondents.count).to eq 1
     end
   end
 
   describe 'indicating there are no additional respondents' do
     scenario 'when no additional respondents have been previously added' do
-      visit claim_additional_respondents_path
-
-      choose "No"
-
-      click_button 'Save and continue'
-
+      additional_respondents_page.load
+      additional_respondents_page
+        .fill_in_all(secondary_respondents: [])
+        .save_and_continue
+      employment_details_page.wait_until_displayed
       expect(claim.secondary_respondents).to be_empty
-      expect(page.current_path).not_to eq claim_additional_respondents_path
     end
 
     scenario 'when additional respondents have been previously added' do
       add_some_additional_respondents
 
-      visit claim_additional_respondents_path
-
-      choose "No"
-
-      click_button 'Save and continue'
-
+      additional_respondents_page.load
+      additional_respondents_page
+        .fill_in_all(secondary_respondents: [])
+        .save_and_continue
+      employment_details_page.wait_until_displayed
       expect(claim.secondary_respondents).to be_empty
-      expect(page.current_path).not_to eq claim_additional_respondents_path
     end
   end
 
   def add_some_additional_respondents
-    visit claim_additional_respondents_path
-
-    choose 'Yes'
-
-    attributes.each do |field, value|
-      fill_in field, with: value
-    end
-
-    click_button 'Add another respondent'
-
-    within '#resource_1' do
-      secondary_attributes.each do |field, value|
-        fill_in field, with: value
-      end
-
-      check "I don’t have an Acas number"
-
-      choose "My employer has already been in touch with Acas"
-    end
-
-    click_button 'Save and continue'
+    second_ui_respondent = build(:ui_secondary_respondent, :default)
+    additional_respondents_page.load
+    additional_respondents_page
+      .fill_in_all(secondary_respondents: ui_secondary_respondents + [second_ui_respondent])
+      .save_and_continue
   end
 end

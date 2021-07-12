@@ -1,98 +1,96 @@
 - content_for(:page_title, page_title)
 
 .main-header role="banner"
-  h1= t('.header')
-  p = t('.info')
+  h1 class="govuk-heading-xl govuk-!-margin-top-9" = t('.header')
+  p.govuk-body = t('.info')
 
-.main-section
+.govuk-grid-row
 
-  .main-content
+  .govuk-grid-column-two-thirds-from-desktop
     = incomplete_claim_warning(claim)
+    h2.govuk-heading-m
+      span = t ".sections.claimant"
+      span.review-quick-edit = quick_edit_link_for "claimant"
+    hr class="govuk-section-break.govuk-section-break--visible"
+    dl class="govuk-summary-list govuk-!-margin-bottom-9"
+      = render 'claimant', claimant: primary_claimant, section_name: 'claimant'
 
-    div class=("review-list-entry claimant")
-      h2.list-header
-        span = t ".sections.claimant"
-        = quick_edit_link_for "claimant"
+    h2.govuk-heading-m
+      span = t ".sections.additional_claimants"
+      span.review-quick-edit = quick_edit_link_for 'additional_claimants'
+    hr class="govuk-section-break.govuk-section-break--visible"
+    dl class="govuk-summary-list govuk-!-margin-bottom-9"
+      - if claim.additional_claimants_csv.present?
+        = render 'additional_claimants_csv', claim: claim, section_name: 'additional_claimants'
+      - else
+        = render 'additional_claimants', claimants: secondary_claimants, section_name: 'additional_claimants'
 
-      table.review-table
-        = render 'claimant', claimant: primary_claimant, section_name: 'claimant'
+    h2.govuk-heading-m
+      span = t ".sections.representative"
+      span.review-quick-edit = quick_edit_link_for "representative"
+    hr class="govuk-section-break.govuk-section-break--visible"
 
-    div class=("review-list-entry additional-claimants")
-      h2.list-header
-        span = t ".sections.additional_claimants"
-        = quick_edit_link_for 'additional_claimants'
-        table.review-table
-          - if claim.additional_claimants_csv.present?
-            = render 'additional_claimants_csv', claim: claim, section_name: 'additional_claimants'
-          - else
-            = render 'additional_claimants', claimants: secondary_claimants, section_name: 'additional_claimants'
+    dl class="govuk-summary-list govuk-!-margin-bottom-9"
+      = render 'representative', representative: representative, section_name: 'representative'
 
-    div class=("review-list-entry representative")
-      h2.list-header
-        span = t ".sections.representative"
-        = quick_edit_link_for "representative"
+    h2.govuk-heading-m
+      span = t ".sections.respondent"
+      span.review-quick-edit = quick_edit_link_for "respondent"
+    hr class="govuk-section-break.govuk-section-break--visible"
 
-      table.review-table
-        = render 'representative', representative: representative, section_name: 'representative'
+    dl class="govuk-summary-list govuk-!-margin-bottom-9"
+      = render 'respondent', respondent: respondent, section_name: 'respondent'
 
-    div class=("review-list-entry respondent")
-      h2.list-header
-        span = t ".sections.respondent"
-        = quick_edit_link_for "respondent"
+    h2.govuk-heading-m
+      span = t ".sections.additional_respondents"
+      span.review-quick-edit = quick_edit_link_for "additional_respondents"
+    hr class="govuk-section-break.govuk-section-break--visible"
 
-      table.review-table
-        = render 'respondent', respondent: respondent, section_name: 'respondent'
+    dl class="govuk-summary-list govuk-!-margin-bottom-9"
+      = render 'additional_respondents', respondents: secondary_respondents, section_name: 'additional_respondents'
 
-    div class=("review-list-entry additional-respondents")
-      h2.list-header
-        span = t ".sections.additional_respondents"
-        = quick_edit_link_for "additional_respondents"
+    h2.govuk-heading-m
+      span = t ".sections.employment"
+      span.review-quick-edit = quick_edit_link_for "employment"
+    hr class="govuk-section-break.govuk-section-break--visible"
 
-      table.review-table
-        = render 'additional_respondents', respondents: secondary_respondents, section_name: 'additional_respondents'
+    dl class="govuk-summary-list govuk-!-margin-bottom-9"
+      = render 'employment', employment: employment, section_name: 'employment'
 
-    div class=("review-list-entry employment")
-      h2.list-header
-        span = t ".sections.employment"
-        = quick_edit_link_for "employment"
+    h2.govuk-heading-m
+      span = t ".sections.claim_type"
+      span.review-quick-edit = quick_edit_link_for "claim_type"
+    hr class="govuk-section-break.govuk-section-break--visible"
 
-      table.review-table
-        = render 'employment', employment: employment, section_name: 'employment'
+    dl class="govuk-summary-list govuk-!-margin-bottom-9"
+      = render 'claim_type', claim: claim, section_name: 'claim_type'
 
-    div class=("review-list-entry claim-type")
-      h2.list-header
-        span = t ".sections.claim_type"
-        = quick_edit_link_for "claim_type"
+    h2.govuk-heading-m
+      span = t ".sections.claim_details"
+      span.review-quick-edit = quick_edit_link_for "claim_details"
+    hr class="govuk-section-break.govuk-section-break--visible"
 
-      table.review-table
-        = render 'claim_type', claim: claim, section_name: 'claim_type'
+    dl class="govuk-summary-list govuk-!-margin-bottom-9"
+      = render 'claim_details', claim: claim, section_name: 'claim_details'
 
-    div class=("review-list-entry claim-details")
-      h2.list-header
-        span = t ".sections.claim_details"
-        = quick_edit_link_for "claim_details"
+    h2.govuk-heading-m
+      span = t ".sections.claim_outcome"
+      span.review-quick-edit = quick_edit_link_for "claim_outcome"
+    hr class="govuk-section-break.govuk-section-break--visible"
 
-      table.review-table
-        = render 'claim_details', claim: claim, section_name: 'claim_details'
+    dl class="govuk-summary-list govuk-!-margin-bottom-9"
+      = render 'claim_outcome', claim: claim, section_name: 'claim_outcome'
 
-    div class=("review-list-entry claim-outcome")
-      h2.list-header
-        span = t ".sections.claim_outcome"
-        = quick_edit_link_for "claim_outcome"
+    h2.govuk-heading-m
+      span = t ".sections.additional_information"
+      span.review-quick-edit = quick_edit_link_for "additional_information"
+    hr class="govuk-section-break.govuk-section-break--visible"
 
-      table.review-table
-        = render 'claim_outcome', claim: claim, section_name: 'claim_outcome'
-
-    div class=("review-list-entry additional-information")
-      h2.list-header
-        span = t ".sections.additional_information"
-        = quick_edit_link_for "additional_information"
-
-      table.review-table
-        = render 'additional_information', claim: claim, section_name: 'additional_information'
+    dl class="govuk-summary-list govuk-!-margin-bottom-9"
+      = render 'additional_information', claim: claim, section_name: 'additional_information'
 
     = render 'email_addresses', claim: claim
 
-    p.print = link_to t('.print_link').html_safe
+    p.govuk-body.print = link_to t('.print_link').html_safe
 
   = render 'shared/aside'

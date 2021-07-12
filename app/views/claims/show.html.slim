@@ -1,21 +1,19 @@
 - content_for(:page_title, claim_title)
 
-.main-header
-  h1.page-trail
-    span.page-number= t('.page_number', current_page: current_page, total_pages: total_pages)
-    span.page-title
-      = claim_header
+span class="govuk-caption-l govuk-!-margin-top-5"= t('.page_number', current_page: current_page, total_pages: total_pages)
+h1 class="govuk-heading-xl govuk-!-margin-top-3"
+  = claim_header
 
-.main-section
+.govuk-grid-row
 
-  .main-content
-    = simple_form_for resource, url: request.fullpath, multipart: true do |f|
+  .govuk-grid-column-two-thirds
+    = form_for resource, url: request.fullpath, multipart: true, builder: EtGdsDesignSystem.form_builder_class do |f|
       = hidden_field_tag :return_to_review, params[:return_to_review]
 
-      = f.error_notification
-      .form-fields lang= "#{I18n.locale}"
+      = f.govuk_error_summary(t 'shared.error_notification.default_message')
+      .form-fields
         = render current_step, f: f
       .form-actions
-        = f.button :submit
+        = f.submit t('shared.continue_button')
 
   = render partial: 'shared/aside'

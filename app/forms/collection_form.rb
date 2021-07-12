@@ -59,13 +59,6 @@ class CollectionForm < Form
     collection.all?(&:valid?)
   end
 
-  # @TODO Fix this - every time this gets called, the errors will get duplicated
-  def errors
-    collection.each_with_object(super) do |resource, errors|
-      errors.add(:collection, resource.errors) unless resource.errors.empty?
-    end
-  end
-
   private
 
   def relation

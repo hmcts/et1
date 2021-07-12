@@ -1,86 +1,96 @@
-div
-  table.review-table
-    tr
-      th = t('diversities.claim_type.hint')
-      td
-        - if f.object.claim_type
-           = t("simple_form.options.diversities_claim_type.claim_type.#{f.object.claim_type}")
-      td = link_to t('diversities.edit'), diversity_claim_type_path(return_to_review: true)
+dl.govuk-summary-list
+  div.govuk-summary-list__row
+    dt.govuk-summary-list__key = t "diversities.claim_type.hint"
+    dt.govuk-summary-list__value
+      - if f.object.claim_type
+        = t("simple_form.options.diversities_claim_type.claim_type.#{f.object.claim_type}")
+    dt.govuk-summary-list__value = link_to t('diversities.edit'), diversity_claim_type_path(return_to_review: true)
 
-    tr
-      th = t('diversities.identity.sex.hint')
-      td
-        - if f.object.sex
-           = t("simple_form.options.diversities_identity.sex.#{f.object.sex}")
-      td = link_to t('diversities.edit'), diversity_identity_path(return_to_review: true)
-    tr
-      th = t('diversities.identity.gender.hint')
-      td
-        - if f.object.gender
-          = t("simple_form.options.diversities_identity.gender.#{f.object.gender}")
-      td = link_to t('diversities.edit'), diversity_identity_path(return_to_review: true)
-    tr
-      th = t('diversities.identity.gender_at_birth.hint')
-      td
-        - if f.object.gender_at_birth
-          = t("simple_form.options.diversities_identity.gender_at_birth.#{f.object.gender_at_birth}")
-      td = link_to t('diversities.edit'), diversity_identity_path(return_to_review: true)
+  div.govuk-summary-list__row
+    dt.govuk-summary-list__key = t 'diversities.identity.sex.hint'
+    dt.govuk-summary-list__value
+      - if f.object.sex
+        = t("simple_form.options.diversities_identity.sex.#{f.object.sex}")
+    dt.govuk-summary-list__value = link_to t('diversities.edit'), diversity_identity_path(return_to_review: true)
 
-    tr
-      th = t('diversities.identity.sexual_identity.hint')
-      td
-        - if f.object.sexual_identity
-          = t("simple_form.options.diversities_identity.sexual_identity.#{f.object.sexual_identity}")
-      td = link_to t('diversities.edit'), diversity_identity_path(return_to_review: true)
+  div.govuk-summary-list__row
+    dt.govuk-summary-list__key = t 'diversities.identity.gender.hint'
+    dt.govuk-summary-list__value
+      - if f.object.gender
+        = t("simple_form.options.diversities_identity.gender.#{f.object.gender}")
+    dt.govuk-summary-list__value = link_to t('diversities.edit'), diversity_identity_path(return_to_review: true)
 
-    tr
-      th = t('diversities.relationship.hint')
-      td
-        - if f.object.relationship
-          = t("simple_form.options.diversities_relationship.relationship.#{f.object.relationship}")
-      td = link_to t('diversities.edit'), diversity_relationship_path(return_to_review: true)
-    tr
-      th = t('diversities.age_caring.age_group.hint')
-      td
-        - if f.object.age_group
-          = t("simple_form.options.diversities_age_caring.age_group.#{f.object.age_group}")
-      td = link_to t('diversities.edit'), diversity_age_caring_path(return_to_review: true)
-    tr
-      th = t('diversities.age_caring.caring_responsibility.hint')
-      td
-        -if f.object.caring_responsibility
-          = t("simple_form.options.diversities_age_caring.caring_responsibility.#{f.object.caring_responsibility}")
-      td = link_to t('diversities.edit'), diversity_age_caring_path(return_to_review: true)
-    tr
-      th = t('diversities.religion.hint')
-      td
-        - if religion_value(f.object)
-          = religion_value(f.object)
-      td = link_to t('diversities.edit'), diversity_religion_path(return_to_review: true)
-    tr
-      th = t('diversities.ethnicity.hint')
-      td
+  div.govuk-summary-list__row
+    dt.govuk-summary-list__key = t 'diversities.identity.gender_at_birth.hint'
+    dt.govuk-summary-list__value
+      - if f.object.gender_at_birth
+        = t("simple_form.options.diversities_identity.gender_at_birth.#{f.object.gender_at_birth}")
+    dt.govuk-summary-list__value = link_to t('diversities.edit'), diversity_identity_path(return_to_review: true)
+
+  div.govuk-summary-list__row
+    dt.govuk-summary-list__key = t 'diversities.identity.sexual_identity.hint'
+    dt.govuk-summary-list__value
+      - if f.object.sexual_identity
+        = t("simple_form.options.diversities_identity.sexual_identity.#{f.object.sexual_identity}")
+    dt.govuk-summary-list__value = link_to t('diversities.edit'), diversity_identity_path(return_to_review: true)
+
+  div.govuk-summary-list__row
+    dt.govuk-summary-list__key = t 'diversities.relationship.hint'
+    dt.govuk-summary-list__value
+      - if f.object.relationship
+        = t("simple_form.options.diversities_relationship.relationship.#{f.object.relationship}")
+    dt.govuk-summary-list__value = link_to t('diversities.edit'), diversity_relationship_path(return_to_review: true)
+
+  div.govuk-summary-list__row
+    dt.govuk-summary-list__key = t 'diversities.age_caring.age_group.hint'
+    dt.govuk-summary-list__value
+      - if f.object.age_group
+        = t("simple_form.options.diversities_age_caring.age_group.#{f.object.age_group}")
+    dt.govuk-summary-list__value = link_to t('diversities.edit'), diversity_age_caring_path(return_to_review: true)
+
+  div.govuk-summary-list__row
+    dt.govuk-summary-list__key = t 'diversities.age_caring.caring_responsibility.hint'
+    dt.govuk-summary-list__value
+      - if f.object.caring_responsibility
+        = t("simple_form.options.diversities_age_caring.caring_responsibility.#{f.object.caring_responsibility}")
+    dt.govuk-summary-list__value = link_to t('diversities.edit'), diversity_age_caring_path(return_to_review: true)
+
+  div.govuk-summary-list__row
+    dt.govuk-summary-list__key = t 'diversities.religion.hint'
+    dt.govuk-summary-list__value
+      - if religion_value(f.object)
+        = religion_value(f.object)
+    dt.govuk-summary-list__value = link_to t('diversities.edit'), diversity_religion_path(return_to_review: true)
+
+  div.govuk-summary-list__row
+    dt.govuk-summary-list__key = t 'diversities.ethnicity.hint'
+    dt.govuk-summary-list__value
+      - if f.object.ethnicity
+        = t("simple_form.options.diversities_ethnicity.ethnicity.#{f.object.ethnicity}")
+    dt.govuk-summary-list__value = link_to t('diversities.edit'), diversity_ethnicity_path(return_to_review: true)
+
+  - if display_ethnicity_subgroup? && f.object.ethnicity_subgroup
+    div.govuk-summary-list__row
+      dt.govuk-summary-list__key = t 'diversities.ethnicity_subgroup.header'
+      dt.govuk-summary-list__value
         - if f.object.ethnicity
-          = t("simple_form.options.diversities_ethnicity.ethnicity.#{f.object.ethnicity}")
-      td = link_to t('diversities.edit'), diversity_ethnicity_path(return_to_review: true)
+          = t("simple_form.options.diversities_ethnicity.ethnicity_subgroup.#{f.object.ethnicity_subgroup}")
+      dt.govuk-summary-list__value = link_to t('diversities.edit'), diversity_ethnicity_path(return_to_review: true)
 
-    - if display_ethnicity_subgroup? && f.object.ethnicity_subgroup
-      tr
-        th = t('diversities.ethnicity_subgroup.header')
-        td = t("simple_form.options.diversities_ethnicity.ethnicity_subgroup.#{f.object.ethnicity_subgroup}")
-        td = link_to t('diversities.edit'), diversity_ethnicity_path(return_to_review: true)
-    tr
-      th = t('diversities.disability.hint')
-      td
-        - if f.object.disability
-          = t("simple_form.options.diversities_disability.disability.#{f.object.disability}")
-      td = link_to t('diversities.edit'), diversity_disability_path(return_to_review: true)
-    tr
-      th = t('diversities.pregnancy.hint')
-      td
-        - if f.object.pregnancy
-          = t("simple_form.options.diversities_pregnancy.pregnancy.#{f.object.pregnancy}")
-      td = link_to t('diversities.edit'), diversity_pregnancy_path(return_to_review: true)
+  div.govuk-summary-list__row
+    dt.govuk-summary-list__key = t 'diversities.disability.hint'
+    dt.govuk-summary-list__value
+      - if f.object.disability
+        = t("simple_form.options.diversities_disability.disability.#{f.object.disability}")
+    dt.govuk-summary-list__value = link_to t('diversities.edit'), diversity_disability_path(return_to_review: true)
+
+  div.govuk-summary-list__row
+    dt.govuk-summary-list__key = t 'diversities.pregnancy.hint'
+    dt.govuk-summary-list__value
+      - if f.object.pregnancy
+        = t("simple_form.options.diversities_pregnancy.pregnancy.#{f.object.pregnancy}")
+    dt.govuk-summary-list__value = link_to t('diversities.edit'), diversity_pregnancy_path(return_to_review: true)
 
 - content_for :submit_button do
-  = f.button :submit, t('.submit'), class: 'button'
+  = f.govuk_submit t'.submit'
+

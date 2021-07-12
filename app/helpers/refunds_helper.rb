@@ -14,12 +14,12 @@ module RefundsHelper
   end
 
   def country_of_claim_for(id)
-    I18n.t("simple_form.options.refunds_original_case_details.et_country_of_claim.#{id}")
+    I18n.t("refunds.original_case_details.et_country_of_claim.options.#{id}")
   end
 
   def et_office_for(id)
     return '' if id.blank?
-    I18n.t("simple_form.options.refunds_original_case_details.et_tribunal_office.#{id}")
+    I18n.t("refunds.original_case_details.et_tribunal_office.options.#{id}")
   end
 
   def payment_date_for(obj, fee)
@@ -32,7 +32,7 @@ module RefundsHelper
 
   def payment_method_for(obj, fee)
     payment_method = obj.send("#{fee}_payment_method")
-    I18n.t("simple_form.options.refunds_fees.#{fee}_payment_method.#{payment_method}")
+    I18n.t("refunds.fees.#{fee}_payment_method.options.#{payment_method}")
   end
 
   private

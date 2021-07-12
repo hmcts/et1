@@ -14,7 +14,7 @@ RSpec.describe 'Respondents Details Validation', type: :feature, js: true do
     group_claims_page.save_and_continue
     representatives_details_page.no_representative
     representatives_details_page.save_and_continue
-    respondents_details_page.fill_in_respondent(respondent)
+    respondents_details_page.fill_in_all(respondent: respondent)
 
     # ACT - Click the save and continue button
     respondents_details_page.save_and_continue

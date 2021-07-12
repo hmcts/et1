@@ -9,14 +9,14 @@
   = claimant.mobile_number
 = render 'answer', section_name: 'claimant', question: 'gender' do
   - if claimant.gender.present?
-    = I18n.t "simple_form.options.claimant.gender.#{claimant.gender}"
+    = I18n.t "claims.claimant.gender.options.#{claimant.gender}"
   - else
     = nil
 = render 'answer', section_name: 'claimant', question: 'contact_preference' do
   - if claimant.contact_preference.present?
-    = t "simple_form.options.claimant.contact_preference.#{claimant.contact_preference}"
+    = t "claims.claimant.contact_preference.options.#{claimant.contact_preference}"
 = render 'answer', section_name: 'claimant', question: 'allow_video_attendance' do
-  = t "simple_form.options.claimant.allow_video_attendance.#{claimant.allow_video_attendance}"
+  = t "claims.claimant.allow_video_attendance.options.#{claimant.allow_video_attendance}"
 = render 'answer', section_name: 'claimant', question: 'telephone_number' do
   = claimant.address_telephone_number
 = render 'answer', section_name: 'claimant', question: 'is_disabled' do

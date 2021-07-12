@@ -59,6 +59,10 @@ module ET1
         ::ET1::Test::Messaging.instance.t(*args)
       end
 
+      def self.t(*args)
+        ::ET1::Test::Messaging.instance.t(*args)
+      end
+
       class_methods do
         def t(*args)
           ::ET1::Test::Messaging.instance.t(*args)

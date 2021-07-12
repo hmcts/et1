@@ -1,25 +1,16 @@
-fieldset
-  = f.input :ethnicity,
-    as: :radio_buttons,
-    readonly: nil,
-    include_hidden: false,
-    collection: Diversities::EthnicityForm::ETHNICITY,
-    item_wrapper_class: 'govuk-radios__item',
-    label: false, input_html: {class: 'govuk-radios__input'}
-
-- ethnicity_type_list.each do |ethnicity_type|
-  fieldset class = "#{ethnicity_type} ethnicity_subgroup"
-    = f.input :ethnicity_subgroup,
-      as: :radio_buttons,
-      readonly: nil,
-      include_hidden: false,
-      collection: Diversities::EthnicityForm::ETHNICITY_SUBGROUP[ethnicity_type],
-      item_wrapper_class: 'govuk-radios__item',
-      label: t("diversities.ethnicity_subgroup.header"), input_html: {class: 'govuk-radios__input'}
-
-
-- content_for(:javascripts)
-  javascript:
-    $(document).ready(function () {
-      diversityEthinicityPage.init()
-    });
+= f.collection_radio_buttons :ethnicity, Diversities::EthnicityForm::ETHNICITY.map { |ethnicity| [ethnicity, t("diversities.diversities_ethnicity.ethnicity.options.#{ethnicity}")]}, :first, :last, label: {text: false}
+= f.revealed_content :ethnicity, values: [:white]
+  div data-subgroup='white'
+    = f.collection_radio_buttons :ethnicity_subgroup, Diversities::EthnicityForm::ETHNICITY_SUBGROUP['white'].map { |key| [key, t("diversities.diversities_ethnicity.ethnicity_subgroup.#{key}")] }, :first, :last, label: {text: t("diversities.ethnicity_subgroup.header")}
+= f.revealed_content :ethnicity, values: [:'mixed-multiple-ethnic-groups']
+  div data-subgroup='mixed-multiple-ethnic-groups'
+    = f.collection_radio_buttons :ethnicity_subgroup, Diversities::EthnicityForm::ETHNICITY_SUBGROUP['mixed-multiple-ethnic-groups'].map { |key| [key, t("diversities.diversities_ethnicity.ethnicity_subgroup.#{key}")] }, :first, :last, label: {text: t("diversities.ethnicity_subgroup.header")}
+= f.revealed_content :ethnicity, values: [:'asian-asian-british']
+  div data-subgroup='asian-asian-british'
+    = f.collection_radio_buttons :ethnicity_subgroup, Diversities::EthnicityForm::ETHNICITY_SUBGROUP['asian-asian-british'].map { |key| [key, t("diversities.diversities_ethnicity.ethnicity_subgroup.#{key}")] }, :first, :last, label: {text: t("diversities.ethnicity_subgroup.header")}
+= f.revealed_content :ethnicity, values: [:'black-african-caribbean-black-british']
+  div data-subgroup='black-african-caribbean-black-british'
+    = f.collection_radio_buttons :ethnicity_subgroup, Diversities::EthnicityForm::ETHNICITY_SUBGROUP['black-african-caribbean-black-british'].map { |key| [key, t("diversities.diversities_ethnicity.ethnicity_subgroup.#{key}")] }, :first, :last, label: {text: t("diversities.ethnicity_subgroup.header")}
+= f.revealed_content :ethnicity, values: [:'other-ethnic-group']
+  div data-subgroup='other-ethnic-group'
+    = f.collection_radio_buttons :ethnicity_subgroup, Diversities::EthnicityForm::ETHNICITY_SUBGROUP['other-ethnic-group'].map { |key| [key, t("diversities.diversities_ethnicity.ethnicity_subgroup.#{key}")] }, :first, :last, label: {text: t("diversities.ethnicity_subgroup.header")}

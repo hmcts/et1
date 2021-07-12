@@ -1,4 +1,4 @@
-FROM phusion/passenger-customizable:1.0.12
+FROM phusion/passenger-customizable:1.0.15
 # Or, instead of the 'full' variant, use one of these:
 #FROM phusion/passenger-ruby23:<VERSION>
 #FROM phusion/passenger-ruby24:<VERSION>

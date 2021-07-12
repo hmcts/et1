@@ -1,0 +1,10 @@
+.claim_reviews {
+  &.show {
+    .review-quick-edit {
+      float: right;
+      a {
+        font-size: 16px;
+      }
+    }
+  }
+}

@@ -1,2 +1,5 @@
 - content_for(:before_alerts, '<!-- Before alerts placeholder -->'.html_safe)
+- content_for(:application_head)
+  = stylesheet_pack_tag 'refunds', media: 'all'
+  = javascript_pack_tag 'refunds'
 = render template: "layouts/application"

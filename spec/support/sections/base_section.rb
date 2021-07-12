@@ -2,6 +2,7 @@ require_relative '../messaging'
 module ET1
   module Test
     class BaseSection < SitePrism::Section
+      include EtTestHelpers::Section
       include ::ET1::Test::I18n
 
       def translate_if_needed(sym_or_str)

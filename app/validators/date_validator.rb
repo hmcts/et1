@@ -2,7 +2,7 @@
 # strings etc.. (once all forms are converted to NullDbForm)
 class DateValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    if illegal_year?(record.read_attribute_before_type_cast(attribute))
+    if illegal_year?(value)
       record.errors.add(attribute, :invalid)
     elsif coercion_failed?(value, attribute, record) || non_empty_string?(value, attribute, record)
       record.errors.add(attribute)
@@ -35,7 +35,7 @@ class DateValidator < ActiveModel::EachValidator
     elsif value.is_a?(Date) || value.is_a?(Time)
       value.year < 1000
     else
-      value[:year].present? && value[:year].present? && value[:year].to_i < 1000
+      value[:year].present? && value[:year].to_i < 1000
     end
   rescue ArgumentError
     false

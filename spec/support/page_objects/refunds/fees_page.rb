@@ -3,34 +3,128 @@ module ET1
   module Test
     module Refunds
       class FeesPage < BasePage
-        element :form_error_message, '[aria-describedby=error-message]'
+        section :form_error_message, govuk_component(:error_summary), :govuk_error_summary, "Provide information in the highlighted fields."
         element :help, '[data-behavior=help]'
-        section :original_claim_fees, :xpath, (XPath.generate { |x| x.descendant(:fieldset)[x.descendant(:legend)[x.string.n.is("Complete the relevant fields for fees you have paid")]] }) do
-          section :et_issue, :xpath, (XPath.generate { |x| x.descendant(:tr)[x.descendant(:td)[x.string.n.is("ET Issue")]] }) do
-            section :fee, ET1::Test::RefundSections::FormInput, '.refunds_fees_et_issue_fee'
-            section :payment_date, ET1::Test::RefundSections::FormPaymentDate, '.refunds_fees_et_issue_fee_payment_date'
-            section :payment_method, ET1::Test::RefundSections::FormSelect, '.refunds_fees_et_issue_fee_payment_method'
+        # @!method original_claim_fees
+        #   A govuk fieldset component
+        #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+        section :original_claim_fees, govuk_component(:fieldset), :govuk_fieldset, 'Complete the relevant fields for fees you have paid' do
+          include EtTestHelpers::Section
+          # @!method et_issue
+          #   A govuk fieldset component
+          #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+          section :et_issue, govuk_component(:fieldset), :govuk_fieldset, 'ET Issue' do
+            include EtTestHelpers::Section
+            # @!method fee_question
+            #   A govuk text field component wrapping the input, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+            section :fee_question, govuk_component(:text_field), :govuk_text_field, 'Fee'
+            # @!method payment_date_question
+            #   A govuk date field component wrapping the inputs, label, hint etc.. for a date question
+            #   @return [EtTestHelpers::Components::GovUKDateField] The site prism section
+            section :payment_date_question, govuk_component(:date_field), :govuk_date_field, 'Payment date'
+            # @!method payment_date_unknown_question
+            #   A govuk file field component wrapping the input, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKCheckbox] The site prism section
+            section :payment_date_unknown_question, govuk_component(:checkbox), :govuk_checkbox, "Don't know"
+            # @!method payment_method_question
+            #   A govukselect component wrapping the select, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKCollectionSelect] The site prism section
+            section :payment_method_question, govuk_component(:collection_select), :govuk_collection_select, 'Payment method'
           end
-          section :et_hearing, :xpath, (XPath.generate { |x| x.descendant(:tr)[x.descendant(:td)[x.string.n.is("ET Hearing")]] }) do
-            section :fee, ET1::Test::RefundSections::FormInput, '.refunds_fees_et_hearing_fee'
-            section :payment_date, ET1::Test::RefundSections::FormPaymentDate, '.refunds_fees_et_hearing_fee_payment_date'
-            section :payment_method, ET1::Test::RefundSections::FormSelect, '.refunds_fees_et_hearing_fee_payment_method'
+
+          # @!method et_hearing
+          #   A govuk fieldset component
+          #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+          section :et_hearing, govuk_component(:fieldset), :govuk_fieldset, 'ET Hearing' do
+            include EtTestHelpers::Section
+            # @!method fee_question
+            #   A govuk text field component wrapping the input, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+            section :fee_question, govuk_component(:text_field), :govuk_text_field, 'Fee'
+            # @!method payment_date_question
+            #   A govuk date field component wrapping the inputs, label, hint etc.. for a date question
+            #   @return [EtTestHelpers::Components::GovUKDateField] The site prism section
+            section :payment_date_question, govuk_component(:date_field), :govuk_date_field, 'Payment date'
+            # @!method payment_date_unknown_question
+            #   A govuk file field component wrapping the input, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKCheckbox] The site prism section
+            section :payment_date_unknown_question, govuk_component(:checkbox), :govuk_checkbox, "Don't know"
+            # @!method payment_method_question
+            #   A govukselect component wrapping the select, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKCollectionSelect] The site prism section
+            section :payment_method_question, govuk_component(:collection_select), :govuk_collection_select, 'Payment method'
           end
-          section :et_reconsideration, :xpath, (XPath.generate { |x| x.descendant(:tr)[x.descendant(:td)[x.string.n.is("ET Reconsideration")]] }) do
-            section :fee, ET1::Test::RefundSections::FormInput, '.refunds_fees_et_reconsideration_fee'
-            section :payment_date, ET1::Test::RefundSections::FormPaymentDate, '.refunds_fees_et_reconsideration_fee_payment_date'
-            section :payment_method, ET1::Test::RefundSections::FormSelect, '.refunds_fees_et_reconsideration_fee_payment_method'
+
+          # @!method et_reconsideration
+          #   A govuk fieldset component
+          #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+          section :et_reconsideration, govuk_component(:fieldset), :govuk_fieldset, 'ET Reconsideration' do
+            include EtTestHelpers::Section
+            # @!method fee_question
+            #   A govuk text field component wrapping the input, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+            section :fee_question, govuk_component(:text_field), :govuk_text_field, 'Fee'
+            # @!method payment_date_question
+            #   A govuk date field component wrapping the inputs, label, hint etc.. for a date question
+            #   @return [EtTestHelpers::Components::GovUKDateField] The site prism section
+            section :payment_date_question, govuk_component(:date_field), :govuk_date_field, 'Payment date'
+            # @!method payment_date_unknown_question
+            #   A govuk file field component wrapping the input, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKCheckbox] The site prism section
+            section :payment_date_unknown_question, govuk_component(:checkbox), :govuk_checkbox, "Don't know"
+            # @!method payment_method_question
+            #   A govukselect component wrapping the select, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKCollectionSelect] The site prism section
+            section :payment_method_question, govuk_component(:collection_select), :govuk_collection_select, 'Payment method'
           end
-          section :eat_issue, :xpath, (XPath.generate { |x| x.descendant(:tr)[x.descendant(:td)[x.string.n.is("EAT Issue")]] }) do
-            section :fee, ET1::Test::RefundSections::FormInput, '.refunds_fees_eat_issue_fee'
-            section :payment_date, ET1::Test::RefundSections::FormPaymentDate, '.refunds_fees_eat_issue_fee_payment_date'
-            section :payment_method, ET1::Test::RefundSections::FormSelect, '.refunds_fees_eat_issue_fee_payment_method'
+
+          # @!method eat_issue
+          #   A govuk fieldset component
+          #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+          section :eat_issue, govuk_component(:fieldset), :govuk_fieldset, 'EAT Issue' do
+            include EtTestHelpers::Section
+            # @!method fee_question
+            #   A govuk text field component wrapping the input, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+            section :fee_question, govuk_component(:text_field), :govuk_text_field, 'Fee'
+            # @!method payment_date_question
+            #   A govuk date field component wrapping the inputs, label, hint etc.. for a date question
+            #   @return [EtTestHelpers::Components::GovUKDateField] The site prism section
+            section :payment_date_question, govuk_component(:date_field), :govuk_date_field, 'Payment date'
+            # @!method payment_date_unknown_question
+            #   A govuk file field component wrapping the input, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKCheckbox] The site prism section
+            section :payment_date_unknown_question, govuk_component(:checkbox), :govuk_checkbox, "Don't know"
+            # @!method payment_method_question
+            #   A govukselect component wrapping the select, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKCollectionSelect] The site prism section
+            section :payment_method_question, govuk_component(:collection_select), :govuk_collection_select, 'Payment method'
           end
-          section :eat_hearing, :xpath, (XPath.generate { |x| x.descendant(:tr)[x.descendant(:td)[x.string.n.is("EAT Hearing")]] }) do
-            section :fee, ET1::Test::RefundSections::FormInput, '.refunds_fees_eat_hearing_fee'
-            section :payment_date, ET1::Test::RefundSections::FormPaymentDate, '.refunds_fees_eat_hearing_fee_payment_date'
-            section :payment_method, ET1::Test::RefundSections::FormSelect, '.refunds_fees_eat_hearing_fee_payment_method'
+
+          # @!method eat_hearing
+          #   A govuk fieldset component
+          #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+          section :eat_hearing, govuk_component(:fieldset), :govuk_fieldset, 'EAT Hearing' do
+            include EtTestHelpers::Section
+            # @!method fee_question
+            #   A govuk text field component wrapping the input, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+            section :fee_question, govuk_component(:text_field), :govuk_text_field, 'Fee'
+            # @!method payment_date_question
+            #   A govuk date field component wrapping the inputs, label, hint etc.. for a date question
+            #   @return [EtTestHelpers::Components::GovUKDateField] The site prism section
+            section :payment_date_question, govuk_component(:date_field), :govuk_date_field, 'Payment date'
+            # @!method payment_date_unknown_question
+            #   A govuk file field component wrapping the input, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKCheckbox] The site prism section
+            section :payment_date_unknown_question, govuk_component(:checkbox), :govuk_checkbox, "Don't know"
+            # @!method payment_method_question
+            #   A govukselect component wrapping the select, label, hint etc..
+            #   @return [EtTestHelpers::Components::GovUKCollectionSelect] The site prism section
+            section :payment_method_question, govuk_component(:collection_select), :govuk_collection_select, 'Payment method'
           end
+
           section :total, :xpath, (XPath.generate { |x| x.descendant(:fieldset)[x.descendant(:legend)[x.string.n.is("Total fees paid")]] }) do
             element :fee, '[data-behavior=\'total_fees\']'
           end

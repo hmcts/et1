@@ -1,10 +1,5 @@
 fieldset
   p = t('.act')
   p = t('.conditions')
-  = f.input :disability,
-    as: :radio_buttons,
-    readonly: nil,
-    include_hidden: false,
-    collection: Diversities::DisabilityForm::DISABILITY,
-    item_wrapper_class: 'govuk-radios__item',
-    label: false, input_html: {class: 'govuk-radios__input'}
+  = f.govuk_collection_radio_buttons :disability, Diversities::DisabilityForm::DISABILITY.map { |disability| [disability, t("diversities.diversities_disability.disability.options.#{disability}")]}, :first, :last, label: {text: false}
+

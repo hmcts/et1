@@ -1,47 +1,52 @@
 - content_for(:page_title, page_title)
 
-.main-header role="banner"
-  h1= t '.header'
+h1 class="govuk-heading-xl govuk-!-margin-top-9" = t '.header'
 
-.main-section lang= "#{I18n.locale}"
-  .main-content#main-sub-content
-    .callout.callout-confirmation
-      p.detail = t '.callout_detail'
-      span.number= claim.fee_group_reference
 
-    section.content-section
-      h2 = t('.what_happens_next.header')
-      ol.numerical-list
-        p = t('.what_happens_next.covid_19')
-        p = link_to ('https://www.gov.uk/guidance/coronavirus-covid-19-courts-and-tribunals-planning-and-preparation'), t('.what_happens_next.covid_19_link')
-        p = t('.what_happens_next.covid_19_confirmation')
+.govuk-grid-row
+  .govuk-grid-column-two-thirds
+    div.govuk-panel.govuk-panel--confirmation
+      h1 class="govuk-!-font-size-36 govuk-panel__title" = t '.callout_detail'
+      div.govuk-panel__body
+        span.number= claim.fee_group_reference
 
-        / li
-        /   p= t('.what_happens_next.send_to_respondent')
-        / li
-        /   p= t('.what_happens_next.next_steps')
+.govuk-grid-row
+  .govuk-grid-column-two-thirds
+    h2.govuk-heading-m = t('.what_happens_next.header')
+    hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-3"
 
-      table.confirmation-table
-        caption = t('.submission_details.header')
-        tr role="row"
-          th = t '.download_application.header'
-          td
-            = link_to t('.download_application.link_text'), claim.pdf_url, target: "_blank", class: 'pdf-success'
-            = link_to t('.download_application.invalid_link_text'), nil, target: "_blank", class: 'pdf-failure hidden'
+    ol.govuk-list
+      li
+        p.govuk-body = t('.what_happens_next.covid_19')
+        p.govuk-body = link_to ('https://www.gov.uk/guidance/coronavirus-covid-19-courts-and-tribunals-planning-and-preparation'), t('.what_happens_next.covid_19_link')
+        p.govuk-body = t('.what_happens_next.covid_19_confirmation')
 
-        - confirmation_presenter.each_item do |name, content|
-          tr role="row"
-            th = t ".submission_details.#{name}"
-            td = content
+      / li
+      /   p.govuk-body= t('.what_happens_next.send_to_respondent')
+      / li
+      /   p.govuk-body= t('.what_happens_next.next_steps')
 
-      = simple_format t('.pel_info') unless claim.remission_claimant_count.zero?
+    .submission-details
+      h2.govuk-heading-m = t('.submission_details.header')
+      hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-3"
+      .govuk-grid-row
+        .govuk-grid-column-one-third
+          p.govuk-body = t '.download_application.header'
+        .govuk-grid-column-two-thirds
+          = link_to t('.download_application.link_text'), claim.pdf_url, target: "_blank", class: 'pdf-success govuk-link'
+          = link_to t('.download_application.invalid_link_text'), nil, target: "_blank", class: 'pdf-failure hidden govuk-link'
+      - confirmation_presenter.each_item do |name, content|
+        .govuk-grid-row
+          .govuk-grid-column-one-third.question
+            p.govuk-body = t ".submission_details.#{name}"
+          .govuk-grid-column-two-thirds.answer
+            p.govuk-body = content
 
-      p = t '.print_link_html'
+    = simple_format t('.pel_info') unless claim.remission_claimant_count.zero?
 
-      p = t('.feedback_html', href: language_specific_feedback_url)
-      p = t('.diversity_html', href: diversity_landing_path)
+    p.govuk-body = t '.print_link_html'
+    p.govuk-body = t('.feedback_html', href: language_specific_feedback_url)
+    p.govuk-body = t('.diversity_html', href: diversity_landing_path)
 - content_for(:javascripts)
-  javascript:
-    $(document).ready(function () {
-      claimConfirmationPage.init()
-    });
+javascript:
+  Et.pages.claims.ClaimConfirmationPage()

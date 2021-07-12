@@ -1,23 +1,21 @@
-- content_for(:page_title, page_title)
+h1.govuk-heading-xl= t('.header')
+= form_for resource, as: user_session, url: user_session_path, builder: EtGdsDesignSystem.form_builder_class do |f|
+  = f.govuk_error_summary(t 'shared.error_notification.default_message')
 
-.main-header role="banner"
-  h1= t('.header')
+  = f.fieldset label: t('timeout_sessions.session.subheader') do
+    = f.text_field :reference,
+      label: t('timeout_sessions.reference.label'),
+      hint: t('timeout_sessions.reference.hint')
 
-.main-section
+    = f.text_field :password,
+      label: t('claims.session.password.label'),
+      hint: t('claims.session.password.hint')
 
-  .main-content
-    = simple_form_for user_session, url: user_session_path do |f|
-      = f.error_notification
+    = f.submit t('helpers.submit.save_and_return[session].create')
 
-      fieldset
-        legend = t('.subheader')
-
-        = f.input :reference
-
-        = f.input :password, as: :string
-
-        = f.button :submit
-
-        p.form-hint= t('.hint_html', path: root_path)
+  p.form-hint
+    = t(".forgot_password")
+    = link_to t(".reset_password"), new_password_path(resource_name)
+  p.form-hint= t('.hint_html', path: root_path)
 
   = render partial: 'shared/aside'

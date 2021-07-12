@@ -10,7 +10,7 @@ module ET1
       end
 
       # Registers the user for a save and return
-      def register(email_address:, password:)
+      def register(email_address: '', password:)
         email_address_question.set(email_address)
         memorable_word_question.set(password)
         save_and_continue_element.click

@@ -1,6 +1,10 @@
-.feedback-notice
-  .language-picker
-    =link_to t('switch.language'), locale: t('switch.locale')
-  p
-    = t('.feedback_statement_html', path: "/apply/feedback?locale=#{I18n.locale}")
-
+.govuk-phase-banner
+  .govuk-grid-row
+    .govuk-grid-column-two-thirds
+      p.govuk-phase-banner__content
+        strong.govuk-tag.govuk-phase-banner__content__tag beta
+        span
+          = t('.feedback_statement_html', path: "/apply/feedback?locale=#{I18n.locale}")
+    .govuk-grid-column-one-third
+      span.language-picker
+        =link_to t('switch.language'), { locale: t('switch.locale') }, class: 'govuk-link'

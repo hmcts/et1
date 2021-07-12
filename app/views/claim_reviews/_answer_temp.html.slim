@@ -2,8 +2,6 @@ tr
   th = t "claim_reviews.item.#{section_name}.#{question}"
   - value = yield
   - if value.present?
-    td
-      = value
+    = value
   - else
-    td.not-entered
-      = t 'claim_reviews.item.not_entered'
+    = t 'claim_reviews.item.not_entered'

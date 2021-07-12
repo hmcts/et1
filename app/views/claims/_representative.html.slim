@@ -1,58 +1,34 @@
-fieldset
-  legend= t '.form_legend'
+= f.fieldset label: t('.form_legend')
+  hr class="govuk-section-break.govuk-section-break--visible govuk-!-margin-bottom-4"
+  = f.collection_radio_buttons :has_representative, optional: true, inline: true, include_hidden: false
+  = f.revealed_content :has_representative, values: [:true]
+    p.govuk-inset-text = t '.contact_info'
 
-  fieldset
-    legend.form-label = "#{t('simple_form.labels.representative.has_representative')} #{t('simple_form.optional.text')}"
-    .reveal-publish-delegate
-      = f.input :has_representative,
-        as: :radio_buttons,
-        label: false,
-        readonly: nil,
-        include_hidden: false,
-        item_wrapper_class: 'block-label',
-        wrapper_class: 'form-group-reveal',
-        input_html: { :class => 'reveal-publish-publisher ga-vpv'},
-        reveal: { true => 'main', false => 'main' }
+    = f.fieldset label: t('.representative_legend')
+      hr class="govuk-section-break.govuk-section-break--visible govuk-!-margin-bottom-4"
+      = f.collection_select :type
+      = f.text_field :organisation_name, optional: true
+      = f.text_field :name
 
-  .clearfix.toggle-content.reveal-subscribe data-target="main" data-show-array="true"
-    .callout.callout-reference
-      p = t '.contact_info'
 
-  fieldset.toggle-content.reveal-subscribe data-target="main" data-show-array="true"
-    legend= t '.representative_legend'
+    = f.fieldset label: t('.contact_legend')
+      hr class="govuk-section-break.govuk-section-break--visible govuk-!-margin-bottom-4"
+      = f.text_field :address_building
+      = f.text_field :address_street
+      = f.text_field :address_locality
+      = f.text_field :address_county
+      = f.text_field :address_post_code
+      = f.phone_field :address_telephone_number, optional: true
+      = f.phone_field :mobile_number, optional: true
+      = f.collection_radio_buttons :contact_preference
+      = f.email_field :email_address, optional: true
+      = f.text_field :dx_number, optional: true
 
-    = f.input :type,
-      collection: RepresentativeType::TYPES,
-      include_blank: :translate,
-      label: t('.representative_type_legend')
-    = f.input :organisation_name
-    = f.input :name
-
-  fieldset.toggle-content.reveal-subscribe data-target="main" data-show-array="true"
-    legend= t '.contact_legend'
-    = f.input :address_building
-    = f.input :address_street
-    = f.input :address_locality
-    = f.input :address_county
-    = f.input :address_post_code, input_html: { class: 'short-input' }
-    = f.input :address_telephone_number, input_html: { class: 'medium-input' }
-    = f.input :mobile_number, input_html: { class: 'medium-input' }
-
-    fieldset
-      legend.form-label = t('simple_form.labels.representative.contact_preference')
-      = f.input :contact_preference,
-        label: false,
-        collection: RepresentativeForm::CONTACT_PREFERENCES,
-        as: :radio_buttons,
-        readonly: nil,
-        include_hidden: false,
-        item_wrapper_class: 'block-label'
-
-    = f.input :email_address, input_html: { class: 'medium-input' }
-    = f.input :dx_number, input_html: { class: 'medium-input' }
-
-    details
-      summary role="button" aria={controls: 'details-content-0', expanded: 'true'}
-        span.summary= t '.what_is_dx.detail'
-      .panel-indent#details-content-0
-        p = t '.what_is_dx.summary'
+      details class="govuk-details govuk-!-margin-bottom-9"
+        summary.govuk-details__summary role="button" aria={controls: 'details-content-0', expanded: 'true'}
+          span.govuk-details__summary-text = t '.what_is_dx.detail'
+        .govuk-details__text#details-content-0
+          p = t '.what_is_dx.summary'
+- content_for(:javascripts)
+  javascript:
+    Et.pages.claims.RepresentativePage()

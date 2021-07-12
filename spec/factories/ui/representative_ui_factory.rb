@@ -1,10 +1,6 @@
 module ET1
   module Test
-    class RepresentativeUi
-      attr_accessor :type, :name_of_organisation, :name
-      attr_accessor :address_building, :address_street, :address_town, :address_county, :address_post_code
-      attr_accessor :phone_or_mobile_number, :alternative_phone_or_mobile_number
-      attr_accessor :email_address, :dx_number, :best_correspondence_method
+    class RepresentativeUi < ActiveSupport::OrderedOptions
 
     end
   end
@@ -26,7 +22,7 @@ FactoryBot.define do
       name_of_organisation { "Dodgy Co" }
       phone_or_mobile_number { '01332 111222' }
       alternative_phone_or_mobile_number { '01332 222333' }
-      email_address { 'email@address.com' }
+      email_address { 'rep@example.com' }
       dx_number { '1234567' }
     end
   end

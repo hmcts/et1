@@ -3,6 +3,6 @@
     = yes_no false
 - else
   - claimants.each_with_index do |child, index|
-    table.review-table
-      caption= t "claim_reviews.collection.additional_claimants.sub_header", index: index + 2
+    dl class="govuk-summary-list govuk-!-margin-bottom-9"
+      h2.govuk-heading-m = t "claim_reviews.collection.additional_claimants.sub_header", index: index + 2
       = render partial: 'claim_reviews/additional_claimants/claimant', locals: { section_name: section_name, claimant: child }

@@ -1,8 +1,8 @@
 - presenter.each_item do |name, value|
-  tr
-    th = t ".#{section_name}.#{name}"
+  div.govuk-summary-list__row
+    dt.govuk-summary-list__key = t ".#{section_name}.#{name}"
     - if value.present?
-      td = sanitize(value.to_s, tags: ['br'])
+      dt.govuk-summary-list__value = sanitize(value.to_s, tags: ['br'])
     - else
-      td.not-entered
+      dt.govuk-summary-list__value
         = t '.not_entered'

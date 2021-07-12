@@ -58,8 +58,8 @@ feature 'Guide', type: :feature do
 
     scenario 'Returns to the claim review page when editing a claim' do
       start_claim
-      visit claim_review_path
-      within('.additional-claimants') { click_link 'Edit' }
+      review_page.load
+      review_page.edit_section('Group claim')
       within('aside') { click_link 'Guide' }
       click_link 'Return to form'
 

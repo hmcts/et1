@@ -30,7 +30,7 @@ module Refunds
       length: { maximum: AddressAttributes::POSTCODE_LENGTH }
     attribute :applicant_first_name,         :string
     attribute :applicant_last_name,          :string
-    attribute :applicant_date_of_birth,      :gds_date_type
+    attribute :applicant_date_of_birth,      :et_date
     attribute :applicant_email_address, :string
     attribute :applicant_title, :string
 

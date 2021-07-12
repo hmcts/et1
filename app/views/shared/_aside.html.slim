@@ -1,10 +1,10 @@
-aside role="complementary"
-  h3= t '.gethelp_header'
-  ul
-    li= link_to t('.read_guide'), guide_path
-    li= link_to t('.contact_us'), t('.contact_us_link'), { rel: 'external', target: '_blank'}
-  - if show_signout?
-    h3= t '.actions_header'
-    ul
-      li= button_to({ controller: '/timeout_sessions', action: :destroy },
-      { method: :delete, class: 'button-hyperlink' }) { t(".signout") }
+.govuk-grid-column-one-third
+  aside role="complementary" class="govuk-!-padding-left-9"
+    h3 class="govuk-heading-m govuk-!-padding-top-8" = t '.gethelp_header'
+    ul.govuk-list
+      li= link_to t('.read_guide'), guide_path, class: 'govuk-link'
+      li= link_to t('.contact_us'), t('.contact_us_link'), { rel: 'external', target: '_blank', class: 'govuk-link'}
+      - if show_signout?
+        h3= t '.actions_header'
+        li = link_to t('.signout'), timeout_session_path, method: :delete, class: 'govuk-link--no-visited-state'
+

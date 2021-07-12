@@ -1,17 +1,6 @@
-fieldset.profile_selection
-  legend = t('.profile_type')
-  = f.input :profile_type,
-          as: :radio_buttons,
-          readonly: nil,
-          include_hidden: false,
-          label: false,
-          required: true,
-          item_wrapper_tag: :div,
-          collection: Refunds::ProfileSelectionForm::PROFILE_TYPES,
-          input_html: { data: { behavior: 'profile_type' } }
-
+= f.collection_radio_buttons :profile_type
 - content_for(:javascripts)
   javascript:
       $(document).ready(function () {
-          refundProfileSelectionPage.init()
+          Et.pages.refunds.ProfileSelectionPage();
       });

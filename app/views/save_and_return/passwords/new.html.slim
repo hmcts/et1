@@ -1,25 +1,14 @@
-- content_for(:page_title, page_title)
+h1.govuk-heading-xl= t('claims.password.new.header')
+= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, builder: EtGdsDesignSystem.form_builder_class) do |f|
+  = f.govuk_error_summary(t 'shared.error_notification.default_message')
 
-.main-header role="banner"
-  h1= t('.header')
+  = f.govuk_fieldset label: {text: t('claims.password.new.enter_your_details')} do
+    = f.govuk_text_field :email,
+      label: {text: t('claims.password.new.email.label')},
+      hint: { text: t('claims.password.new.email.hint') }
 
-.main-section
-
-  .main-content
-    = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-      = f.error_notification
-
-      fieldset
-        legend = t('.enter_your_details')
-
-        = f.input :email,
-          label: t('simple_form.labels.save_and_return.password.new.email'),
-          hint: t('simple_form.hints.save_and_return.password.new.email'),
-          required: true
-        = f.input :reference,
-          label: t('simple_form.labels.save_and_return.password.new.reference'),
-          hint: t('simple_form.hints.save_and_return.password.new.reference'),
-          required: true
-        = f.button :submit, t('.submit_button')
-
+    = f.govuk_text_field :reference,
+      label: {text: t('claims.password.new.reference.label')},
+      hint: { text: t('claims.password.new.reference.hint') }
+    = f.govuk_submit t('.submit_button')
   = render partial: 'shared/aside'

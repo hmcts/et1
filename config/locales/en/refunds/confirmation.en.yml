@@ -1,0 +1,18 @@
+en:
+  refunds:
+    confirmation:
+      header: "Refund application submitted"
+      confirmation: "Your application for a refund has been submitted"
+      callout_detail: "Your refund reference number"
+      what_happens_next:
+        header: "What happens next"
+      what_happens_next_detail_html: |
+        The details of your application will be checked and verified.
+        We will contact you to confirm your entitlement, or if we require any further information.
+        This process may take up to 15 working days.
+      refund_details:
+        header: "Submission details"
+      refund_submitted:
+        header: "Claim submitted"
+      print_link_html: |
+        <a href="javascript:window.print(0);">Print this page</a> for your records

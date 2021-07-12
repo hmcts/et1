@@ -1,22 +1,5 @@
-fieldset
-  legend= t '.legend'
-
-  label.radio_buttons.optional.form-label = t '.has_miscellaneous_information'
-
-  p.form-hint.text = t '.has_miscellaneous_information_hint'
-
-  = f.input :has_miscellaneous_information, label: false,
-    as: :radio_buttons,
-    readonly: nil,
-    include_hidden: false,
-    item_wrapper_class: 'block-label',
-    wrapper_html: { :class => 'form-group-reveal reveal-publish-delegate' },
-    input_html: { :class => 'reveal-publish-publisher ga-vpv'},
-    reveal: { true => 'main', false => 'main' }
-
-  = f.input :miscellaneous_information, as: :text,
-    label: false,
-    input_html: { rows: 15, maxlength: '2500' },
-    wrapper_html: { :class => 'toggle-content reveal-subscribe',
-                    :'data-target' => 'main',
-                    :'data-show-array' => 'true' }
+= f.fieldset label: { text: t('.legend') } do
+  hr class="govuk-section-break.govuk-section-break--visible govuk-!-margin-bottom-3"
+  = f.collection_radio_buttons :has_miscellaneous_information, optional: true, include_hidden: false
+  = f.revealed_content :has_miscellaneous_information, values: [:true]
+    = f.text_area :miscellaneous_information, max_chars: 2500, rows: 15

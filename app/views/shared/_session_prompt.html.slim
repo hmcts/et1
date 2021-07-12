@@ -1,4 +1,5 @@
-#session_prompt.validation-summary.alert-dialog.hidden tabindex="0" role="alertdialog" aria={ labelledby: 'timeoutTitle', describedby: 'timeoutDescription' }
-  h2#timeoutTitle = t 'session_prompt.header_html'
-  p#timeoutDescription = t 'session_prompt.session_continue'
-  button#session_prompt_continue_btn.button.button-primary = t 'session_prompt.session_continue_button'
+#session_prompt.govuk-error-summary style="display: none;" tabindex="0" role="alertdialog" aria={ labelledby: 'timeoutTitle', describedby: 'timeoutDescription' }
+  h2.govuk-error-summary__title = t 'session_prompt.header_html'
+  .govuk-error-summary__body
+    p.govuk-body = t 'session_prompt.session_continue'
+    button#session_prompt_continue_btn.govuk-button data-module="govuk-button" = t 'session_prompt.session_continue_button'

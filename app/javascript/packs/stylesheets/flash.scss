@@ -1,0 +1,14 @@
+.flash {
+  background-color: #f8f8f8;
+  margin: 30px 0;
+  padding: 30px 20px;
+  &.notice {
+    border-color: #ffbf47;
+  }
+  &.alert {
+    border-color: #b10e1e;
+  }
+  &.info {
+    border-color: #85994b;
+  }
+}

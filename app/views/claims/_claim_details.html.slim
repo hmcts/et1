@@ -1,46 +1,22 @@
-h2.legend= t '.claim_details'
+h2.govuk-heading-m= t '.describe'
+hr class="govuk-section-break.govuk-section-break--visible govuk-!-margin-bottom-3"
 
-p= t('.claim_details_html', path: guide_path)
+p.govuk-body = t('.claim_details_html', path: guide_path)
 
-details open=(resource.claim_form_details_rtf? || !resource.errors[:claim_details_rtf].empty? ? true : nil)
-  summary role='button' aria={ \
-    expanded: "#{resource.claim_form_details_rtf?}",
-    controls: 'details-content-0'}
-    span.summary= t('.claim_details_upload')
+details.govuk-details data-module="govuk-details" open=(resource.claim_form_details_rtf? || !resource.errors[:claim_details_rtf].empty? ? true : nil)
+  summary.govuk-details__summary
+    span.govuk-details__summary-text= t('.claim_details_upload')
 
-  .panel-indent#details-content-0
-    = f.input :claim_details_rtf do
-      = f.input_field :claim_details_rtf, as: :file do
+  .govuk-inset-text.govuk-details__text
+    = f.file_field :claim_details_rtf, optional: true
     - if resource.claim_form_details_rtf?
-      = f.input :remove_claim_details_rtf, as: :boolean,
-          inline_label: t('.remove_claim_details_rtf',
-            file: resource.attachment_filename),
-            label: false
+      = f.check_box :remove_claim_details_rtf, true, label: { text: t('.remove_claim_details_rtf.label', file: resource.attachment_filename) }
     = f.hidden_field :claim_details_rtf_cache
 
-= f.input :claim_details, label: false,
-  hint: t('.claim_details_hint_html', path: guide_path),
-  as: :text,
-  input_html: { rows: 15, maxlength: '2500' }
+= f.text_area :claim_details, max_chars: 2500, rows: 15
 
-fieldset
-  legend= t '.similar_claims'
-  = f.input :other_known_claimants,
-    as: :radio_buttons,
-    readonly: nil,
-    collection: responses_collection,
-    include_hidden: false,
-    item_wrapper_class: 'block-label',
-    wrapper_class: 'form-group-reveal reveal-publish-delegate',
-    input_html: { :class => 'reveal-publish-publisher ga-vpv'},
-    reveal: { true => 'sub1', false => 'sub1' }
+= f.fieldset label: t('.similar_claims') do
+  = f.collection_radio_buttons :other_known_claimants, inline: true, optional: true
+  = f.revealed_content :other_known_claimants, values: [:true]
+    = f.text_area :other_known_claimant_names, optional: true, rows: 5, max_chars: 350
 
-  = f.input :other_known_claimant_names,
-    as: :text,
-    input_html: { rows: 5, maxlength: '350' },
-    item_wrapper_class: 'block-label',
-    wrapper_class: 'panel-indent toggle-content',
-    wrapper_html: { :id => :other_known_claimant_names_wrapper,
-                    :class => 'reveal-subscribe ',
-                    :'data-target' => 'sub1',
-                    :'data-show-array' => 'true' }

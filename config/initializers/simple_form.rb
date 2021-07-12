@@ -110,7 +110,7 @@ SimpleForm.setup do |config|
     if required.present?
       label
     else
-      label + ' ' + I18n.t('simple_form.optional.text')
+      label + ' ' + I18n.t('shared.optional')
     end
   end
 

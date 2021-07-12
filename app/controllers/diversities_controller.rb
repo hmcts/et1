@@ -12,7 +12,7 @@ class DiversitiesController < ApplicationController
   end
 
   def update
-    resource.assign_attributes params.fetch("diversities_#{current_step}", {})
+    resource.assign_attributes params.fetch("diversities_#{current_step}", {}).permit!
     if resource.save
       redirect_to next_page
     else

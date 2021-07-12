@@ -1,7 +1,7 @@
 - if representative.present?
   = render 'answer', section_name: 'representative', question: 'type' do
     - if representative.type
-      = t "simple_form.options.representative.type.#{representative.type}"
+      = t "claims.representative.type.options.#{representative.type}"
   = render 'answer', section_name: 'representative', question: 'organisation_name' do
     = representative.organisation_name
   = render 'answer', section_name: 'representative', question: 'name' do
@@ -17,7 +17,7 @@
     = representative.dx_number
   = render 'answer', section_name: 'representative', question: 'contact_preference' do
     - if representative.contact_preference.present?
-      = t "simple_form.options.representative.contact_preference.#{representative.contact_preference}"
+      = t "claims.representative.contact_preference.options.#{representative.contact_preference}"
 - else
   = render 'answer', section_name: 'representative', question: 'has_representative' do
     = yes_no(false)

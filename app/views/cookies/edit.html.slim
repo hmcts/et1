@@ -89,15 +89,7 @@
             td = t '.section_two.table.five.purpose'
             td = t '.section_two.table.five.expires'
 
-        = simple_form_for(cookie_form, as: :cookie, url: cookies_path, method: :patch) do |f|
-          fieldset
-            legend.form-label = t('simple_form.labels.cookies.allow_analytics')
-            = f.input :usage,
-              label: false,
-              as: :radio_buttons,
-              collection: t('simple_form.options.allow_analytics').to_a.map(&:reverse),
-              readonly: nil,
-              include_hidden: false,
-              item_wrapper_class: 'block-label'
+        = form_for cookie_form, as: :cookie, url: cookies_path, method: :patch, builder: EtGdsDesignSystem.form_builder_class do |f|
+          = f.collection_radio_buttons :usage, inline: true
 
-            = f.button :submit, t('cookies.edit.save_cookies')
+          = f.submit t('cookies.edit.save_cookies')

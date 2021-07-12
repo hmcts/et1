@@ -37,8 +37,8 @@ describe "claim_reviews/show.html.slim" do
       {
         start_date: Date.civil(2000, 2, 1),
         average_hours_worked_per_week: 40.0,
-        gross_pay: 500, gross_pay_period_type: 'weekly', net_pay: 490,
-        net_pay_period_type: 'weekly', enrolled_in_pension_scheme: false,
+        gross_pay: 500, pay_period_type: 'weekly', net_pay: 490,
+        enrolled_in_pension_scheme: false,
         benefit_details: 'Company car', current_situation: 'employment_terminated',
         end_date: Date.civil(2010, 12, 1),
         worked_notice_period_or_paid_in_lieu: false,

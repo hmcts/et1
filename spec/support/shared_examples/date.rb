@@ -2,12 +2,6 @@ RSpec.shared_examples 'it parses dates' do |*dates|
   dates.each do |date|
     subject { described_class.new Claim.new }
 
-    it 'assigns the concrete date value when all parts are present and valid' do
-      subject.send "#{date}=", 'day' => '15', 'month' => '1', 'year' => '1985'
-
-      expect(subject.send(date)).to eq Date.civil(1985, 1, 15)
-    end
-
     describe 'validation' do
       context "when no #{date} has been given" do
         before { subject.valid? }
@@ -19,7 +13,7 @@ RSpec.shared_examples 'it parses dates' do |*dates|
 
       context "when a 'blank' #{date} has been given" do
         before do
-          subject.send "#{date}=", 'day' => '', 'month' => '', '' => ''
+          subject.send "#{date}=", ''
           subject.valid?
         end
 
@@ -39,7 +33,7 @@ RSpec.shared_examples 'it parses dates' do |*dates|
 
         context "when a non-numeric #{date} has been given" do
           before do
-            subject.send "#{date}=", 'day' => 'wat', 'month' => 'da', 'year' => 'fuq'
+            subject.send "#{date}=", 'wat/da/fuq'
             subject.valid?
           end
 
@@ -50,7 +44,7 @@ RSpec.shared_examples 'it parses dates' do |*dates|
 
         context 'when a numeric date with out of bounds segments has been given' do
           before do
-            subject.send "#{date}=", 'day' => '64', 'month' => '32', 'year' => '2014'
+            subject.send "#{date}=", '64/32/2014'
             subject.valid?
           end
 

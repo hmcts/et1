@@ -1,9 +1,8 @@
-tr
-  th = t "claim_reviews.item.#{section_name}.#{question}"
-  - value = yield
-  - if value.present?
-    td
+div.govuk-summary-list__row
+  dt.govuk-summary-list__key = t "claim_reviews.item.#{section_name}.#{question}"
+  dt.govuk-summary-list__value
+    - value = yield
+    - if value.present?
       = value
-  - else
-    td.not-entered
+    - else
       = t 'claim_reviews.item.not_entered'

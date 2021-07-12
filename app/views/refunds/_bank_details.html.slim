@@ -1,28 +1,20 @@
 fieldset
   span = t('.account_help')
-
-= f.input :payment_account_type,
-        required: true,
-        collection: Refunds::BankDetailsForm::ACCOUNT_TYPES,
-        include_blank: :translate,
-        wrapper_class: 'form-group-reveal reveal-publish-delegate',
-        input_html: {:class => 'reveal-publish-publisher ga-vpv', data: {target: 'payment_account_type'}},
-        reveal: {'bank' => 'payment_account_type', 'building_society' => 'payment_account_type'}
-
-fieldset.reveal-subscribe data-target='payment_account_type' data-show-array="bank"
-  legend = t('.your_bank_details')
-  = f.input :payment_bank_name, required: true, input_html: {class: 'medium-input'}
-  = f.input :payment_bank_account_name, required: true, input_html: {class: 'medium-input'}
-  = f.input :payment_bank_account_number, type: :tel, required: true, input_html: {class: 'medium-input'}
-  = f.input :payment_bank_sort_code, required: true, input_html: {class: 'medium-input'}
-fieldset.reveal-subscribe data-target='payment_account_type' data-show-array='building_society'
-  legend = t('.your_building_society_details')
-  = f.input :payment_building_society_name, required: true, input_html: {class: 'medium-input'}
-  = f.input :payment_building_society_account_name, required: true, input_html: {class: 'medium-input'}
-  = f.input :payment_building_society_account_number, required: true, input_html: {class: 'medium-input'}
-  = f.input :payment_building_society_sort_code, required: true, input_html: {class: 'medium-input'}
+= f.collection_radio_buttons :payment_account_type
+= f.revealed_content :payment_account_type, values: ['bank']
+  = f.fieldset label: t('.your_bank_details')
+    = f.text_field :payment_bank_name
+    = f.text_field :payment_bank_account_name
+    = f.text_field :payment_bank_account_number
+    = f.text_field :payment_bank_sort_code
+= f.revealed_content :payment_account_type, values: ['building_society']
+  = f.fieldset label: t('.your_building_society_details')
+    = f.text_field :payment_building_society_name
+    = f.text_field :payment_building_society_account_name
+    = f.text_field :payment_building_society_account_number
+    = f.text_field :payment_building_society_sort_code
 - content_for(:javascripts)
   javascript:
       $(document).ready(function () {
-          refundBankDetailsPage.init()
+          Et.pages.refunds.BankDetailsPage();
       });

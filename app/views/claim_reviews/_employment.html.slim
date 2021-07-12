@@ -5,15 +5,15 @@
     = employment.benefit_details
   = render 'answer', section_name: 'employment', question: 'current_situation' do
     - if employment.current_situation
-      = t "simple_form.options.employment.current_situation.#{employment.current_situation}"
+      = t "claims.employment.current_situation.options.#{employment.current_situation}"
   = render 'answer', section_name: 'employment', question: 'enrolled_in_pension_scheme' do
     = yes_no employment.enrolled_in_pension_scheme?
   = render 'answer', section_name: 'employment', question: 'gross_pay' do
-    = review_pay_for employment.gross_pay, employment.gross_pay_period_type
+    = review_pay_for employment.gross_pay, employment.pay_period_type
   = render 'answer', section_name: 'employment', question: 'job_title' do
     = employment.job_title
   = render 'answer', section_name: 'employment', question: 'net_pay' do
-    = review_pay_for employment.net_pay, employment.net_pay_period_type
+    = review_pay_for employment.net_pay, employment.pay_period_type
   = render 'answer', section_name: 'employment', question: 'start_date' do
     = review_date employment.start_date
   - unless !employment.worked_notice_period_or_paid_in_lieu? || employment.current_situation == 'still_employed' || employment.current_situation == 'notice_period'

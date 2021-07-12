@@ -1,38 +1,22 @@
-fieldset
-  legend= t '.subheader'
-  fieldset
-    legend.form-label = "#{t('simple_form.labels.additional_claimants.of_collection_type')} #{t('simple_form.optional.text')}"
-    = f.input :of_collection_type,
-      label: false,
-      as: :radio_buttons,
-      readonly: nil,
-      item_wrapper_class: 'block-label',
-      wrapper_class: 'form-group-reveal reveal-publish-delegate',
-      input_html: { :class => 'reveal-publish-publisher ga-vpv'},
-      reveal: { true => 'sub1', false => 'sub1' }
-
-  .multiples.reveal-subscribe data-target="sub1" data-show-array="true"
-
-    #number_claimants_info.panel-indent
+= f.fieldset label: t('.subheader')
+  hr class="govuk-section-break.govuk-section-break--visible govuk-!-margin-bottom-3"
+  = f.collection_radio_buttons :has_multiple_claimants, inline: true, optional: true, include_hidden: false
+  = f.revealed_content :has_multiple_claimants, values: [:true]
+    #number_claimants_info.govuk-inset-text
       # = t ".number_claimants_info"
       # = t(".csv_upload_text_html", path: claim_additional_claimants_upload_path)
 
-    = f.simple_fields_for :collection do |builder|
+    = f.fields_for :secondary_claimants do |builder|
       .multiple id=("resource_#{builder.index}")
-        fieldset
-          legend= t('.person', number: builder.index + 2)
-
-          = link_to t('.remove_resource_link', number: builder.index + 2), 'javascript:void(0);', { class: 'remove-multiple' }
+        = builder.fieldset label: t('.person', number: builder.index + 2)
+          = link_to t('.remove_resource_link', number: builder.index + 2), 'javascript:void(0);', data: { 'multiple-remove': "resource_#{builder.index}" }
 
           = render 'personal_details', f: builder
 
           = render 'address', f: builder
+          = builder.hidden_field :_destroy, data: { 'multiple-mark-for-destroy': true }
 
-          .js-enabled-hidden.destroy
-            = builder.input :_destroy,
-              as: :gds_check_boxes,
-              item_wrapper_class: 'block-label',
-              wrapper_class: 'input manager',
-              input_html: { class: 'destroy-checkbox' }
-
-    = f.submit value: t('.add_fields'), class: 'hyperlink', id: 'button_add_resource'
+    = f.submit t('.add_fields')
+- content_for(:javascripts)
+  javascript:
+    Et.pages.claims.AdditionalClaimantsPage()

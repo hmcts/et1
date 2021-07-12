@@ -1,0 +1,139 @@
+en:
+  refunds:
+    original_case_details:
+      original_case_details: "Your case details"
+      header: "Details about your original case"
+      representative_details: "Representative"
+      respondent_details: "Who was your claim against (Respondent) ?"
+      claimant_details: "Your address at the time of your claim"
+      contact_details: "Claimant Address"
+      address_changed:
+        label: Has your address changed since you made your employment tribunal claim ?
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      claimant_address_building:
+        label: Building number or name
+      claimant_address_street:
+        label: Street
+      claimant_address_locality:
+        label: Town/city
+      claimant_address_county:
+        label: County
+      claimant_address_post_code:
+        label: UK Postcode
+      claim_had_representative:
+        label: "Did you have a representative at the time of your original claim ?"
+        options:
+          'true': 'Yes'
+          'false': 'No'
+      representative_name:
+        label: Representative name
+      representative_address_building:
+        label: Building number or name
+      representative_address_street:
+        label: Street
+      representative_address_locality:
+        label: Town/city
+      representative_address_county:
+        label: County
+      representative_address_post_code:
+        label: UK Postcode
+      respondent_name:
+        label: Respondent name
+      respondent_address_building:
+        label: Building number or name
+      respondent_address_street:
+        label: Street
+      respondent_address_locality:
+        label: Town/city
+      respondent_address_county:
+        label: County
+      respondent_address_post_code:
+        label: UK Postcode
+      et_country_of_claim:
+        label: Where was your claim issued?
+        options:
+          '': Please select
+          england_and_wales: England & Wales
+          scotland: Scotland
+      et_tribunal_office:
+        label: Employment tribunal office
+        options:
+          '': Please select
+          '14': "Bristol"
+          '15': "Bury St Edmunds"
+          '32': "East London"
+          '51': "Edinburgh"
+          '17': "Exeter"
+          '41': "Glasgow"
+          '34': "Huntingdon"
+          '18': "Leeds"
+          '19': "Leicester"
+          '50': "London"
+          '22': "London Central"
+          '23': "London South"
+          '24': "Manchester"
+          '26': "Midlands (East) ET"
+          '13': "Midlands (West) ET"
+          '25': "Newcastle"
+          '27': "Reading"
+          '31': "Southampton"
+          '16': "Wales"
+          '33': "Watford"
+          'unknown': "Don't know"
+      additional_information:
+        label: Additional information
+        hint: Please use this box to give us any information or reference numbers you think would be helpful in identifying your case
+      et_case_number:
+        label: Employment tribunal case number
+        hint: |
+          Your Employment Tribunal case number can be found on the letters you received from HMCTS in relation to your case.
+          Your ET case number is 7 digits, followed by / and then the year eg. 1234567/2017.
+          If you cannot find this number, please use the other information box below to give us any information or reference numbers you think would be helpful in identifying your case
+      eat_case_number:
+        label: Employment appeal tribunal case number
+        hint: |
+          Your Employment Appeal Tribunal case number can be found on the letters you received from HMCTS in relation to your case.
+          Your EAT case cumber will start UKEAT/xxxx/YY/xxx.
+          If you cannot find this number, please use the other information box below to give us any information or reference numbers you think would be helpful in identifying your case
+  activemodel:
+    errors:
+      models:
+        refunds/original_case_details:
+          attributes:
+            claimant_address_building:
+              blank: Enter the building number or name from your address at the time of the original claim
+            claimant_address_street:
+              blank: Enter the street from your address at the time of the original claim
+            claimant_address_post_code:
+              blank: Enter your post code at the time of the original claim
+            respondent_name:
+              blank: Enter the respondent's name
+            respondent_address_building:
+              blank: Enter the building number or name from the respondent's address
+            respondent_address_street:
+              blank: Enter the street from the respondent's address
+            respondent_address_post_code:
+              blank: Enter the respondent's post code
+            representative_name:
+              blank: Enter the representative's name
+            representative_address_building:
+              blank: Enter the building number or name from the representative's address
+            representative_address_street:
+              blank: Enter the street from the representative's address
+            representative_address_post_code:
+              blank: Enter the representative's post code
+            claim_had_representative:
+              nil_or_empty: Please select Yes or No
+            et_country_of_claim:
+              blank: Please select the country where your case was heard
+            et_case_number:
+              invalid: Must be in the format nnnnnnn/nnnn
+            eat_case_number:
+              invalid: Must be in the format UKEAT/nnnn/nn/nnn
+            address_changed:
+              nil_or_empty: Please select Yes or No
+
+
+

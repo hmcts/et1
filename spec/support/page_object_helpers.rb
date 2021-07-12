@@ -50,86 +50,117 @@ module ET1
         ::ET1::Test::RespondentsDetailsPage.new
       end
 
+      # @return [ET1::Test::AdditionalRespondentsPage]
+      def additional_respondents_page
+        ::ET1::Test::AdditionalRespondentsPage.new
+      end
+
+      # @return [ET1::Test::EmploymentDetailsPage]
       def employment_details_page
         ::ET1::Test::EmploymentDetailsPage.new
       end
 
+      # @return [ET1::Test::AboutTheClaimPage]
       def about_the_claim_page
         ::ET1::Test::AboutTheClaimPage.new
       end
 
+      # @return [ET1::Test::ClaimDetailsPage]
       def claim_details_page
         ::ET1::Test::ClaimDetailsPage.new
       end
 
+      # @return [ET1::Test::ClaimOutcomePage]
       def claim_outcome_page
         ::ET1::Test::ClaimOutcomePage.new
       end
 
+      # @return [ET1::Test::MoreAboutTheClaimPage]
       def more_about_the_claim_page
         ::ET1::Test::MoreAboutTheClaimPage.new
       end
 
+      # @return [ET1::Test::CheckYourClaimPage]
       def check_your_claim_page
         ::ET1::Test::CheckYourClaimPage.new
       end
 
+      # @return [ET1::Test::ClaimSubmittedPage]
       def claim_submitted_page
         ::ET1::Test::ClaimSubmittedPage.new
       end
 
+      # @return [ET1::Test::NewClaimPage]
       def new_claim_page
         @new_claim_page ||= NewClaimPage.new
       end
 
+      # @return [ET1::Test::StepOnePage]
       def step_one_page
         @step_one_page ||= StepOnePage.new
       end
 
+      # @return [ET1::Test::StepTwoPage]
       def step_two_page
         @step_two_page ||= StepTwoPage.new
       end
 
+      # @return [ET1::Test::StepThreePage]
       def step_three_page
         @step_three_page ||= StepThreePage.new
       end
 
+      # @return [ET1::Test::StepFourPage]
       def step_four_page
         @step_four_page ||= StepFourPage.new
       end
 
+      # @return [ET1::Test::StepFivePage]
       def step_five_page
         @step_five_page ||= StepFivePage.new
       end
 
+      # @return [ET1::Test::StepSixPage]
       def step_six_page
         @step_six_page ||= StepSixPage.new
       end
 
+      # @return [ET1::Test::StepSevenPage]
       def step_seven_page
         @step_seven_page ||= StepSevenPage.new
       end
 
+      # @return [ET1::Test::StepEightPage]
       def step_eight_page
         @step_eight_page ||= StepEightPage.new
       end
 
+      # @return [ET1::Test::StepNinePage]
       def step_nine_page
         @step_nine_page ||= StepNinePage.new
       end
 
+      # @return [ET1::Test::StepTenPage]
       def step_ten_page
         @step_ten_page ||= StepTenPage.new
       end
 
+      # @return [ET1::Test::StepElevenPage]
       def step_eleven_page
         @step_eleven_page ||= StepElevenPage.new
       end
 
+      # @return [ET1::Test::SubmissionPage]
       def submission_page
         @submission_page ||= SubmissionPage.new
       end
 
+      # @return [ET1::Test::ReviewPage]
+      def review_page
+        @review_page ||= ReviewPage.new
+      end
+
+      # @return [ET1::Test::ClaimSubmittedPage]
       def claim_submitted_page
         @claim_submitted_page ||= ClaimSubmittedPage.new
       end
@@ -138,30 +169,37 @@ module ET1
         @refund_step_one_page ||= Refunds::StepOnePage.new
       end
 
+      # @return [ET1::Test::Refunds::ApplicantPage]
       def refund_applicant_page
         @refund_applicant_page ||= Refunds::ApplicantPage.new
       end
 
+      # @return [ET1::Test::Refunds::OriginalCaseDetailsPage]
       def refund_original_case_details_page
         @refund_original_case_details_page ||= Refunds::OriginalCaseDetailsPage.new
       end
 
+      # @return [ET1::Test::Refunds::FeesPage]
       def refund_fees_page
         @refund_fees_page ||= Refunds::FeesPage.new
       end
 
+      # @return [ET1::Test::Refunds::PaymentDetailsPage]
       def refund_payment_details_page
         @refund_payment_details_page ||= Refunds::PaymentDetailsPage.new
       end
 
+      # @return [ET1::Test::Refunds::ReviewPage]
       def refund_review_page
         @refund_review_page ||= Refunds::ReviewPage.new
       end
 
+      # @return [ET1::Test::Refunds::ProfileSelectionPage]
       def refund_profile_selection_page
         @refund_profile_selection_page ||= Refunds::ProfileSelectionPage.new
       end
 
+      # @return [ET1::Test::Refunds::ConfirmationPage]
       def refund_confirmation_page
         @refund_confirmation_page ||= Refunds::ConfirmationPage.new
       end

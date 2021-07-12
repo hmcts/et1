@@ -36,12 +36,12 @@ Rails.application.routes.draw do
       resource :claim_confirmation, only: :show, path: :confirmation
 
       resource :claim, only: :create, path: "/" do
-
-        %w<claimants respondents>.each do |page|
-          resource :"additional_#{page}", only: %i<show update>,
-            controller: :multiples, page: "additional-#{page}",
-            path: "additional-#{page}"
-        end
+        resource :"additional_claimants", only: %i<show update>,
+                 controller: :multiple_claimants, page: "additional-claimants",
+                 path: "additional-claimants"
+        resource :"additional_respondents", only: %i<show update>,
+                 controller: :multiple_respondents, page: "additional-respondents",
+                 path: "additional-respondents"
 
         resource :claimant, only: [:show, :update], controller: :claims, page: 'claimant', path: "claimant"
         resource :additional_claimants, only: [:show, :update], controller: :claims, page: 'additional-claimants', path: "additional-claimants"

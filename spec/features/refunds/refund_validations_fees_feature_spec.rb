@@ -51,22 +51,4 @@ RSpec.feature 'Refund Validations - Fees Page', js: true do
     and_i_save_the_refund_fees
     then_i_should_see_the_refund_bank_details_page
   end
-  scenario 'A user must see all valid years only' do
-    and_i_fill_in_all_my_refund_fee_values_only
-    then_i_should_see_only_years_in_the_year_dropdown_of_all_of_the_fee_dates "2013,2014,2015,2016,2017"
-  end
-  scenario 'A user is prevented from selecting a month before the start date' do
-    and_i_fill_in_all_my_refund_fee_values_only
-    then_i_should_only_see_months_in_year_in_all_of_the_fee_dates("July,August,September,October,November,December", "2013")
-  end
-  scenario 'A user sees all months in 2014,2015 and 2016' do
-    and_i_fill_in_all_my_refund_fee_values_only
-    then_i_should_see_all_months_in_year_in_all_of_the_fee_dates("2014")
-    then_i_should_see_all_months_in_year_in_all_of_the_fee_dates("2015")
-    then_i_should_see_all_months_in_year_in_all_of_the_fee_dates("2016")
-  end
-  scenario 'A user is prevented from selecting a month after the end date' do
-    and_i_fill_in_all_my_refund_fee_values_only
-    then_i_should_only_see_months_in_year_in_all_of_the_fee_dates("January,February,March,April,May,June,July,August", "2017")
-  end
 end

@@ -132,6 +132,6 @@ en:
       submit_warning: This is the last opportunity to change the details of your claim online. Check all the information above is correct.
       confirmation: Email confirmation
       submit: Submit claim
-      hint: |
-            A copy of the completed claim will be sent to:
+      email_addresses:
+        label: "A copy of the completed claim will be sent to:"
       add_email_address: Add email address

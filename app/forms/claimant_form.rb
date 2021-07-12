@@ -16,7 +16,7 @@ class ClaimantForm < Form
 
   attribute :first_name,         :string
   attribute :last_name,          :string
-  attribute :date_of_birth,      :gds_date_type
+  attribute :date_of_birth,      :et_date
   attribute :address_country,    :string
   attribute :mobile_number,      :string
   attribute :fax_number,         :string
@@ -49,11 +49,11 @@ class ClaimantForm < Form
                             ccd_email: { if: :contact_preference_email? },
                             length: { maximum: EMAIL_ADDRESS_LENGTH }
 
+  validates :date_of_birth, date: true
   validate :older_then_16
 
   delegate :fax?, :email?, to: :contact_preference, prefix: true
 
-  validates :date_of_birth, date: true
 
   def contact_preference
     (read_attribute(:contact_preference) || "").inquiry

@@ -26,6 +26,6 @@ module PageHelper
   end
 
   def claim_pages_list
-    ['claim_reviews', 'payments', 'multiples']
+    ['claim_reviews', 'payments', 'multiple_claimants', 'multiple_respondents']
   end
 end

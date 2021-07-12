@@ -1,0 +1,18 @@
+en:
+  refunds:
+    profile_selection:
+      header: "Introduction Page"
+      please_select_profile: "Introduction Page"
+      profile_type:
+        label: "You can apply for a refund of Employment Tribunal or Employment Appeal Tribunal Fees (or both) by confirming you are one of the following:"
+        options:
+          'claimant_direct_not_reimbursed': "I was an individual claimant who made the payments set out in this application and have not been reimbursed by anyone pursuant to an order of the Tribunal"
+          'claimant_via_rep': "I was an individual claimant whose representative paid the fee and I then reimbursed them"
+
+  activemodel:
+    errors:
+      models:
+        refunds/profile_selection:
+          attributes:
+            profile_type:
+              blank: Please confirm

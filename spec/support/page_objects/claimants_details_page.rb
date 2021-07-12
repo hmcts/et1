@@ -53,7 +53,7 @@ module ET1
 
       # Clicks the save and continue button
       def save_and_continue
-        save_and_continue_element.click
+        save_and_continue_button.submit
       end
 
       def save_and_complete_later
@@ -79,32 +79,105 @@ module ET1
       private
 
       section :about_the_claimant_group, :fieldset_translated, 'claimants_details.about_the_claimant_group' do
+        include EtTestHelpers::Section
+        # @!method title_question
+        #   A govukselect component wrapping the select, label, hint etc..
+        #   @return [EtTestHelpers::Components::GovUKCollectionSelect] The site prism section
+        section :title_question, govuk_component(:collection_select), :govuk_collection_select, :'claimants_details.title.label'
 
-        section :title_question, ::ET1::Test::SelectQuestionSection, :question_labelled_translated, 'claimants_details.title.label'
-        section :first_name_question, ::ET1::Test::TextQuestionSection, :question_labelled_translated, 'claimants_details.first_name.label'
-        section :last_name_question, ::ET1::Test::TextQuestionSection, :question_labelled_translated, 'claimants_details.last_name.label'
-        section :date_of_birth_question, ::ET1::Test::DateQuestionSection, :question_group_labelled_translated, 'claimants_details.date_of_birth.label'
-        section :gender_question, ::ET1::Test::RadioButtonsQuestionSection, :question_labelled_translated, 'claimants_details.gender.label'
-        section :has_special_needs_question, ::ET1::Test::RadioButtonsQuestionSection, :question_group_labelled_translated, 'claimants_details.has_special_needs.label'
-        section :special_needs_question, ::ET1::Test::TextAreaQuestionSection, :question_labelled_translated, 'claimants_details.special_needs.label'
+        # @!method first_name_question
+        #   A govuk text field component wrapping the input, label, hint etc..
+        #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+        section :first_name_question, govuk_component(:text_field), :govuk_text_field, :'claimants_details.first_name.label'
+
+        # @!method govuk_text_field
+        #   A govuk text field component wrapping the input, label, hint etc..
+        #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+        section :last_name_question, govuk_component(:text_field), :govuk_text_field, :'claimants_details.last_name.label'
+
+        # @!method date_of_birth_question
+        #   A govuk date field component wrapping the input, label, hint etc.. for the date of birth question
+        #   @return [EtTestHelpers::Components::GovUKDateField] The site prism section
+        section :date_of_birth_question, govuk_component(:date_field), :govuk_date_field, :'claimants_details.date_of_birth.label'
+
+        # @!method gender_question
+        #   A govuk radio button component for the gender question
+        #   @return [EtTestHelpers::Components::GovUKCollectionRadioButtons] The site prism section
+        section :gender_question, govuk_component(:collection_radio_buttons), :govuk_collection_radio_buttons, :'claimants_details.gender.label'
+
+        # @!method has_special_needs_question
+        #   A govuk radio button component for the has special needs question
+        #   @return [EtTestHelpers::Components::GovUKCollectionRadioButtons] The site prism section
+        section :has_special_needs_question, govuk_component(:collection_radio_buttons), :govuk_collection_radio_buttons, :'claimants_details.has_special_needs.label'
+
+        # @!method special_needs_question
+        #   A govuk text area component wrapping the input, label, hint etc..
+        #   @return [EtTestHelpers::Components::GovUKTextArea] The site prism section
+        section :special_needs_question, govuk_component(:text_area), :govuk_text_area, :'claimants_details.special_needs.label'
       end
 
       section :claimants_contact_details_group, :fieldset_translated, 'claimants_details.claimants_contact_details_group' do
-        section :building_question, ::ET1::Test::TextQuestionSection, :question_labelled_translated, 'claimants_details.building.label'
-        section :street_question, ::ET1::Test::TextQuestionSection, :question_labelled_translated, 'claimants_details.street.label'
-        section :town_question, ::ET1::Test::TextQuestionSection, :question_labelled_translated, 'claimants_details.town.label'
-        section :county_question, ::ET1::Test::TextQuestionSection, :question_labelled_translated, 'claimants_details.county.label'
-        section :post_code_question, ::ET1::Test::TextQuestionSection, :question_labelled_translated, 'claimants_details.post_code.label'
-        section :country_question, ::ET1::Test::SelectQuestionSection, :question_labelled_translated, 'claimants_details.country.label'
-        section :phone_or_mobile_number_question, ::ET1::Test::TextQuestionSection, :question_labelled_translated, 'claimants_details.phone_or_mobile_number.label'
-        section :alternative_phone_or_mobile_number_question, ::ET1::Test::TextQuestionSection, :question_labelled_translated, 'claimants_details.alternative_phone_or_mobile_number.label'
-        section :email_address_question, ::ET1::Test::TextQuestionSection, :question_labelled_translated, 'claimants_details.email_address.label'
-        section :best_correspondence_method_question, ::ET1::Test::RadioButtonsQuestionSection, :question_group_labelled_translated, 'claimants_details.best_correspondence_method.label'
-        section :allow_video_attendance_question, ::ET1::Test::RadioButtonsQuestionSection, :question_group_labelled_translated, 'claimants_details.allow_video_attendance.label'
+        include EtTestHelpers::Section
+        # @!method building_question
+        #   A govuk text field component wrapping the input, label, hint etc..
+        #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+        section :building_question, govuk_component(:text_field), :govuk_text_field, :'claimants_details.building.label'
+
+        # @!method street_question
+        #   A govuk text field component wrapping the input, label, hint etc..
+        #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+        section :street_question, govuk_component(:text_field), :govuk_text_field, :'claimants_details.street.label'
+
+        # @!method town_question
+        #   A govuk text field component wrapping the input, label, hint etc..
+        #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+        section :town_question, govuk_component(:text_field), :govuk_text_field, :'claimants_details.town.label'
+
+        # @!method county_question
+        #   A govuk text field component wrapping the input, label, hint etc..
+        #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+        section :county_question, govuk_component(:text_field), :govuk_text_field, :'claimants_details.county.label'
+
+        # @!method post_code_question
+        #   A govuk text field component wrapping the input, label, hint etc..
+        #   @return [EtTestHelpers::Components::GovUKTextField] The site prism section
+        section :post_code_question, govuk_component(:text_field), :govuk_text_field, :'claimants_details.post_code.label'
+
+        # @!method country_question
+        #   A govukselect component wrapping the select, label, hint etc..
+        #   @return [EtTestHelpers::Components::GovUKCollectionSelect] The site prism section
+        section :country_question, govuk_component(:collection_radio_buttons), :govuk_collection_radio_buttons, :'claimants_details.country.label'
+
+        # @!method phone_or_mobile_number_question
+        #   A govuk phone field component representing the phone or mobile question
+        #   @return [EtTestHelpers::Components::GovUKPhoneField] The site prism section
+        section :phone_or_mobile_number_question, govuk_component(:phone_field), :govuk_phone_field, :'claimants_details.phone_or_mobile_number.label'
+
+        # @!method alternative_phone_or_mobile_number_question
+        #   A govuk phone field component representing the alternative phone or mobile question
+        #   @return [EtTestHelpers::Components::GovUKPhoneField] The site prism section
+        section :alternative_phone_or_mobile_number_question, govuk_component(:phone_field), :govuk_phone_field, :'claimants_details.alternative_phone_or_mobile_number.label'
+
+        # @!method email_address_question
+        #   A govuk email field component wrapping the input, label, hint etc..
+        #   @return [EtTestHelpers::Components::GovUKEmailField] The site prism section
+        section :email_address_question, govuk_component(:email_field), :govuk_email_field, :'claimants_details.email_address.label'
+
+        # @!method best_correspondence_method_question
+        #   A govuk radio button component for the gender question
+        #   @return [EtTestHelpers::Components::GovUKCollectionRadioButtons] The site prism section
+        section :best_correspondence_method_question, govuk_component(:collection_radio_buttons), :govuk_collection_radio_buttons, :'claimants_details.best_correspondence_method.label'
+        # @!method allow_video_attendance_question
+        #   A govuk radio button component for the video question
+        #   @return [EtTestHelpers::Components::GovUKCollectionRadioButtons] The site prism section
+        section :allow_video_attendance_question, govuk_component(:collection_radio_buttons), :govuk_collection_radio_buttons, :'claimants_details.allow_video_attendance.label'
       end
 
-      element :save_and_continue_element, :button_translated, 'claimants_details.save_and_continue'
-      element :save_and_complete_later_element, :button_translated, 'claimants_details.save_and_complete_later'
+      # @!method save_and_continue_button
+      #   A govuk submit button component...
+      #   @return [EtTestHelpers::Components::GovUKSubmit] The site prism section
+      section :save_and_continue_button, govuk_component(:submit), :govuk_submit, :'claimants_details.save_and_continue'
+      element :save_and_complete_later_element, :link_or_button_translated, 'claimants_details.save_and_complete_later'
 
     end
   end

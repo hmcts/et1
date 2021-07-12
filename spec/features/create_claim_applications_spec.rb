@@ -7,10 +7,20 @@ feature 'Claim applications', type: :feature, js: true do
   include ActiveJob::TestHelper
   include ActiveJobPerformHelper
 
-  around { |example| travel_to(Date.new(2014, 9, 29)) { example.run } }
+  around { |example| travel_to(Date.new(2018, 9, 29)) { example.run } }
   let(:et_api_url) { 'http://api.et.net:4000/api/v2' }
   let(:build_claim_url) { "#{et_api_url}/claims/build_claim" }
   let(:example_pdf_url) { test_valid_pdf_url(host: "#{page.server.host}:#{page.server.port}") }
+  let(:ui_claimant) { build(:ui_claimant, :default) }
+  let(:ui_secondary_claimants) { build_list(:ui_secondary_claimant, 1, :default) }
+  let(:ui_representative) { build(:ui_representative, :default) }
+  let(:ui_respondent) { build(:ui_respondent, :default) }
+  let(:ui_secondary_respondents) { [] }
+  let(:ui_employment) { build(:ui_employment, :default) }
+  let(:ui_claim_type) { build(:ui_claim_type, :default) }
+  let(:ui_claim_details) { build(:ui_claim_details, :test) }
+  let(:ui_claim_outcome) { build(:ui_claim_outcome, :default) }
+  let(:ui_more_about_the_claim) { build(:ui_more_about_the_claim, :default) }
   around do |example|
     ClimateControl.modify ET_API_URL: et_api_url do
       example.run
@@ -41,36 +51,34 @@ feature 'Claim applications', type: :feature, js: true do
   context 'along the happy path' do
     scenario 'Hitting the start page' do
       visit '/'
-      expect(page).not_to have_signout_button
-      expect(page).not_to have_session_prompt
+      expect(apply_page).to be_displayed
+      expect(apply_page).not_to have_sign_out_button
+      apply_page.assert_no_session_prompt
     end
 
     scenario 'Create a new application', js: true do
       start_claim
-      expect(page).to have_text page_number(1)
+      expect(saving_your_claim_page).to be_displayed
       expect(page).to have_text before_you_start_message
-      expect(page).not_to have_signout_button
-      expect(page).to have_session_prompt
+      expect(saving_your_claim_page).not_to have_sign_out_button
+      saving_your_claim_page.assert_session_prompt
     end
 
     scenario 'Entering word for save and return' do
       start_claim
-      fill_in_password 'green'
+      saving_your_claim_page.register(email_address: nil, password: 'green')
 
       claim = Claim.last
       expect(claim.user.valid_password?('green')).to be true
 
-      expect(page).to have_text page_number(2)
-      expect(page).to have_text claim_heading_for(:claimant)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      expect(claimants_details_page).to be_displayed
+      expect(claimants_details_page).to have_sign_out_button
+      claimants_details_page.assert_session_prompt
     end
 
     scenario 'Entering word and email for save and return', js: true do
       start_claim
-      fill_in_password_and_email('green',
-                                 FormMethods::SAVE_AND_RETURN_EMAIL,
-                                 "save_and_return_user_email")
+      saving_your_claim_page.register(email_address: FormMethods::SAVE_AND_RETURN_EMAIL, password: 'green')
 
       claim = Claim.last
       expect(claim.user.valid_password?('green')).to be true
@@ -86,211 +94,228 @@ feature 'Claim applications', type: :feature, js: true do
 
     scenario 'Entering personal details' do
       start_claim
-      fill_in_password
-      fill_in_personal_details
-
-      expect(page).to have_text page_number(3)
-      expect(page).to have_text claim_heading_for(:additional_claimants)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      saving_your_claim_page.register(email_address: nil, password: 'green')
+      claimants_details_page.fill_in_all(claimant: ui_claimant)
+      claimants_details_page.save_and_continue
+      expect(group_claims_page).to be_displayed
+      expect(group_claims_page).to have_sign_out_button
+      group_claims_page.assert_session_prompt
     end
 
     scenario 'Entering additional claimant details' do
       start_claim
-      fill_in_password
-      fill_in_personal_details
-      fill_in_additional_claimant_details
-
-      expect(page).to have_text page_number(4)
-      expect(page).to have_text claim_heading_for(:representative)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      saving_your_claim_page.register(email_address: nil, password: 'green')
+      claimants_details_page.fill_in_all(claimant: ui_claimant)
+      claimants_details_page.save_and_continue
+      group_claims_page.fill_in_all(secondary_claimants: ui_secondary_claimants)
+      group_claims_page.save_and_continue
+      expect(representatives_details_page).to be_displayed
+      expect(representatives_details_page).to have_sign_out_button
+      representatives_details_page.assert_session_prompt
     end
 
     scenario "Navigating between manual and CSV upload for additional claimants" do
       start_claim
-      fill_in_password
-      fill_in_personal_details
-      fill_in_additional_claimant_jump_to_csv_upload
+      saving_your_claim_page.register(email_address: nil, password: 'green')
+      claimants_details_page.fill_in_all(claimant: ui_claimant)
+      claimants_details_page.save_and_continue
+      group_claims_page.provide_spreadsheet
 
-      expect(page).to have_text page_number(3)
-      expect(page).to have_text claim_heading_for(:additional_claimants_upload)
-      expect(page).to have_signout_button
+      expect(group_claims_upload_page).to be_displayed
+      expect(group_claims_upload_page).to have_sign_out_button
 
-      click_link "manually"
+      group_claims_upload_page.switch_to_manual_input
 
-      expect(page).to have_text page_number(3)
-      expect(page).to have_text claim_heading_for(:additional_claimants)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      expect(group_claims_page).to be_displayed
+      expect(group_claims_page).to have_sign_out_button
+      group_claims_page.assert_session_prompt
     end
 
     scenario 'Entering additional claimant upload details' do
       start_claim
-      fill_in_password
-      fill_in_personal_details
-      fill_in_additional_claimant_jump_to_csv_upload
-      fill_in_additional_claimants_upload_details
+      saving_your_claim_page.register(email_address: nil, password: 'green')
+      claimants_details_page.fill_in_all(claimant: ui_claimant)
+      claimants_details_page.save_and_continue
+      group_claims_page.provide_spreadsheet.no_secondary_claimants.save_and_continue
 
-      expect(page).to have_text page_number(4)
-      expect(page).to have_text claim_heading_for(:representative)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      expect(representatives_details_page).to be_displayed
+      expect(representatives_details_page).to have_sign_out_button
+      representatives_details_page.assert_session_prompt
     end
 
     scenario 'Entering representative details' do
       start_claim
-      fill_in_password
-      fill_in_personal_details
-      fill_in_additional_claimant_details
-      fill_in_representative_details
+      saving_your_claim_page.register(email_address: nil, password: 'green')
+      claimants_details_page.fill_in_all(claimant: ui_claimant)
+      claimants_details_page.save_and_continue
+      group_claims_page.fill_in_all(secondary_claimants: ui_secondary_claimants)
+      group_claims_page.save_and_continue
+      representatives_details_page.fill_in_all(representative: ui_representative)
+      representatives_details_page.save_and_continue
 
-      expect(page).to have_text page_number(5)
-      expect(page).to have_text claim_heading_for(:respondent)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      expect(respondents_details_page).to be_displayed
+      expect(respondents_details_page).to have_sign_out_button
+      respondents_details_page.assert_session_prompt
     end
 
     scenario 'Display ACAS hints', js: true do
       start_claim
-      fill_in_password
-      fill_in_personal_details
-      fill_in_additional_claimant_details
-      fill_in_representative_details
-
-      check "I don’t have an Acas number"
-
-      within('form#edit_respondent') do
-        within('.acas .panel-indent') do
-          expect(page).to have_text 'Please note: Incorrectly claiming an exemption may lead to your claim being rejected. If in doubt, please contact ACAS.'
-          expect(page).not_to have_text 'Please note: This is a rare type of claim. The fact that you are making a claim of unfair dismissal does not mean you are necessarily making a claim for interim relief.'
-          choose 'respondent_no_acas_number_reason_interim_relief'
-          expect(page).to have_text 'Please note: This is a rare type of claim. The fact that you are making a claim of unfair dismissal does not mean you are necessarily making a claim for interim relief.'
-        end
-      end
+      saving_your_claim_page.register(email_address: nil, password: 'green')
+      claimants_details_page.fill_in_all(claimant: ui_claimant)
+      claimants_details_page.save_and_continue
+      group_claims_page.fill_in_all(secondary_claimants: ui_secondary_claimants)
+      group_claims_page.save_and_continue
+      representatives_details_page.fill_in_all(representative: ui_representative)
+      representatives_details_page.save_and_continue
+      dont_have_acas_respondent = build(:ui_respondent, :default, :dont_have_acas)
+      dont_have_acas_respondent_interim_relief = build(:ui_respondent, :dont_have_acas, :interim_relief)
+      respondents_details_page
+        .fill_in_all(respondent: dont_have_acas_respondent)
+        .assert_correct_hints(dont_have_acas_respondent)
+        .fill_in_dont_have_acas_number(dont_have_acas_respondent_interim_relief)
+        .assert_correct_hints(dont_have_acas_respondent_interim_relief)
     end
 
     scenario 'Entering respondent details' do
       start_claim
-      fill_in_password
-      fill_in_personal_details
-      fill_in_additional_claimant_details
-      fill_in_representative_details
-      fill_in_respondent_details
+      saving_your_claim_page.register(email_address: nil, password: 'green')
+      claimants_details_page.fill_in_all(claimant: ui_claimant)
+      claimants_details_page.save_and_continue
+      group_claims_page.fill_in_all(secondary_claimants: ui_secondary_claimants)
+      group_claims_page.save_and_continue
+      representatives_details_page.fill_in_all(representative: ui_representative)
+      representatives_details_page.save_and_continue
+      respondents_details_page.fill_in_all(respondent: ui_respondent)
+      respondents_details_page.save_and_continue
 
-      expect(page).to have_text page_number(6)
-      expect(page).to have_text claim_heading_for(:additional_respondents)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      expect(additional_respondents_page).to be_displayed
+      expect(additional_respondents_page).to have_signout_button
+      additional_respondents_page.assert_session_prompt
     end
 
     scenario 'Entering additional respondent details' do
       start_claim
-      fill_in_password
-      fill_in_personal_details
-      fill_in_additional_claimant_details
-      fill_in_representative_details
-      fill_in_respondent_details
-      fill_in_additional_respondent_details
+      saving_your_claim_page.register(email_address: nil, password: 'green')
+      claimants_details_page.fill_in_all(claimant: ui_claimant)
+      claimants_details_page.save_and_continue
+      group_claims_page.fill_in_all(secondary_claimants: ui_secondary_claimants)
+      group_claims_page.save_and_continue
+      representatives_details_page.fill_in_all(representative: ui_representative)
+      representatives_details_page.save_and_continue
+      #fill_in_representative_details
+      respondents_details_page.fill_in_all(respondent: ui_respondent)
+      respondents_details_page.save_and_continue
+      additional_respondents_page.no_secondary_respondents
+      additional_respondents_page.save_and_continue
 
-      expect(page).to have_text page_number(7)
-      expect(page).to have_text claim_heading_for(:employment)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      expect(employment_details_page).to be_displayed
+      expect(employment_details_page).to have_sign_out_button
+      employment_details_page.assert_session_prompt
     end
 
     scenario 'Entering employment details' do
       start_claim
-      fill_in_password
-      fill_in_personal_details
-      fill_in_additional_claimant_details
-      fill_in_representative_details
-      fill_in_respondent_details
-      fill_in_additional_respondent_details
-      fill_in_employment_details
+      saving_your_claim_page.register(email_address: nil, password: 'green')
+      claimants_details_page.fill_in_all(claimant: ui_claimant)
+      claimants_details_page.save_and_continue
+      group_claims_page.fill_in_all(secondary_claimants: ui_secondary_claimants)
+      group_claims_page.save_and_continue
+      representatives_details_page.fill_in_all(representative: ui_representative)
+      representatives_details_page.save_and_continue
+      respondents_details_page.fill_in_all(respondent: ui_respondent)
+      respondents_details_page.save_and_continue
+      additional_respondents_page.fill_in_all(secondary_respondents: ui_secondary_respondents)
+      additional_respondents_page.save_and_continue
 
-      expect(page).to have_text page_number(8)
-      expect(page).to have_text claim_heading_for(:claim_type)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      expect(employment_details_page).to be_displayed
+      expect(employment_details_page).to have_sign_out_button
+      employment_details_page.assert_session_prompt
     end
 
     scenario 'Entering claim type details' do
-      fill_in_pre_claim_pages
-      fill_in_claim_type_details
+      start_claim
 
-      expect(page).to have_text page_number(9)
-      expect(page).to have_text claim_heading_for(:claim_details)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      fill_in_pre_claim_pages
+
+      about_the_claim_page.fill_in_all(claim_type: ui_claim_type)
+      about_the_claim_page.save_and_continue
+
+      expect(claim_details_page).to be_displayed
+      expect(claim_details_page).to have_sign_out_button
+      claim_details_page.assert_session_prompt
     end
 
     scenario 'Entering claim details' do
       fill_in_pre_claim_pages
-      fill_in_claim_type_details
-      fill_in_claim_details
+      about_the_claim_page.fill_in_all(claim_type: ui_claim_type)
+      about_the_claim_page.save_and_continue
+      claim_details_page.fill_in_all(claim_details: ui_claim_details)
+      claim_details_page.save_and_continue
 
-      expect(page).to have_text page_number(10)
-      expect(page).to have_text claim_heading_for(:claim_outcome)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      expect(claim_outcome_page).to be_displayed
+      expect(claim_outcome_page).to have_sign_out_button
+      claim_outcome_page.assert_session_prompt
     end
 
     scenario 'Entering claim outcome details' do
       fill_in_pre_claim_pages
-      fill_in_claim_type_details
-      fill_in_claim_details
-      fill_in_claim_outcome_details
+      about_the_claim_page.fill_in_all(claim_type: ui_claim_type)
+      about_the_claim_page.save_and_continue
+      claim_details_page.fill_in_all(claim_details: ui_claim_details)
+      claim_details_page.save_and_continue
+      claim_outcome_page.fill_in_all(claim_outcome: ui_claim_outcome).save_and_continue
 
-      expect(page).to have_text page_number(11)
-      expect(page).to have_text claim_heading_for(:additional_information)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      expect(more_about_the_claim_page).to be_displayed
+      expect(more_about_the_claim_page).to have_sign_out_button
+      more_about_the_claim_page.assert_session_prompt
     end
 
     scenario 'Entering additonal information' do
       fill_in_pre_claim_pages
-      fill_in_claim_type_details
-      fill_in_claim_details
-      fill_in_claim_outcome_details
-      fill_in_addtional_information
+      about_the_claim_page.fill_in_all(claim_type: ui_claim_type)
+      about_the_claim_page.save_and_continue
+      claim_details_page.fill_in_all(claim_details: ui_claim_details)
+      claim_details_page.save_and_continue
+      claim_outcome_page.fill_in_all(claim_outcome: ui_claim_outcome).save_and_continue
+      more_about_the_claim_page.fill_in_all(more_about_the_claim: ui_more_about_the_claim).save_and_continue
 
-      expect(page).not_to have_text claim_heading_for(:your_fee)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      expect(check_your_claim_page).to have_sign_out_button
+      check_your_claim_page.assert_session_prompt
     end
 
     scenario 'Entering your fee details' do
       fill_in_pre_claim_pages
-      fill_in_claim_type_details
-      fill_in_claim_details
-      fill_in_claim_outcome_details
-      fill_in_addtional_information
-
-      expect(page).to have_text review_heading_for(:show)
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      about_the_claim_page.fill_in_all(claim_type: ui_claim_type)
+      about_the_claim_page.save_and_continue
+      claim_details_page.fill_in_all(claim_details: ui_claim_details)
+      claim_details_page.save_and_continue
+      claim_outcome_page.fill_in_all(claim_outcome: ui_claim_outcome).save_and_continue
+      more_about_the_claim_page.fill_in_all(more_about_the_claim: ui_more_about_the_claim).save_and_continue
+      expect(check_your_claim_page).to be_displayed
+      expect(check_your_claim_page).to have_sign_out_button
+      check_your_claim_page.assert_session_prompt
     end
 
     scenario 'Signout from claim review page' do
       complete_a_claim
 
-      expect(page).to have_signout_button
-      expect(page).to have_session_prompt
+      expect(check_your_claim_page).to be_displayed
+      expect(check_your_claim_page).to have_sign_out_button
+      check_your_claim_page.assert_session_prompt
     end
 
     scenario 'Saving the confirmation email recipients' do
       complete_a_claim
       click_button 'Submit claim'
+      sleep 2
 
       expect(Claim.last.confirmation_email_recipients).
-        to eq [FormMethods::CLAIMANT_EMAIL, FormMethods::REPRESENTATIVE_EMAIL]
+        to eq [FormMethods::REPRESENTATIVE_EMAIL]
     end
 
     scenario 'Deselecting email confirmation recipients before submission' do
-      complete_a_claim seeking_remissions: true
-      deselect_claimant_email
-      deselect_representative_email
+      complete_a_claim
+      review_page.email_confirmation_section.email_recipients.set([])
       click_button 'Submit claim'
 
       expect(Claim.last.confirmation_email_recipients).to be_empty
@@ -300,10 +325,11 @@ feature 'Claim applications', type: :feature, js: true do
       complete_a_claim
       click_button 'Submit claim'
 
+      expect(claim_submitted_page).to be_displayed
       expect(page).to have_text "Claim submitted"
       expect(page).to have_text "Watford, watfordet@justice.gov.uk, 01923 281 750"
-      expect(page).not_to have_signout_button
-      expect(page).not_to have_session_prompt
+      expect(claim_submitted_page).not_to have_sign_out_button
+      claim_submitted_page.assert_no_session_prompt
     end
 
     scenario 'attempting a new claim after submission' do
@@ -321,42 +347,44 @@ feature 'Claim applications', type: :feature, js: true do
       expect(a_request(:post, build_claim_url).
         with do |request|
         claimant = JSON.parse(request.body)['data'].detect { |cmd| cmd['command'] == 'BuildPrimaryClaimant' }['data']
-        expect(claimant).to include "title" => "Mr",
-                                    "first_name" => "Barrington",
-                                    "last_name" => "Wrigglesworth",
+        expect(claimant).to include "title" => ET1::Test::I18n.t(ui_claimant.title),
+                                    "first_name" => ui_claimant.first_name,
+                                    "last_name" => ui_claimant.last_name,
                                     "address_attributes" => a_hash_including(
-                                      "building" => "1",
-                                      "street" => "High street",
-                                      "locality" => "Anytown",
-                                      "county" => "Anyfordshire",
-                                      "post_code" => "AT1 4PQ",
-                                      "country" => "United Kingdom"
+                                      "building" => ui_claimant.address_building,
+                                      "street" => ui_claimant.address_street,
+                                      "locality" => ui_claimant.address_town,
+                                      "county" => ui_claimant.address_county,
+                                      "post_code" => ui_claimant.address_post_code,
+                                      "country" => ET1::Test::I18n.t(ui_claimant.address_country)
                                     ),
-                                    "address_telephone_number" => "01234567890",
-                                    "mobile_number" => "07956000000",
-                                    "email_address" => "barrington@example.com",
-                                    "contact_preference" => "Email",
-                                    "allow_video_attendance" => true,
-                                    "gender" => "Male",
-                                    "date_of_birth" => "1985-01-15",
-                                    "special_needs" => "I am blind."
+                                    "address_telephone_number" => ui_claimant.phone_or_mobile_number,
+                                    "mobile_number" => ui_claimant.alternative_phone_or_mobile_number,
+                                    "email_address" => ui_claimant.email_address,
+                                    "contact_preference" => ET1::Test::I18n.t(ui_claimant.best_correspondence_method),
+                                    "allow_video_attendance" => ui_claimant.allow_video_attendance.to_s.split('.').last == 'yes',
+                                    "gender" => ET1::Test::I18n.t(ui_claimant.gender),
+                                    "date_of_birth" => Date.parse(ui_claimant.date_of_birth).strftime('%Y-%m-%d'),
+                                    "special_needs" => ui_claimant.special_needs
       end).to have_been_made
     end
 
     context 'Downloading the PDF', js: true do
       scenario 'when the file is available' do
-        complete_a_claim seeking_remissions: true
+        complete_a_claim
         click_button 'Submit claim'
         expect(claim_submitted_page).to have_save_a_copy_link
+        expect(claim_submitted_page).not_to have_invalid_save_a_copy_link
       end
 
       context 'with pdf not ready yet' do
         let(:example_pdf_url) { test_invalid_pdf_url(host: "#{page.server.host}:#{page.server.port}") }
 
         scenario 'when the file is unavailable' do
-          complete_a_claim seeking_remissions: true
+          complete_a_claim
           click_button 'Submit claim'
           expect(claim_submitted_page).to have_invalid_save_a_copy_link
+          expect(claim_submitted_page).not_to have_save_a_copy_link
         end
       end
     end
@@ -366,8 +394,8 @@ feature 'Claim applications', type: :feature, js: true do
         complete_a_claim
         expect(page).to have_text 'Check your claim'
 
-        within(:xpath, './/div[@class="main-content"]') do
-          expect(page).not_to have_text 'Your fee'
+        within('#main-content') do
+          expect(page).not_to have_text 'Your fee '
           expect(page).not_to have_text 'Help with fees'
         end
 

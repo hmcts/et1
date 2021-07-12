@@ -1,21 +1,15 @@
-- content_for(:page_title, t('.header'))
-
-.main-header role="banner"
-  h1= t '.header'
+h1.govuk-heading-xl= t("claims.feedback.header")
 
 .main-section
   .main-content
-    = simple_form_for(resource, url: feedback_path) do |f|
+    = form_for resource, url: feedback_path, builder: EtGdsDesignSystem.form_builder_class do |f|
+
       .form-fields
         = f.invisible_captcha :subtitle
-        = f.input :comments,
-          as: :text,
-          input_html: { rows: 5 }
-        = f.input :suggestions,
-          as: :text,
-          input_html: { rows: 5 }
-        = f.input :email_address
+        = f.text_area :comments, label: t('claims.feedback.feedback_comments'), max_chars: 2500, rows: 5
+        = f.text_area :suggestions, label: t('claims.feedback.feedback_suggestions'), max_chars: 2500, rows: 5
+        = f.text_field :email_address, label: t('claims.feedback.feedback_email_address')
       .form-actions
-        = f.button :submit
+        = f.submit t('claims.feedback.feedback_submit_button')
 
   = render partial: 'shared/aside'

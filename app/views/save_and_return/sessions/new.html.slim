@@ -1,32 +1,21 @@
-- content_for(:page_title, page_title)
+h1.govuk-heading-xl= t('claims.session.header')
+= form_for resource, as: resource_name, url: session_path(resource_name), builder: EtGdsDesignSystem.form_builder_class do |f|
+  = f.govuk_error_summary(t 'shared.error_notification.default_message')
 
-.main-header role="banner"
-  h1= t('.header')
+  = f.govuk_fieldset label: {text: t('claims.session.subheader')} do
+    = f.text_field :reference,
+      label: { text: t('claims.session.reference.label') },
+      hint: { text: t('claims.session.reference.hint') }
 
-.main-section
+    = f.text_field :password,
+      label: {text: t('claims.session.password.label')},
+      hint: { text: t('claims.session.password.hint') }
 
-  .main-content
-    = simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
-      = f.error_notification
+    = f.submit t('helpers.submit.save_and_return[session].create')
 
-      fieldset
-        legend = t('.subheader')
-
-        = f.input :reference,
-          label: t('simple_form.labels.save_and_return.session.new.reference'),
-          hint: t('simple_form.hints.save_and_return.session.new.reference'),
-          required: true
-
-        = f.input :password,
-          as: :string,
-          label: t('simple_form.labels.save_and_return.session.new.password'),
-          required: true
-
-        = f.button :submit, t('helpers.submit.save_and_return[session].create')
-
-        p.form-hint
-          = t(".forgot_password")
-          = link_to t(".reset_password"), new_password_path(resource_name)
-        p.form-hint= t('.hint_html', path: root_path)
+  p.form-hint
+    = t(".forgot_password")
+    = link_to t(".reset_password"), new_password_path(resource_name)
+  p.form-hint= t('.hint_html', path: root_path)
 
   = render partial: 'shared/aside'

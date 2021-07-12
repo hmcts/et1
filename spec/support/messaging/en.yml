@@ -100,6 +100,10 @@ en:
           name: 'Name'
           acas_number: 'Acas number'
           address: 'Address'
+    email_confirmation:
+      title: 'Email confirmation'
+      email_recipients:
+        label: 'A copy of the completed claim will be sent to:'
   apply:
     start_a_claim: Start a claim
     return_to_a_claim: Return to a claim
@@ -112,6 +116,7 @@ en:
     claimants_contact_details_group: Claimant’s contact details
     save_and_continue: Save and continue
     save_and_complete_later: Save and complete later
+    remove_this_claimant: Remove this claimant
     errors:
       invalid_phone_number: Invalid phone number
       allow_video_attendance:
@@ -163,7 +168,7 @@ en:
     alternative_phone_or_mobile_number:
       label: Alternative phone or mobile number (optional)
     email_address:
-      label: Email address (optional)
+      label: Email address
     best_correspondence_method:
       label: Best way to send correspondence to you (the claimant)
       options:
@@ -181,6 +186,22 @@ en:
       options:
         "yes": "Yes"
         "no": "No"
+    add_more_claimants:
+      label: 'Add more claimants'
+    claimant_section:
+      label: 'Claimant %{number}'
+  group_claims_upload:
+    people_making_claim_with_you:
+      label: Do you want to upload details of 6 claimants or more? (optional)
+      options:
+        "yes": "Yes"
+        "no": "No"
+    upload_spreadsheet:
+      label: Upload spreadsheet (optional)
+    remove_csv_file:
+      label: "Remove previously uploaded document:"
+    switch_to_manual: manually
+    save_and_continue: Save and continue
   representatives_details:
     save_and_continue: Save and continue
     about_your_representative_group: About your representative
@@ -274,6 +295,9 @@ en:
       label: Acas early conciliation certificate number
     dont_have_acas_number:
       label: I don’t have an Acas number
+      options:
+        "yes": "Yes"
+        "no": "No"
     dont_have_acas_number_reason:
       label: Why don’t you have an Acas number?
       options:
@@ -281,11 +305,201 @@ en:
         acas_has_no_jurisdiction: Acas doesn’t have the power to conciliate on some or all of my claim
         employer_contacted_acas: My employer has already been in touch with Acas
         interim_relief: "The claim consists only of a complaint of unfair dismissal which contains an application for interim relief."
-
-
-
-
-
+  additional_respondents:
+    save_and_continue: Save and continue
+    remove_this_respondent: Remove this respondent
+    claim_against_other_person:
+      label: Claims against more than one employer
+      options:
+        "yes": "Yes"
+        "no": "No"
+    add_more_respondents:
+      label: 'Add another respondent'
+    respondent_section:
+      label: 'Respondent %{number}'
+    name:
+      label: Name of respondent
+    building:
+      label: Building number or name
+    street:
+      label: Street
+    town:
+      label: Town/city
+    county:
+      label: County
+    post_code:
+      label: Postcode
+    acas_number:
+      label: Acas early conciliation certificate number
+    dont_have_acas_number:
+      label: I don’t have an Acas number
+    dont_have_acas_number_reason:
+      label: Why don’t you have an Acas number?
+  save_and_complete_later:
+    sign_out_now: Sign out now
+    email_address:
+      label: Enter your email address to get your claim number emailed to you.
+  return_to_your_claim:
+    memorable_word:
+      label: Memorable word
+    save_and_return_number:
+      label: Save and return number
+    find_my_claim: Find my claim
+    success_message: Your claim has been retrieved. You can now continue where you left off
+  reset_memorable_word:
+    memorable_word:
+      label: Memorable word
+    reset_memorable_word: Reset memorable word
+  reset_memorable_word_instructions:
+    email_address:
+      label: Enter your email address
+    claim_number:
+      label: Save and return number
+    reset_memorable_word: 'Reset memorable word'
+    enter_your_details_fieldset: Enter your details below
+  claim_details:
+    rtf_file:
+      label: The document needs to be in Rich Text Format(RTF)
+      hint: "You can usually save a file as RTF by selecting File> Save As> Export To> Format: Rich Text Format"
+    remove_rtf_file:
+      label: "Remove previously uploaded document:"
+    claim_details:
+      label: 'Describe your claim'
+      hint: Limit is 2500 characters.
+    other_known_claimants:
+      label: Do you know of any other claimants (not already listed) making similar claims against the same employer? (optional)
+      hint: A judge may combine similar claims to manage and hear them together. This may save you and the tribunal time and money.
+      options:
+        'yes': 'Yes'
+        'no': 'No'
+    other_known_claimant_names:
+      label: You can add the names of other people here. (optional)
+      hint: Limit is 350 characters.
+    save_and_continue: Save and continue
+    upload_separate_document_section:
+      label: Or upload it as a separate document
+  claim_type:
+    is_whistleblowing:
+      heading: Whistleblowing claim
+      label: Are you reporting suspected wrongdoing at work?
+      hint: You can report things at work that aren’t right, are illegal or if anyone is neglecting their duties (also known as making ‘disclosure in the public interest’).
+      options:
+        'true': 'Yes'
+        'false': 'No'
+    send_claim_to_whistleblowing_entity:
+      label: Do you want us to send a copy of your claim to the relevant person or body that deals with whistleblowing?
+      options:
+        'true': 'Yes'
+        'false': 'No'
+    unfair_dismissal:
+      label: Unfair dismissal
+      options:
+        is_unfair_dismissal: Unfair dismissal (including constructive dismissal)
+    discrimination:
+      label: Discrimination
+      options:
+        sex_including_equal_pay: Sex (including equal pay)
+        disability: Disability
+        race: Race
+        age: Age
+        pregnancy_or_maternity: Pregnancy or maternity
+        religion_or_belief: Religion or belief
+        marriage_or_civil_partnership: Marriage or civil partnership
+        gender_reassignment: Gender reassignment
+    pay:
+      label: Pay
+      options:
+        redundancy: Redundancy pay
+        notice: Notice pay
+        holiday: Holiday pay
+        arrears: Arrears of pay
+        other: Other payments
+    other:
+      label: Other type of claim (not shown above)
+      options:
+        other_type_of_claim: Other type of claim
+    claim_type_other_details:
+      label: State the other type of claim(s) that you’re making
+    save_and_continue: Save and continue
+  employment:
+    was_employed:
+      label: Have you ever been employed by the person or organisation that you’re making this claim against? (optional)
+      options:
+        'true': 'Yes'
+        'false': 'No'
+    current_situation:
+      label: What is your current work situation in relation to the employer you're making a claim against?
+      options:
+        still_employed: Still working for this employer
+        notice_period: Working a notice period for this employer
+        employment_terminated: No longer working for this employer
+    job_title:
+      label: Job title (optional)
+    start_date:
+      label: Employment start date
+    notice_period_end_date:
+      label: Notice period end date
+    end_date:
+      label: Employment end date
+    worked_notice_period:
+      label: Did you work (or get paid for) a period of notice?
+      options:
+        'true': 'Yes'
+        'false': 'No'
+    notice_pay_period_count:
+      label: For how many weeks or months did you get paid?
+    notice_pay_period_type:
+      options:
+        weeks: Weeks
+        months: Months
+    average_hours_worked_per_week:
+      label: Average hours worked per week
+    gross_pay:
+      label: Pay before tax
+    pay_period_type:
+      label: How often were you paid (optional)
+      options:
+        weekly: Weekly
+        monthly: Monthly
+    net_pay:
+      label: Pay after tax
+    enrolled_in_pension_scheme:
+      label: Are – or were – you a member of your employer’s pension scheme? (optional)
+    benefit_details:
+      label: Do – or did – you have any benefits, like a company car?
+    found_new_job:
+      label: Have you got a new job? (optional)
+    new_job_start_date:
+      label: New job start date
+    new_job_gross_pay:
+      label: New job pay before tax
+    new_job_pay_period_type:
+      label: How often are you paid (optional)
+      options:
+        weekly: Weekly
+        monthly: Monthly
+    save_and_continue:
+      label: Save and continue
+  claim_outcome:
+    what_do_you_want:
+      label: What do you want if your claim is successful? (optional)
+      options:
+        compensation: Compensation
+        recommendation: A recommendation from a tribunal (that the employer takes action so that the problem at work doesn’t happen again)
+        get_old_job_back: To get your old job back
+        get_another_job: To get another job with the same employer or associated employer
+    notes:
+      label: What compensation or other outcome do you want? (optional)
+    save_and_continue: Save and continue
+  more_about_the_claim:
+    provide_more_information:
+      label: Do you want to provide additional information about your claim? (optional)
+      options:
+        'true': 'Yes'
+        'false': 'No'
+    more_information:
+      label: Enter more detail about your claim.
+    save_and_continue: Save and continue
   components:
     date:
       day: Day

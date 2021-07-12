@@ -5,7 +5,7 @@
   - if respondent.acas_early_conciliation_certificate_number?
     = respondent.acas_early_conciliation_certificate_number
   - elsif respondent.no_acas_number_reason
-    = I18n.t "simple_form.options.respondent.no_acas_number_reason.#{respondent.no_acas_number_reason}"
+    = I18n.t "claims.respondent.no_acas_number_reason.options.#{respondent.no_acas_number_reason}"
 = render 'answer', section_name: 'respondent', question: 'telephone_number' do
   = respondent.address_telephone_number
 = render 'answer_address', section_name: 'respondent', question: 'work_address', value: respondent.work_address unless respondent.worked_at_same_address?

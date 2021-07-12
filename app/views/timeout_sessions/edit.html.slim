@@ -1,35 +1,25 @@
-- content_for(:page_title, page_title)
+p= t('claims.show.page_number', current_page: current_page, total_pages: total_pages)
+h1.govuk-heading-xl= t(".header")
 
-.main-header role="banner"
-  h1= t('.header')
+= form_for resource, as: user_session, url: user_session_path, method: :post, builder: EtGdsDesignSystem.form_builder_class do |f|
+  = hidden_field_tag :return_to_review, params[:return_to_review]
+  = f.govuk_error_summary(t 'shared.error_notification.default_message')
+  = f.govuk_fieldset label: {text: t('timeout_sessions.registration.application_number')} do
+    span.number= claim.reference
 
-.main-section
+    = f.govuk_fieldset label: {text: false} do
+      p= t('timeout_sessions.registration.intro_text')
+      = f.text_field :email, label: {text: "#{t('timeout_sessions.registration.email_address.label')} #{t('shared.optional')}"}
+      = f.text_field :password,
+        label: {text: t('timeout_sessions.registration.password.label')},
+        hint: {text: t('timeout_sessions.registration.password.hint')}
 
-  .main-content
-    .clearfix
-      .callout.callout-reference style="clear:both;"
-        p.detail= t('timeout_sessions.reference')
-        span.number= claim.reference
 
-    = simple_form_for user_session, url: user_session_path do |f|
-      = f.error_notification
-
-      fieldset
-        legend= t('.memorable_word_legend')
-        .content-section
-          = format t('.hint')
-          = f.input :password, as: :string
-
-      - if claim
-      fieldset
-        legend= t('.application_number_legend')
-        = f.input :email_address
-
-      p.print
-        = link_to t('.print_link'), 'javascript:window.print();', {class: 'print-page'}
-        = '&nbsp;'.html_safe
-        = t('.print_copy')
-
-      = f.button :submit
-
+    p.print
+      = link_to t('.print_link'), 'javascript:window.print();', {class: 'print-page'}
+      = '&nbsp;'.html_safe
+      = t('.print_copy')
+    = f.hidden_field :reference
+    .form-actions
+      = f.submit t('shared.continue_button')
   = render partial: 'shared/aside'
